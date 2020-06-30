@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/paddingXXXSmall"
+        android:layout_marginBottom="@dimen/paddingXXXSmall"
+        android:layout_marginLeft="@dimen/paddingXXXSmall"
+        android:layout_marginRight="@dimen/paddingXXXSmall"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="@dimen/paddingXXXSmall"
+        card_view:cardUseCompatPadding="false"
+        card_view:cardElevation="@dimen/paddingXSmall">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rv_invoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/paddingXXLarge"
+                    android:paddingRight="@dimen/paddingXXLarge"
+                    android:paddingTop="@dimen/paddingSmall">
+
+                    <TextView
+                        android:id="@+id/tv_invoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invoice"
+                        android:textSize="@dimen/textXXXLarge"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/tv_invoice_numb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/textXXXLarge"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/numb_invoice"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rv_date_invoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/paddingXXLarge"
+                    android:paddingRight="@dimen/paddingXXLarge"
+                    android:paddingTop="@dimen/paddingSmall">
+
+                    <TextView
+                        android:id="@+id/tv_date_invoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/date_invoice"
+                        android:textSize="@dimen/textXXLarge"
+                        android:textColor="@color/black"/>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/paddingXXLarge"
+                    android:paddingRight="@dimen/paddingXXLarge"
+                    android:paddingTop="@dimen/paddingSmall">
+
+                    <TextView
+                        android:id="@+id/text_no_pesanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_pesanan"
+                        android:textSize="@dimen/textXXLarge"
+                        android:textColor="@color/gray_txt"/>
+
+                    <TextView
+                        android:id="@+id/text_pelanggan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray_txt"
+                        android:textSize="@dimen/textXXLarge"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/pelanggan"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rv_numb_pesanan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/paddingXXLarge"
+                    android:paddingRight="@dimen/paddingXXLarge"
+                    android:paddingTop="@dimen/paddingSmall">
+
+                    <TextView
+                        android:id="@+id/tv_no_pesanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nomor"
+                        android:textSize="@dimen/textXXXLarge"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/tv_pelanggan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textXXXLarge"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/andhika"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:background="#CCCCCC"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="@dimen/paddingXXLarge"
+                    android:layout_marginRight="@dimen/paddingXXLarge"
+                    android:layout_marginTop="@dimen/paddingLarge"
+                    android:layout_height="1dp"/>
+
+                <RelativeLayout
+                    android:id="@+id/rv_total_harga"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/paddingXXLarge"
+                    android:paddingRight="@dimen/paddingXXLarge"
+                    android:paddingTop="@dimen/paddingSmall"
+                    android:layout_marginBottom="@dimen/paddingXXXLarge">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/total_harga"
+                        android:textSize="@dimen/textXXXLarge"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/tv_total_harga"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/textXXXLarge"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/duit"/>
+
+                </RelativeLayout>
+
+
+
+
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

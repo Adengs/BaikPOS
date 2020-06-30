@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_gray"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/txt_qty"
+        android:text="1"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/paddingSmall"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/tv_product"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Nama Makanan"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_product_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:text="10.000"
+                android:textColor="@color/black" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rela_promo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/tv_promo"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Promo"
+                android:textColor="@color/gray_txt" />
+
+            <TextView
+                android:id="@+id/tv_promo_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:text="10.000"
+                android:textColor="@color/gray_txt" />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_detail"/>
+
+
+        <RelativeLayout
+            android:id="@+id/rela_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="0dp"
+            android:paddingTop="0dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="6dp">
+
+
+            <TextView
+                android:id="@+id/tv_tv_plus_gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_nama_catatan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_tv_plus_gone"
+                android:layout_alignBottom="@+id/tv_tv_plus_gone"
+                android:layout_marginRight="@dimen/paddingXXLarge"
+                android:layout_toRightOf="@id/tv_tv_plus_gone"
+                android:text="Tidak usah pakai gula"
+                android:textColor="@color/txt_reservasi"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

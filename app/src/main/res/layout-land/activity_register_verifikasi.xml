@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".activity.RegisterVerifikasiActivity">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:background="@color/gray_light">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/logo"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/paddingXXXXXXLarge"
+            android:paddingTop="@dimen/paddingXXXXXLarge"
+            android:paddingRight="@dimen/paddingXXXXXXLarge">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/verifikasi"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="@dimen/paddingXXXXLarge"
+                android:layout_height="3dp"
+                android:background="@color/green_dark" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/paddingLarge"
+                android:text="@string/verifikasi_email" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingXXXXLarge"
+                android:layout_marginRight="@dimen/paddingLarge"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/code_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/paddingXXXSmall"
+                    android:layout_marginRight="@dimen/paddingXXXSmall"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:imeOptions="flagNoExtractUi"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textColor="@color/green_dark" />
+
+                <EditText
+                    android:id="@+id/code_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/paddingXXXSmall"
+                    android:layout_marginRight="@dimen/paddingXXXSmall"
+                    android:layout_weight="1"
+
+                    android:gravity="center"
+                    android:imeOptions="flagNoExtractUi"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textColor="@color/green_dark" />
+
+                <EditText
+                    android:id="@+id/code_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/paddingXXXSmall"
+                    android:layout_marginRight="@dimen/paddingXXXSmall"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:imeOptions="flagNoExtractUi"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textColor="@color/green_dark" />
+
+                <EditText
+                    android:id="@+id/code_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/paddingXXXSmall"
+                    android:layout_marginRight="@dimen/paddingXXXSmall"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:imeOptions="flagNoExtractUi"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textColor="@color/green_dark" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_lanjutkan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/paddingLarge"
+                android:background="@color/green_dark"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/lanjutkan"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/paddingXXXXXLarge"
+                android:layout_marginBottom="@dimen/paddingLarge"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tidak_terima_kode" />
+
+                <TextView
+                    android:id="@+id/btn_kirim_ulang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingLeft="@dimen/paddingSmall"
+                    android:paddingRight="@dimen/paddingSmall"
+                    android:text="@string/kirim_ulang"
+                    android:textAllCaps="true"
+                    android:textColor="@color/green_dark" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_kasir"
+            android:icon="@drawable/ic_kasir_on"
+            android:title="@string/kasir_B" />
+        <item
+            android:id="@+id/nav_penjualan"
+            android:icon="@drawable/ic_penjualan"
+            android:title="@string/penjualan_B" />
+        <item
+            android:id="@+id/nav_laporan"
+            android:icon="@drawable/ic_laporan"
+            android:title="@string/laporan_B" />
+        <item
+            android:id="@+id/nav_absensi"
+            android:icon="@drawable/ic_absensi"
+            android:title="@string/absensi_B" />
+
+        <item
+            android:id="@+id/nav_pengaturan"
+            android:icon="@drawable/ic_pengaturan"
+            android:title="@string/pengaturan_B" />
+    </group>
+
+    <item android:title="">
+        <menu>
+<!--            <item-->
+<!--                android:id="@+id/nav_kunci_layar"-->
+<!--                android:icon="@drawable/ic_kunci_layar"-->
+<!--                android:title="@string/kunci_layar_B" />-->
+<!--            <item-->
+<!--                android:id="@+id/nav_send"-->
+<!--                android:icon="@drawable/ic_menu_send"-->
+<!--                android:title="@string/menu_send" />-->
+        </menu>
+
+
+    </item>
+
+</menu>

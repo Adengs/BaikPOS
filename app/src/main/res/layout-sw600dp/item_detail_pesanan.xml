@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/paddingSmall"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_success" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/paddingXSmall"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scrubled Egg"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/txt_extra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Extra : extra bawang goreng"
+                android:textColor="@color/txt_reservasi" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/txt_qty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/paddingXXXSmall"
+        android:layout_marginBottom="@dimen/paddingXXXSmall"
+        android:background="@color/txt_reservasi"
+        android:paddingLeft="@dimen/paddingSmall"
+        android:paddingRight="@dimen/paddingSmall"
+        android:text="x 2"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/txt_subtotal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text="Rp. 120.000"
+        android:textColor="@color/black" />
+
+</LinearLayout>

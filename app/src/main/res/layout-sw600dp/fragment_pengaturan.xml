@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ui.laporan.LaporanFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/layout_menu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+
+            android:background="@color/white">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/btn_logout_aplikasi">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="@dimen/paddingSmall">
+
+                    <LinearLayout
+                        android:id="@+id/btn_produk_kategori"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/paddingXSmall"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/v_produk_kategori"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/paddingXSmall"
+                            android:background="@color/green_dark"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txt_produk_kategori"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:paddingTop="@dimen/paddingXSmall"
+                            android:paddingBottom="@dimen/paddingXSmall"
+                            android:text="@string/produk_kategori" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_produk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/paddingXSmall"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/txt_produk"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:paddingLeft="@dimen/paddingSmall"
+                            android:paddingTop="@dimen/paddingXSmall"
+                            android:paddingBottom="@dimen/paddingXSmall"
+                            android:text="@string/produk" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_kategori"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/paddingXSmall"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/txt_kategori"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:paddingLeft="@dimen/paddingSmall"
+                            android:paddingTop="@dimen/paddingXSmall"
+                            android:paddingBottom="@dimen/paddingXSmall"
+                            android:text="@string/kategori" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_stok"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/paddingXSmall"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/txt_stok"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:paddingLeft="@dimen/paddingSmall"
+                            android:paddingTop="@dimen/paddingXSmall"
+                            android:paddingBottom="@dimen/paddingXSmall"
+                            android:text="@string/stok" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/btn_struk_biaya"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/paddingXSmall"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/v_struk_biaya"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/paddingXSmall"
+                            android:background="@color/green_dark"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txt_struk_biaya"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:paddingTop="@dimen/paddingXSmall"
+                            android:paddingBottom="@dimen/paddingXSmall"
+                            android:text="@string/struk_biaya" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_perangkat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/paddingXSmall"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/v_perangkat"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/paddingXSmall"
+                            android:background="@color/green_dark"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txt_perangkat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:paddingTop="@dimen/paddingXSmall"
+                            android:paddingBottom="@dimen/paddingXSmall"
+                            android:text="@string/perangkat" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_pembayaran_nontunai"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/paddingXSmall"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/v_pembayaran_nontunai"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/paddingXSmall"
+                            android:background="@color/green_dark"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txt_pembayaran_nontunai"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:paddingTop="@dimen/paddingXSmall"
+                            android:paddingBottom="@dimen/paddingXSmall"
+                            android:text="@string/pembayaran_nontunai" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_karyawan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/paddingXSmall"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/v_karyawan"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/paddingXSmall"
+                            android:background="@color/green_dark"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txt_karyawan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:paddingTop="@dimen/paddingXSmall"
+                            android:paddingBottom="@dimen/paddingXSmall"
+                            android:text="@string/karyawan" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_outlet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/paddingXSmall"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/v_outlet"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/paddingXSmall"
+                            android:background="@color/green_dark"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txt_outlet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:paddingTop="@dimen/paddingXSmall"
+                            android:paddingBottom="@dimen/paddingXSmall"
+                            android:text="@string/outlet" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_password_pin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/paddingXSmall"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/v_password_pin"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/paddingXSmall"
+                            android:background="@color/green_dark"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txt_password_pin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:paddingTop="@dimen/paddingXSmall"
+                            android:paddingBottom="@dimen/paddingXSmall"
+                            android:text="@string/password_pin" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_promo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/paddingXSmall"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:id="@+id/v_promo"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="@dimen/paddingXSmall"
+                            android:background="@color/green_dark"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txt_promo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:paddingTop="@dimen/paddingXSmall"
+                            android:paddingBottom="@dimen/paddingXSmall"
+                            android:text="@string/promo" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/btn_logout_aplikasi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/gray_light"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:paddingTop="@dimen/paddingSmall"
+                android:paddingBottom="@dimen/paddingSmall">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/logout_aplikasi"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7">
+
+            <FrameLayout
+                android:id="@+id/frame_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/paddingSmall"></FrameLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/green_dark"
+        android:src="@drawable/ic_pengaturan"
+        android:tint="@color/white"
+        android:visibility="gone" />
+</RelativeLayout>

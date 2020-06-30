@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="30dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/container_error">
+
+
+    <ImageView
+        android:src="@drawable/urg"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+    <TextView
+        android:gravity="center"
+        android:layout_marginTop="6dp"
+        android:textSize="10sp"
+        android:text="Getting Order List"
+        android:id="@+id/tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:gravity="center"
+        android:textSize="8sp"
+        android:textColor="#888888"
+        android:text="Sorry page can't be display"
+        android:id="@+id/tv_error_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

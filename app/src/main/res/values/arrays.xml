@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pesanan">
+        <item>Jenis Pesanan</item>
+        <item>MEJA</item>
+        <item>BUNGKUS</item>
+        <item>DELIVERY</item>
+        <item>OJEK ONLINE</item>
+        <item>RESERVASI</item>
+        <item>DILAYANI OLEH</item>
+    </array>
+
+
+</resources>

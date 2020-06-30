@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:focusable="true"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/paddingSmall"
+        android:paddingLeft="@dimen/paddingXXXSmall"
+        android:paddingRight="@dimen/paddingXXXSmall"
+        android:paddingBottom="@dimen/paddingSmall">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:layout_marginRight="@dimen/paddingXXSmall"
+            android:id="@+id/tv_no_nota"
+            android:text="33120"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_pelanggan"
+            android:textSize="12sp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:text="Pelanggan"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_weight="1.5"
+            android:layout_gravity="center_vertical"
+            android:text="30 Feb 2020 10:10"
+            android:id="@+id/tv_tanggal"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:textSize="12sp"
+                android:id="@+id/tv_proses"
+                android:text="@string/proses"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:paddingRight="@dimen/paddingSmall"
+                android:paddingTop="@dimen/paddingXXSmall"
+                android:paddingBottom="@dimen/paddingXXSmall"
+                android:background="@color/green"
+                android:textColor="@color/green_dark"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_selesai"
+                android:text="@string/selesai"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:textSize="12sp"
+                android:paddingRight="@dimen/paddingSmall"
+                android:paddingTop="@dimen/paddingXXSmall"
+                android:paddingBottom="@dimen/paddingXXSmall"
+                android:background="@color/gray_light"
+                android:visibility="gone"
+                android:textColor="@color/gray_darker"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_reservasi"
+                android:text="@string/reservasi"
+                android:visibility="gone"
+                android:textSize="12sp"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:paddingRight="@dimen/paddingSmall"
+                android:paddingTop="@dimen/paddingXXSmall"
+                android:paddingBottom="@dimen/paddingXXSmall"
+                android:background="@color/bg_reservasi"
+                android:textColor="@color/txt_reservasi"/>
+
+
+            <!--            Web-->
+            <TextView
+                android:id="@+id/tv_new_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_reservasi"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:paddingTop="@dimen/paddingXXSmall"
+                android:paddingRight="@dimen/paddingSmall"
+                android:paddingBottom="@dimen/paddingXXSmall"
+                android:text="@string/new_order"
+                android:textColor="@color/txt_reservasi"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_preparing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/green"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:paddingTop="@dimen/paddingXXSmall"
+                android:paddingRight="@dimen/paddingSmall"
+                android:paddingBottom="@dimen/paddingXXSmall"
+                android:text="@string/preparing"
+                android:textColor="@color/green_dark"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_reject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/red_bg"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:paddingTop="@dimen/paddingXXSmall"
+                android:paddingRight="@dimen/paddingSmall"
+                android:paddingBottom="@dimen/paddingXXSmall"
+                android:text="@string/reject"
+                android:textColor="@color/red_text"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_ready_pickup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_ungu"
+                android:paddingLeft="@dimen/paddingSmall"
+                android:paddingTop="@dimen/paddingXXSmall"
+                android:paddingRight="@dimen/paddingSmall"
+                android:paddingBottom="@dimen/paddingXXSmall"
+                android:text="@string/ready_pickup"
+                android:textColor="@color/txt_ungu"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/txt_total"
+            android:textSize="12sp"
+            android:text="400.000"
+            android:layout_gravity="center_vertical"
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_light"/>
+</LinearLayout>
+

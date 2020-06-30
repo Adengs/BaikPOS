@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="paddingXXXSmall">@dimen/_1sdp</dimen>
+    <dimen name="paddingXXSmall">@dimen/_2sdp</dimen>
+    <dimen name="paddingXSmall">@dimen/_4sdp</dimen>
+    <dimen name="paddingSmall">@dimen/_6sdp</dimen>
+    <dimen name="paddingMedium">@dimen/_8sdp</dimen>
+    <dimen name="paddingLarge">@dimen/_10sdp</dimen>
+    <dimen name="paddingXLarge">@dimen/_12sdp</dimen>
+    <dimen name="paddingXXLarge">@dimen/_14sdp</dimen>
+    <dimen name="paddingXXXLarge">@dimen/_16sdp</dimen>
+    <dimen name="paddingXXXXLarge">@dimen/_18sdp</dimen>
+    <dimen name="paddingXXXXXLarge">@dimen/_20sdp</dimen>
+    <dimen name="paddingXXXXXXLarge">@dimen/_50sdp</dimen>
+
+    <dimen name="textXXXSmall">@dimen/_2ssp</dimen>
+    <dimen name="textXXSmall">@dimen/_2ssp</dimen>
+    <dimen name="textXSmall">@dimen/_2ssp</dimen>
+    <dimen name="textSmall">@dimen/_4ssp</dimen>
+    <dimen name="textMedium">@dimen/_6ssp</dimen>
+    <dimen name="textLarge">@dimen/_8ssp</dimen>
+    <dimen name="textXLarge">@dimen/_10ssp</dimen>
+    <dimen name="textXXLarge">@dimen/_12ssp</dimen>
+    <dimen name="textXXXLarge">@dimen/_14ssp</dimen>
+    <dimen name="textXXXXLarge">@dimen/_16ssp</dimen>
+    <dimen name="textXXXXXLarge">@dimen/_18ssp</dimen>
+    <dimen name="textXXXXXXLarge">@dimen/_20ssp</dimen>
+    <dimen name="width_button_tosca">132dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="nav_header_height_green">126dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+</resources>

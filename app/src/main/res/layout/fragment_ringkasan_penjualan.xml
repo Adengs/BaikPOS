@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:background="@color/white">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/toolbar_kas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingSmall"
+            android:orientation="horizontal"
+            android:padding="@dimen/paddingXXSmall">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Transaksi"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total transaksi per hari"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total pendapatan perhari"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+
+        <lecho.lib.hellocharts.view.LineChartView
+            android:id="@+id/chart"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="600dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:drawableLeft="@drawable/ic_green"
+            android:text="Total pendapatan per hari"/>
+
+
+
+        <LinearLayout
+            android:id="@+id/liner_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingSmall"
+            android:orientation="horizontal"
+            android:padding="@dimen/paddingXXSmall">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total Pendapatan"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Laba Kotor"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Terima Pembayaran"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/liner_bottom_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingSmall"
+            android:orientation="horizontal"
+            android:padding="@dimen/paddingXXSmall">
+
+            <TextView
+                android:id="@+id/tv_value_pendapatan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/green_dark"
+                android:text=""
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tv_value_laba_kotor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/green_dark"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tv_pembayaran"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/green_dark"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/liner_bottom_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingSmall"
+            android:orientation="horizontal"
+            android:padding="@dimen/paddingXXSmall">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total Transaksi"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total Produk"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+            <TextView
+                android:visibility="invisible"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Total Uang Keluar"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/liner_bottom_value_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/paddingSmall"
+            android:orientation="horizontal"
+            android:padding="@dimen/paddingXXSmall">
+
+            <TextView
+                android:id="@+id/tv_total_transaksi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/green_dark"
+                android:text=""
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tv_total_produk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/green_dark"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+            <TextView
+                 android:visibility="invisible"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Rp. 20.000"
+                android:textColor="@color/green_dark"
+                android:textAlignment="center"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/paddingSmall"
+            android:layout_marginBottom="@dimen/paddingSmall"
+            android:orientation="horizontal"
+            android:padding="@dimen/paddingXXSmall">
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

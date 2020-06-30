@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/liner_product"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_margin="@dimen/paddingXXXSmall"
+    android:paddingBottom="@dimen/paddingXSmall"
+    android:clickable="true"
+    android:padding="5dp"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_produk"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/tv_promo_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:background="@drawable/label_promo"
+            android:padding="3dp"
+            android:textStyle="normal"
+            android:text="Promo"
+            android:textColor="@color/white" />
+
+        <RelativeLayout
+            android:id="@+id/ll_stok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/black_transparent"
+            android:padding="@dimen/paddingXXSmall">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_stok"
+                android:layout_centerInParent="true"
+                android:text="@string/stok"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/ll_stok_habis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/red_bg"
+            android:padding="@dimen/paddingXXSmall">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/stok_habis"
+                android:textColor="@color/red_text"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
+
+    <TextView
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:id="@+id/tv_nama_produk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama Produk"/>
+
+    <RelativeLayout
+        android:id="@+id/rela_promo"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="@dimen/paddingXXSmall">
+
+        <TextView
+            android:id="@+id/tv_harga_diskon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp. 13.000"
+            android:textSize="12sp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_harga_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_txt"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tv_harga_diskon"
+            android:text="Rp. 13.000"
+            android:textSize="12sp"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_harga"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rp. 13.000"/>
+</LinearLayout>

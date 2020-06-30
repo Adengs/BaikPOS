@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="green_dark">#F3931B</color>
+    <color name="green">#F1FAE7</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="black_transparent">#43000000</color>
+    <color name="red_bg">#FAE5E5</color>
+    <color name="red_text">#FF1C1C</color>
+    <color name="gray">#F0F0F0</color>
+    <color name="gray_txt">#8D8D8D</color>
+    <color name="gray_light">#F9F9F9</color>
+    <color name="gray_darker">#D3D3D3</color>
+    <color name="gray_dark">#F5F5F5</color>
+    <color name="bg_reservasi">#FFF2DE</color>
+    <color name="txt_reservasi">#ED970E</color>
+
+
+    <color name="bg_ungu">#B3A3D5</color>
+    <color name="txt_ungu">#4D0DD8</color>
+</resources>

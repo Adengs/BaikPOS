@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:focusable="true"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/paddingXSmall"
+        android:paddingBottom="@dimen/paddingXSmall"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/v_selected"
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@color/green_dark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/paddingSmall"
+            android:layout_marginRight="@dimen/paddingSmall"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_tanggal"
+                android:layout_marginBottom="@dimen/paddingXSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Senin, 10 Desember 2020" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_pesanan"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="50"
+                    android:id="@+id/txt_jumlah_pesanan"
+                    android:textColor="@color/green_dark"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_light"/>
+</LinearLayout>
+
