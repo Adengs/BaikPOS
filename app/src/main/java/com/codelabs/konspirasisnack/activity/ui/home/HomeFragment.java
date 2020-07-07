@@ -49,10 +49,12 @@ import com.codelabs.konspirasisnack.EventBus.RefreshJenisPesanan;
 import com.codelabs.konspirasisnack.EventBus.RefreshMeja;
 import com.codelabs.konspirasisnack.EventBus.RefreshOrderByMeja;
 import com.codelabs.konspirasisnack.EventBus.RefreshProduct;
+import com.codelabs.konspirasisnack.EventBus.SetDataAlamat;
 import com.codelabs.konspirasisnack.EventBus.SetSearch;
 import com.codelabs.konspirasisnack.EventBus.ShowHideToolbar;
 import com.codelabs.konspirasisnack.EventBus.ShowMeja;
 import com.codelabs.konspirasisnack.EventBus.ShowProductOrderType;
+import com.codelabs.konspirasisnack.EventBus.ShowTambahAlamat;
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.activity.DaftarPelangganActivity;
 import com.codelabs.konspirasisnack.activity.DaftarPesananActivity;
@@ -407,12 +409,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             selectedProduct = new ArrayList<>();
             selectedItemOrder = new ArrayList<>();
             selectedItemOrderByMeja = new ArrayList<>();
+
+
             viewPager.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
                     viewPager.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     EventBus.getDefault().post(selectedProduct);
                     pesananFragment.setDataOrder(selectedItemOrder);
+                    pesananFragment.setDataAlamat(new SetDataAlamat("" + "-" ,"" + "-","" + "-", "" + "-"));
                     pesananFragment.setDataOrderMeja(selectedItemOrderByMeja);
                 }
             });
@@ -427,17 +432,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     showMeja(new ShowMeja(true));
 
 
-//                if (selectedOrderType.getTypeId() >= 2)
                 showProductOrderType(new ShowProductOrderType(true));
 
-//                if (selectedOrderType.getTypeId() == 3)
-//                    showProductOrderType(new ShowProductOrderType(true));
-//
-//                if (selectedOrderType.getTypeId() == 4)
-//                    showProductOrderType(new ShowProductOrderType(true));
-//
-//                if (selectedOrderType.getTypeId() == 5)
-//                    showProductOrderType(new ShowProductOrderType(true));
             }
 
             if (!CheckDevice.isTablet()) {
@@ -464,15 +460,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                 if (selectedOrderDetail.getTransOrderType() == 2)
                     showMeja(new ShowMeja(false));
-//                getCategory();
 
                 if (selectedOrderDetail.getTransOrderType() == 3)
                     showMeja(new ShowMeja(false));
-//                getCategory();
 
                 if (selectedOrderDetail.getTransOrderType() == 4)
                     showMeja(new ShowMeja(false));
-//                getCategory();
 
                 if (selectedOrderDetail.getTransOrderType() == 5)
                     showMeja(new ShowMeja(false));
@@ -481,6 +474,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
 
             pesananFragment.setDataOrder(selectedItemOrder);
+            pesananFragment.setDataAlamatSave(selectedOrderDetail.getDataTransactionShipping());
 
 
             selectedProduct = new ArrayList<>();
@@ -507,6 +501,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
+//    @Subscribe
+//    public void onClickProduct(GetProducts.DATABean produk) {
+//        if (selectedOrderType != null) {
+//            AddOrderDialogFragment addOrderDialogFragment = new AddOrderDialogFragment();
+//            addOrderDialogFragment.show(getChildFragmentManager(), addOrderDialogFragment.getTag());
+//            Bundle data = new Bundle();
+//            data.putString("nama_produk", produk.getItemName());
+//            data.putString("img_produk", produk.getItemImage());
+//            data.putInt("id_product", produk.getItemId());
+//            addOrderDialogFragment.setArguments(data);
+//        } else {
+//            Toast.makeText(getActivity(), "Pilih jenis pesanan", Toast.LENGTH_SHORT).show();
+//        }
+//
+//        if (selectedOrderDetail != null) {
+//            AddOrderDialogFragment addOrderDialogFragment = new AddOrderDialogFragment();
+//            addOrderDialogFragment.show(getChildFragmentManager(), addOrderDialogFragment.getTag());
+//            Bundle data = new Bundle();
+//            data.putString("nama_produk", produk.getItemName());
+//            data.putString("img_produk", produk.getItemImage());
+//            data.putInt("id_product", produk.getItemId());
+//            addOrderDialogFragment.setArguments(data);
+//        }
+//    }
+
     @Subscribe
     public void onClickProduct(GetProducts.DATABean produk) {
         if (selectedOrderType != null) {
@@ -517,9 +536,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             data.putString("img_produk", produk.getItemImage());
             data.putInt("id_product", produk.getItemId());
             addOrderDialogFragment.setArguments(data);
+        } else if (selectedOrderDetail != null) {
+            AddOrderDialogFragment addOrderDialogFragment = new AddOrderDialogFragment();
+            addOrderDialogFragment.show(getChildFragmentManager(), addOrderDialogFragment.getTag());
+            Bundle data = new Bundle();
+            data.putString("nama_produk", produk.getItemName());
+            data.putString("img_produk", produk.getItemImage());
+            data.putInt("id_product", produk.getItemId());
+            addOrderDialogFragment.setArguments(data);
         } else {
             Toast.makeText(getActivity(), "Pilih jenis pesanan", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private void getCategory() {
@@ -1043,6 +1071,38 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             param.setInvoice_no(invoiceCreate.getInvoiceNo());
         }
 
+        ParamCreateOrder.ShippingData shipping = new ParamCreateOrder.ShippingData();
+
+            if (selectedOrderType != null) {
+                if (selectedOrderType.getTypeId() == 3) {
+                    if (selectedCustomer != null) {
+                        shipping.setName(selectedCustomer.getCustFullname());
+                    }else {
+                        Toast.makeText(getActivity(), "Pilih data pelanggan", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    if (selectedOrderDetail == null && DataManager.getInstance().getAddressTambah().equals("")){
+                        Toast.makeText(getActivity(), "Pilih alamat delivery", Toast.LENGTH_SHORT).show();
+                        return;
+                    }else {
+                        shipping.setAddress(DataManager.getInstance().getAddressTambah());
+                        shipping.setLatitude(DataManager.getInstance().getLatitudeTambah());
+                        shipping.setLongitude(DataManager.getInstance().getLongitudeTambah());
+                        shipping.setDatetime(DataManager.getInstance().getDateTimeTambah());
+                    }
+                }
+            }
+
+
+        if (selectedOrderDetail != null){
+            shipping.setName(selectedOrderDetail.getDataTransactionShipping().getTs_to_name());
+            shipping.setAddress(selectedOrderDetail.getDataTransactionShipping().getTs_to_address());
+            shipping.setLatitude(selectedOrderDetail.getDataTransactionShipping().getTs_to_lat());
+            shipping.setLongitude(selectedOrderDetail.getDataTransactionShipping().getTs_to_long());
+            shipping.setDatetime(selectedOrderDetail.getDataTransactionShipping().getTs_request_date());
+        }
+
         param.setServed_by(DataManager.getInstance().getU_id_cashier());
         param.setMergeTablesRes(DataManager.getInstance().getMergeTables());
         param.setNumberOfPeopleRes(DataManager.getInstance().getNumberOfPeople());
@@ -1103,6 +1163,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         for (GetOrderDetail.DATA.TransactionItems orderDetail : selectedItemOrder) {
 
             ParamCreateOrder.ItemsOrder thisOrder = new ParamCreateOrder.ItemsOrder(orderDetail.getTrItemId());
+            thisOrder.setQty(Integer.parseInt(orderDetail.getTrItemQty().replace(".00", "")));
+            thisOrder.setName(orderDetail.getTr_item_name());
+            thisOrder.setImage(orderDetail.getTrItemImage());
+            thisOrder.setCategory_id(orderDetail.getTr_item_category_id());
+            thisOrder.setCategory_name(orderDetail.getTr_item_category_name());
             thisOrder.setActual_price(orderDetail.getTrItemActualPrice());
             thisOrder.setHarga_modal(orderDetail.getTrItemHargaModal());
             thisOrder.setNote(orderDetail.getTrItemInfo());
@@ -1112,6 +1177,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             List<ParamCreateOrder.ItemsOrder.ItemsVariants> selectedVariantOrder = new ArrayList<>();
             for (GetOrderDetail.DATA.TransactionItems.Variants variantOrder : orderDetail.getVariants()) {
                 ParamCreateOrder.ItemsOrder.ItemsVariants variantDetail = new ParamCreateOrder.ItemsOrder.ItemsVariants();
+                variantDetail.setName(variantOrder.getTr_variant_name());
+                variantDetail.setItem_name(variantOrder.getTr_variant_item_name());
+                variantDetail.setUnit(0);
+                variantDetail.setImage("");
                 variantDetail.setId(variantOrder.getTrVariantVariantId());
                 variantDetail.setActual_price(variantOrder.getTrVariantActualPrice());
                 variantDetail.setHarga_modal(variantOrder.getTrVariantHargaModal());
@@ -1129,6 +1198,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             ParamCreateOrder.ItemsOrder thisOrder = new ParamCreateOrder.ItemsOrder(orderDetail.getTrItemId());
             thisOrder.setQty(Integer.parseInt(orderDetail.getTrItemQty().replace(".00", "")));
+            thisOrder.setName(orderDetail.getTr_item_name());
+            thisOrder.setImage(orderDetail.getTrItemImage());
+            thisOrder.setCategory_id(orderDetail.getTr_item_category_id());
+            thisOrder.setCategory_name(orderDetail.getTr_item_category_name());
+
             thisOrder.setActual_price(orderDetail.getTrItemActualPrice());
             thisOrder.setHarga_modal(orderDetail.getTrItemHargaModal());
             thisOrder.setNote(orderDetail.getTrItemInfo());
@@ -1137,6 +1211,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             List<ParamCreateOrder.ItemsOrder.ItemsVariants> selectedVariantOrder = new ArrayList<>();
             for (GetOrderDetail.DATA.TransactionItems.Variants variantOrder : orderDetail.getVariants()) {
                 ParamCreateOrder.ItemsOrder.ItemsVariants variantDetail = new ParamCreateOrder.ItemsOrder.ItemsVariants();
+                variantDetail.setName(variantOrder.getTr_variant_item_name());
+                variantDetail.setItem_name(variantOrder.getTr_variant_item_name());
+                variantDetail.setUnit(0);
+                variantDetail.setImage("");
                 variantDetail.setId(variantOrder.getTrVariantVariantId());
                 variantDetail.setActual_price(variantOrder.getTrVariantActualPrice());
                 variantDetail.setHarga_modal(variantOrder.getTrVariantHargaModal());
@@ -1151,6 +1229,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
         param.setItemsOrders(itemOrder);
+        param.setShipping(shipping);
 
         pajakValue2 = totalPaid - totalDiskon;
         pajakValue3 = (pajak * pajakValue2) / 100;
@@ -1196,6 +1275,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if (response != null) {
                         if (response.getSTATUS() == 200) {
                             DataManager.getInstance().clearCustomerId();
+                            EventBus.getDefault().post(new ShowTambahAlamat(response.getDATA().getTrans_order_type() == 3));
+                            DataManager.getInstance().clearTambahAlamat();
 
 //
                             Toast.makeText(getActivity(), response.getMESSAGE(), Toast.LENGTH_SHORT).show();
@@ -1287,6 +1368,35 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             param.setInvoice_no(invoiceSave.getInvoiceNo());
         }
 
+        ParamCreateOrder.ShippingData shipping = new ParamCreateOrder.ShippingData();
+        if (selectedOrderType != null) {
+            if (selectedOrderType.getTypeId() == 3) {
+                if (selectedCustomer != null) {
+                    shipping.setName(selectedCustomer.getCustFullname());
+                }else {
+                    Toast.makeText(getActivity(), "Pilih data pelanggan", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (selectedOrderDetail == null && DataManager.getInstance().getAddressTambah().equals("")){
+                    Toast.makeText(getActivity(), "Pilih alamat delivery", Toast.LENGTH_SHORT).show();
+                    return;
+                }else {
+                    shipping.setAddress(DataManager.getInstance().getAddressTambah());
+                    shipping.setLatitude(DataManager.getInstance().getLatitudeTambah());
+                    shipping.setLongitude(DataManager.getInstance().getLongitudeTambah());
+                    shipping.setDatetime(DataManager.getInstance().getDateTimeTambah());
+                }
+            }
+        }
+
+        if (selectedOrderDetail != null){
+            shipping.setName(selectedOrderDetail.getDataTransactionShipping().getTs_to_name());
+            shipping.setAddress(selectedOrderDetail.getDataTransactionShipping().getTs_to_address());
+            shipping.setLatitude(selectedOrderDetail.getDataTransactionShipping().getTs_to_lat());
+            shipping.setLongitude(selectedOrderDetail.getDataTransactionShipping().getTs_to_long());
+            shipping.setDatetime(selectedOrderDetail.getDataTransactionShipping().getTs_request_date());
+        }
+
 
         param.setServed_by(DataManager.getInstance().getCashierId());
         param.setMergeTablesRes(DataManager.getInstance().getMergeTables());
@@ -1344,6 +1454,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         for (GetOrderDetail.DATA.TransactionItems orderDetail : selectedItemOrder) {
             ParamCreateOrder.ItemsOrder thisOrder = new ParamCreateOrder.ItemsOrder(orderDetail.getTrItemId());
             thisOrder.setQty(Integer.parseInt(orderDetail.getTrItemQty().replace(".00", "")));
+            thisOrder.setName(orderDetail.getTr_item_name());
+            thisOrder.setImage(orderDetail.getTrItemImage());
+            thisOrder.setCategory_id(orderDetail.getTr_item_category_id());
+            thisOrder.setCategory_name(orderDetail.getTr_item_category_name());
             thisOrder.setActual_price(orderDetail.getTrItemActualPrice());
             thisOrder.setHarga_modal(orderDetail.getTrItemHargaModal());
             thisOrder.setNote(orderDetail.getTrItemInfo());
@@ -1352,6 +1466,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             List<ParamCreateOrder.ItemsOrder.ItemsVariants> selectedVariantOrder = new ArrayList<>();
             for (GetOrderDetail.DATA.TransactionItems.Variants variantOrder : orderDetail.getVariants()) {
                 ParamCreateOrder.ItemsOrder.ItemsVariants variantDetail = new ParamCreateOrder.ItemsOrder.ItemsVariants();
+                variantDetail.setName(variantOrder.getTr_variant_name());
+                variantDetail.setItem_name(variantOrder.getTr_variant_item_name());
+                variantDetail.setUnit(0);
+                variantDetail.setImage("");
                 variantDetail.setId(variantOrder.getTrVariantVariantId());
                 variantDetail.setActual_price(variantOrder.getTrVariantActualPrice());
                 variantDetail.setHarga_modal(variantOrder.getTrVariantHargaModal());
@@ -1367,6 +1485,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
         param.setItemsOrders(itemOrder);
+        param.setShipping(shipping);
         pajakValue2 = totalPaid - totalDiskon;
         pajakValue3 = (pajak * pajakValue2) / 100;
 
@@ -1410,6 +1529,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             pesananFragment.setDataOrderMeja(selectedItemOrderByMeja);
                             EventBus.getDefault().post(selectedProduct);
                             EventBus.getDefault().post(new RefreshProduct());
+                            EventBus.getDefault().post(new ShowTambahAlamat(response.getDATA().getTrans_order_type() == 3));
+                            DataManager.getInstance().clearTambahAlamat();
 
                             if (selectedOrderType != null) {
                                 if (selectedOrderType.getTypeId() == 1) {
@@ -1550,6 +1671,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         dialog.show();
 
     }
+
+
+
 
     @Override
     public void onClick(View view) {

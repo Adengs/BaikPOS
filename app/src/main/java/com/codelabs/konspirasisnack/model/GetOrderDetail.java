@@ -178,6 +178,8 @@ public class GetOrderDetail {
         private List<TransactionItems> transactionItems;
         @SerializedName("trans_shipping_status")
         private int transShippingStatus;
+        @SerializedName("transaction_shipping")
+        private DataTransactionShipping dataTransactionShipping;
 
         public int getTransId() {
             return transId;
@@ -581,6 +583,132 @@ public class GetOrderDetail {
             this.transShippingStatus = transShippingStatus;
         }
 
+        public DataTransactionShipping getDataTransactionShipping() {
+            return dataTransactionShipping;
+        }
+
+        public void setDataTransactionShipping(DataTransactionShipping dataTransactionShipping) {
+            this.dataTransactionShipping = dataTransactionShipping;
+        }
+
+        public static class DataTransactionShipping {
+            @SerializedName("ts_id")
+            private int ts_id;
+            @SerializedName("ts_trans_id")
+            private int ts_trans_id;
+            @SerializedName("ts_from_name")
+            private String ts_from_name;
+            @SerializedName("ts_from_address")
+            private String ts_from_address;
+            @SerializedName("ts_from_city")
+            private String ts_from_city;
+            @SerializedName("ts_from_country")
+            private String ts_from_country;
+            @SerializedName("ts_from_zipcode")
+            private String ts_from_zipcode;
+            @SerializedName("ts_from_lat")
+            private String ts_from_lat;
+            @SerializedName("ts_from_long")
+            private String ts_from_long;
+            @SerializedName("ts_to_name")
+            private String ts_to_name;
+            @SerializedName("ts_to_address")
+            private String ts_to_address;
+            @SerializedName("ts_to_city")
+            private String ts_to_city;
+            @SerializedName("ts_to_country")
+            private String ts_to_country;
+            @SerializedName("ts_to_zipcode")
+            private String ts_to_zipcode;
+            @SerializedName("ts_to_lat")
+            private String ts_to_lat;
+            @SerializedName("ts_to_long")
+            private String ts_to_long;
+            @SerializedName("ts_request_date")
+            private String ts_request_date;
+            @SerializedName("created_at")
+            private String created_at;
+            @SerializedName("updated_at")
+            private String updated_at;
+
+            public int getTs_id() {
+                return ts_id;
+            }
+
+            public int getTs_trans_id() {
+                return ts_trans_id;
+            }
+
+            public String getTs_from_name() {
+                return ts_from_name;
+            }
+
+            public String getTs_from_address() {
+                return ts_from_address;
+            }
+
+            public String getTs_from_city() {
+                return ts_from_city;
+            }
+
+            public String getTs_from_country() {
+                return ts_from_country;
+            }
+
+            public String getTs_from_zipcode() {
+                return ts_from_zipcode;
+            }
+
+            public String getTs_from_lat() {
+                return ts_from_lat;
+            }
+
+            public String getTs_from_long() {
+                return ts_from_long;
+            }
+
+            public String getTs_to_name() {
+                return ts_to_name;
+            }
+
+            public String getTs_to_address() {
+                return ts_to_address;
+            }
+
+            public String getTs_to_city() {
+                return ts_to_city;
+            }
+
+            public String getTs_to_country() {
+                return ts_to_country;
+            }
+
+            public String getTs_to_zipcode() {
+                return ts_to_zipcode;
+            }
+
+            public String getTs_to_lat() {
+                return ts_to_lat;
+            }
+
+            public String getTs_to_long() {
+                return ts_to_long;
+            }
+
+            public String getTs_request_date() {
+                return ts_request_date;
+            }
+
+            public String getCreated_at() {
+                return created_at;
+            }
+
+            public String getUpdated_at() {
+                return updated_at;
+            }
+        }
+
+
         public static class Customer {
             /**
              * cust_id : 4
@@ -821,6 +949,10 @@ public class GetOrderDetail {
             private int trItemTransactionId;
             @SerializedName("tr_item_id")
             private int trItemId;
+            @SerializedName("tr_item_category_id")
+            private int tr_item_category_id;
+            @SerializedName("tr_item_category_name")
+            private String tr_item_category_name;
             @SerializedName("tr_item_merchant_id")
             private int tr_item_merchant_id;
             @SerializedName("tr_item_merchant_name")
@@ -889,6 +1021,22 @@ public class GetOrderDetail {
 
             public void setTrItemId(int trItemId) {
                 this.trItemId = trItemId;
+            }
+
+            public int getTr_item_category_id() {
+                return tr_item_category_id;
+            }
+
+            public void setTr_item_category_id(int tr_item_category_id) {
+                this.tr_item_category_id = tr_item_category_id;
+            }
+
+            public String getTr_item_category_name() {
+                return tr_item_category_name;
+            }
+
+            public void setTr_item_category_name(String tr_item_category_name) {
+                this.tr_item_category_name = tr_item_category_name;
             }
 
             public int getTr_item_merchant_id() {

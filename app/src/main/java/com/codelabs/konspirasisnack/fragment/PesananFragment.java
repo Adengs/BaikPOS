@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.codelabs.konspirasisnack.EventBus.SetDataAlamat;
 import com.codelabs.konspirasisnack.EventBus.ShowTambahAlamat;
 import com.codelabs.konspirasisnack.R;
@@ -44,6 +43,10 @@ public class PesananFragment extends Fragment implements View.OnClickListener {
     LinearLayout linerLokasi;
     @BindView(R.id.tv_tambah_lokasi)
     TextView tvTambahLokasi;
+    @BindView(R.id.liner_tampil_lokasi)
+    LinearLayout linerTampilLokasi;
+    @BindView(R.id.tv_tampil_lokasi)
+    TextView tvTampilLokasi;
 
 
     OrderProdukAdapter adapter;
@@ -73,7 +76,7 @@ public class PesananFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_pesanan, container, false);
         ButterKnife.bind(this, view);
         linerLokasi.setOnClickListener(this);
-//        dataAlamat(new RefreshTambahAlamat());
+        tvTampilLokasi.setText(DataManager.getInstance().getAddressTambah());
 
         return view;
 
@@ -114,13 +117,26 @@ public class PesananFragment extends Fragment implements View.OnClickListener {
         adapterOrderMeja.setDataOrderMeja(orderMeja);
     }
 
+    public void setDataAlamatSave(GetOrderDetail.DATA.DataTransactionShipping dataAlamat) {
+        if (dataAlamat.getTs_to_address().equals("")) {
+            linerTampilLokasi.setVisibility(View.GONE);
+        }else {
+            linerTampilLokasi.setVisibility(View.VISIBLE);
+        }
+        linerLokasi.setVisibility(View.GONE);
+        tvTampilLokasi.setText(dataAlamat.getTs_to_address());
+
+    }
+
     @Subscribe
     public void showTambahAlamat(ShowTambahAlamat alamat) {
         if (alamat.isShowing()) {
             linerLokasi.setVisibility(View.VISIBLE);
             tvTambahLokasi.setText("Tambah alamat");
+            linerTampilLokasi.setVisibility(View.GONE);
         }else {
             linerLokasi.setVisibility(View.GONE);
+//            linerTampilLokasi.setVisibility(View.GONE);
         }
     }
 
@@ -132,6 +148,11 @@ public class PesananFragment extends Fragment implements View.OnClickListener {
         this.longitude = dataAlamat.getLongitude();
         this.datetime = dataAlamat.getDatetime();
         tvTambahLokasi.setText(address);
+        if (address.equals("-")){
+            linerLokasi.setVisibility(View.GONE);
+        }else {
+            linerLokasi.setVisibility(View.VISIBLE);
+        }
         DataManager.getInstance().setAddressTambah(address);
         DataManager.getInstance().setDateTimeTambah(datetime);
         DataManager.getInstance().setLatitudeTambah(latitude);

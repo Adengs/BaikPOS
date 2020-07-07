@@ -80,6 +80,9 @@ public class ParamCreateOrder {
     @Expose
     @SerializedName("cashier_name")
     private String cashierName;
+    @Expose
+    @SerializedName("shipping")
+    private ShippingData shipping;
 
 
     public List<ItemsOrder> getItemsOrders() {
@@ -276,6 +279,71 @@ public class ParamCreateOrder {
         this.cashierName = cashierName;
     }
 
+    public ShippingData getShipping() {
+        return shipping;
+    }
+
+    public void setShipping(ShippingData shipping) {
+        this.shipping = shipping;
+    }
+
+    public static class ShippingData {
+        @Expose
+        @SerializedName("name")
+        private String name;
+        @Expose
+        @SerializedName("address")
+        private String address;
+        @Expose
+        @SerializedName("latitude")
+        private String latitude;
+        @Expose
+        @SerializedName("longitude")
+        private String longitude;
+        @Expose
+        @SerializedName("datetime")
+        private String datetime;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public String getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(String latitude) {
+            this.latitude = latitude;
+        }
+
+        public String getLongitude() {
+            return longitude;
+        }
+
+        public void setLongitude(String longitude) {
+            this.longitude = longitude;
+        }
+
+        public String getDatetime() {
+            return datetime;
+        }
+
+        public void setDatetime(String datetime) {
+            this.datetime = datetime;
+        }
+    }
 
     public static class ItemsOrder {
         @Expose
@@ -543,62 +611,4 @@ public class ParamCreateOrder {
         }
     }
 
-//    public static class ShippingOrder {
-//        @Expose
-//        @SerializedName("name")
-//        private String name;
-//        @Expose
-//        @SerializedName("address")
-//        private String address;
-//        @Expose
-//        @SerializedName("latitude")
-//        private String latitude;
-//        @Expose
-//        @SerializedName("longitude")
-//        private String longitude;
-//        @Expose
-//        @SerializedName("datetime")
-//        private String datetime;
-//
-//
-//        public String getName() {
-//            return name;
-//        }
-//
-//        public void setName(String name) {
-//            this.name = name;
-//        }
-//
-//        public String getAddress() {
-//            return address;
-//        }
-//
-//        public void setAddress(String address) {
-//            this.address = address;
-//        }
-//
-//        public String getLatitude() {
-//            return latitude;
-//        }
-//
-//        public void setLatitude(String latitude) {
-//            this.latitude = latitude;
-//        }
-//
-//        public String getLongitude() {
-//            return longitude;
-//        }
-//
-//        public void setLongitude(String longitude) {
-//            this.longitude = longitude;
-//        }
-//
-//        public String getDatetime() {
-//            return datetime;
-//        }
-//
-//        public void setDatetime(String datetime) {
-//            this.datetime = datetime;
-//        }
-//    }
 }

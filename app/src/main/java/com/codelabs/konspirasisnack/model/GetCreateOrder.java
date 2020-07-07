@@ -89,7 +89,7 @@ public class GetCreateOrder {
         private String trans_status;
         @Expose
         @SerializedName("trans_order_type")
-        private String trans_order_type;
+        private int trans_order_type;
         @Expose
         @SerializedName("trans_reservation_id")
         private String trans_reservation_id;
@@ -190,7 +190,7 @@ public class GetCreateOrder {
             return trans_status;
         }
 
-        public String getTrans_order_type() {
+        public int getTrans_order_type() {
             return trans_order_type;
         }
 

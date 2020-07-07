@@ -265,7 +265,6 @@ public class AddOrderDialogFragment extends DialogFragment implements View.OnCli
                 return;
             }
 
-
             tvTotal.setText(String.valueOf(--jml));
             calculate(new RefreshProduct());
 
@@ -274,35 +273,39 @@ public class AddOrderDialogFragment extends DialogFragment implements View.OnCli
 
         if (view == btnIncrease) {
 
-            int jml = Integer.parseInt(tvTotal.getText().toString());
-            int max = responseData.getActual_stock();
+            if (responseData != null){
+                int jml = Integer.parseInt(tvTotal.getText().toString());
+                int max = responseData.getActual_stock();
+                if (jml == max) {
+                    Toast.makeText(getActivity(), "Batas pembelian maksimal", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-            if (jml == max) {
-                Toast.makeText(getActivity(), "Batas pembelian maksimal", Toast.LENGTH_SHORT).show();
-                return;
+                tvTotal.setText(String.valueOf(++jml));
+                calculate(new RefreshProduct());
             }
-            tvTotal.setText(String.valueOf(++jml));
-            calculate(new RefreshProduct());
         }
-
     }
 
     @Subscribe
     public void calculate(RefreshProduct product) {
         int jml = Integer.parseInt(tvTotal.getText().toString());
 
-        String str = Utils.toCurrency(responseData.getItem_harga_jual());
-        int number = Integer.parseInt(str.replace(".", ""));
-        int harga = number;
+        if (responseData != null){
+            String str = Utils.toCurrency(responseData.getItem_harga_jual());
+            int number = Integer.parseInt(str.replace(".", ""));
+            int harga = number;
 
-        int totalHarga = harga * jml;
-        for (GetProductDetail.VariantsData variant : responseData.getVariantsData())
-            for (GetProductDetail.DetailData detailData : variant.getDetailData())
-                if (detailData.isChecked())
-                    totalHarga += Integer.parseInt(detailData.getVariant_detail_harga_jual().replace(".00", "")) * jml;
-        responseData.setSubtotal(String.valueOf(totalHarga));
-        responseData.setQty(jml);
-        btnJumlahHarga.setText("Rp " + Utils.toCurrency(String.valueOf(totalHarga)));
+            int totalHarga = harga * jml;
+            for (GetProductDetail.VariantsData variant : responseData.getVariantsData())
+                for (GetProductDetail.DetailData detailData : variant.getDetailData())
+                    if (detailData.isChecked())
+                        totalHarga += Integer.parseInt(detailData.getVariant_detail_harga_jual().replace(".00", "")) * jml;
+            responseData.setSubtotal(String.valueOf(totalHarga));
+            responseData.setQty(jml);
+            btnJumlahHarga.setText("Rp " + Utils.toCurrency(String.valueOf(totalHarga)));
+        }
+
     }
 
     @Subscribe

@@ -9,6 +9,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -47,6 +48,8 @@ import com.google.android.gms.tasks.Task;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -90,6 +93,9 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
     private String stringLat;
     private String stringLong;
     private String datetime;
+    private String street;
+    private String selectedTanggal;
+    private String selectedTime;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
 
@@ -128,15 +134,16 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
                         return;
                 }
 
+
                 gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng latLng) {
-//                        MarkerOptions marker = new MarkerOptions().position(new LatLng(point.latitude, point.longitude)).title("Marker");
+
 
                         MarkerOptions markerOptions = new MarkerOptions();
                         markerOptions.position(latLng);
-//                        markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-                        markerOptions.title(address);
+                        markerOptions.title("lokasi delivery");
+
                         gMap.clear();
                         gMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                         gMap.addMarker(markerOptions);
@@ -155,6 +162,7 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
                         stringLong = Double.toString(addresses.get(0).getLongitude());
 
                     }
+
                 });
 
                 gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -287,41 +295,110 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
 
         if (view == edTanggal) {
             //get current date
-            final Calendar c = Calendar.getInstance();
-            mYear = c.get(Calendar.YEAR);
-            mMonth = c.get(Calendar.MONTH);
-            mDay = c.get(Calendar.DAY_OF_MONTH);
+          final Calendar c = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SimpleDateFormat toFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+            String dt = edTanggal.getText().toString();
+            if (!TextUtils.isEmpty(dt)){
+                try {
+                    c.setTime(toFormat.parse(dt));
+                } catch (ParseException e){
+                    e.printStackTrace();
+                }
+            }
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),R.style.datepicker, new DatePickerDialog.OnDateSetListener() {
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            //Create new instance of DatePickerDialog and return it
+            DatePickerDialog datePicker = new DatePickerDialog(getContext(), R.style.datepicker, new DatePickerDialog.OnDateSetListener() {
                 @Override
-                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                    edTanggal.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
+                public void onDateSet(DatePicker view, int year, int month, int day) {
+                    String dd;
+                    if (day < 10) {
+                        dd = "0" + day;
+                    } else {
+                        dd = "" + day;
+                    }
+                    String mm;
+                    month = month + 1;
+                    if (month < 10) {
+                        mm = "0" + month;
+                    } else {
+                        mm = "" + month;
+                    }
+
+                    String fullDate = year + "-" + mm + "-" + dd;
+                    try {
+                        Date dt = simpleDateFormat.parse(fullDate);
+                        edTanggal.setText(toFormat.format(dt));
+                        selectedTanggal = simpleDateFormat.format(dt);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
                 }
-            }, mYear, mMonth, mDay);
-            datePickerDialog.getDatePicker().setMinDate(new Date().getTime());
-            datePickerDialog.show();
+            }, year, month, day);
+            datePicker.getDatePicker().setMinDate(new Date().getTime());
+            datePicker.show();
         }
 
         if (view == edWaktu) {
             //get current time
             final Calendar c = Calendar.getInstance();
-            mHour = c.get(Calendar.HOUR_OF_DAY);
-            mMinute = c.get(Calendar.MINUTE);
-
-            TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),R.style.datepicker, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    edWaktu.setText(hourOfDay + ":" + minute);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+            SimpleDateFormat toFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+            String dt = edWaktu.getText().toString();
+            if (!TextUtils.isEmpty(dt)) {
+                try {
+                    c.setTime(toFormat.parse(dt));
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-            }, mHour, mMinute, false);
+            }
+
+            int hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+
+            // Create a new instance of TimePickerDialog and return it
+            TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),R.style.datepicker,  new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+
+                    String hour;
+                    if(hourOfDay<10){
+                        hour="0"+hourOfDay;
+                    }else{
+                        hour=hourOfDay+"";
+                    }
+
+                    String min;
+                    if(minute<10){
+                        min="0"+minute;
+                    }else{
+                        min=minute+"";
+                    }
+
+                    String time = hour+":"+min;
+                    try {
+                        Date dt = simpleDateFormat.parse(time);
+                        edWaktu.setText(toFormat.format(dt));
+                        selectedTime = simpleDateFormat.format(dt);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, hour, minute, DateFormat.is24HourFormat(getContext()));
             timePickerDialog.show();
         }
 
         if (view == btnSubmit) {
             if (!valid())
                 return;
-            datetime = edTanggal.getText().toString().trim() + " " +edWaktu.getText().toString().trim();
+            datetime = selectedTanggal +"  " + selectedTime;
+//            datetime = edTanggal.getText().toString().trim() + " " +edWaktu.getText().toString().trim();
             EventBus.getDefault().post(new SetDataAlamat(address + "-", stringLat +"-", stringLong +"-", datetime + "-"));
             dismiss();
         }

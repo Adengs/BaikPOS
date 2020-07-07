@@ -126,6 +126,7 @@ public class DaftarPesananAdapter extends RecyclerView.Adapter<DaftarPesananAdap
         TextView tvReadyPickup;
 
         private int transaction_id;
+        private String address, stringLat, stringLong, datetime;
         private GetOrderDetail.DATA detailTransaction;
         private List<GetOrderDetail.DATA.TransactionItems> detailItem;
 
@@ -154,7 +155,6 @@ public class DaftarPesananAdapter extends RecyclerView.Adapter<DaftarPesananAdap
                     if (data.get(getAdapterPosition()).getStatusTxt().equals("Proses")) {
                         transaction_id = data.get(getAdapterPosition()).getTransId();
                         getDetailOrder();
-//                        Toast.makeText(mContext, data.get(getAdapterPosition()).getTransCode(), Toast.LENGTH_LONG).show();
                     } else if (data.get(getAdapterPosition()).isFromWeb()) {
                         transaction_id = data.get(getAdapterPosition()).getTransId();
                         DetailPesananDialogFragment dialog = DetailPesananDialogFragment.newInstance(transaction_id);
@@ -179,10 +179,17 @@ public class DaftarPesananAdapter extends RecyclerView.Adapter<DaftarPesananAdap
                                 detailTransaction = response.getDATA();
                                 Intent returnIntent = new Intent();
                                 EventBus.getDefault().post(new RefreshMeja());
-//                                returnIntent.putExtra("order",new Gson().toJson(detailTransaction));
                                 returnIntent.putExtra(AppConstant.ORDER_DETAIL, new Gson().toJson(detailTransaction));
                                 ((Activity) mContext).setResult(Activity.RESULT_OK, returnIntent);
                                 ((Activity) mContext).finish();
+//                                address = detailTransaction.getDataTransactionShipping().getTs_to_address();
+//                                stringLat = detailTransaction.getDataTransactionShipping().getTs_to_lat();
+//                                stringLong = detailTransaction.getDataTransactionShipping().getTs_to_long();
+//                                datetime = detailTransaction.getDataTransactionShipping().getTs_request_date();
+//                                EventBus.getDefault().post(new SetDataAlamat(address + "-", stringLat +"-", stringLong +"-", datetime + "-"));
+
+
+//                                DataManager.getInstance().setAddressTambah(address);
 
 
                             }

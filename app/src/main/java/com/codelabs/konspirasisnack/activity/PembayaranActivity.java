@@ -250,9 +250,8 @@ public class PembayaranActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pembayaran);
         ButterKnife.bind(this);
-
+        getPaymentMethod();
         CheckDevice.setScreenOrientation(this, CheckDevice.isTablet());
-//        tvToolbarTitle.setText(DataManager.getInstance().getInvoiceNo());
 
         initView();
     }
@@ -293,7 +292,6 @@ public class PembayaranActivity extends AppCompatActivity {
         rvPaymentMethod.setAdapter(adapterPayment);
 
         getDetailOrder(new RefreshDetailOrder());
-        getPaymentMethod();
         ViewTreeObserver vto = layPembayaran.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -446,11 +444,16 @@ public class PembayaranActivity extends AppCompatActivity {
         param.put("invoice_no", detailTransaction.getTransCode());
         param.put("total_paid", detailTransaction.getTransTotal().replace(".00", ""));
         param.put("payment_amount", pay);
-        param.put("payment_method_id", paymentMethod.get(adapterPayment.getPosition()).getPmId() + "");
-        param.put("payment_method_name", paymentMethod.get(adapterPayment.getPosition()).getPmName() + "");
-        param.put("payment_method_code", paymentMethod.get(adapterPayment.getPosition()).getPmCode() + "");
-        param.put("payment_method_image", paymentMethod.get(adapterPayment.getPosition()).getPmImage() + "");
-        param.put("payment_method_charge", paymentMethod.get(adapterPayment.getPosition()).getPmServiceCharge() + "");
+        if (paymentMethod != null){
+            param.put("payment_method_id", paymentMethod.get(adapterPayment.getPosition()).getPmId() + "");
+            param.put("payment_method_name", paymentMethod.get(adapterPayment.getPosition()).getPmName() + "");
+            param.put("payment_method_code", paymentMethod.get(adapterPayment.getPosition()).getPmCode() + "");
+            param.put("payment_method_image", paymentMethod.get(adapterPayment.getPosition()).getPmImage() + "");
+            param.put("payment_method_charge", paymentMethod.get(adapterPayment.getPosition()).getPmServiceCharge() + "");
+        }else {
+            Toast.makeText(this,"Metode pembayaran kosong", Toast.LENGTH_SHORT).show();
+        }
+
 
         Call<PaymentModel> call = apiService.paymentPay(auth, param);
         call.enqueue(new Callback<PaymentModel>() {
