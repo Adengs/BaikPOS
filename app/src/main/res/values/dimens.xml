@@ -11,6 +11,7 @@
     <dimen name="paddingXXXLarge">@dimen/_16sdp</dimen>
     <dimen name="paddingXXXXLarge">@dimen/_18sdp</dimen>
     <dimen name="paddingXXXXXLarge">@dimen/_20sdp</dimen>
+    <dimen name="paddingXXXXXXXLarge">@dimen/_30sdp</dimen>
     <dimen name="paddingXXXXXXLarge">@dimen/_50sdp</dimen>
 
     <dimen name="textXXXSmall">@dimen/_2ssp</dimen>

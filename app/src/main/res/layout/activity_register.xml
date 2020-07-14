@@ -33,10 +33,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/daftar"
                 android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/poppins_black"
                 android:textStyle="bold" />
 
             <View
-                android:layout_width="@dimen/paddingXXXXLarge"
+                android:layout_width="@dimen/paddingXXXXXLarge"
                 android:layout_height="3dp"
                 android:background="@color/green_dark" />
 
@@ -44,7 +46,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingXXLarge"
                 app:hintTextAppearance="@style/TextLabel"
                 app:passwordToggleEnabled="true">
 
@@ -53,6 +55,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="textEmailAddress"
                     android:singleLine="true" />
@@ -61,7 +65,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingXXLarge"
                 app:hintTextAppearance="@style/TextLabel"
                 app:passwordToggleEnabled="true">
 
@@ -70,6 +74,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/kata_sandi"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="textPassword"
                     android:singleLine="true"
@@ -79,7 +85,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingXXLarge"
                 app:hintTextAppearance="@style/TextLabel"
                 app:passwordToggleEnabled="true">
 
@@ -88,6 +94,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/ulang_kata_sandi"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="textPassword"
                     android:singleLine="true"
@@ -99,16 +107,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="false"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/poppins_regular"
                 android:buttonTint="@color/green_dark"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingXXXXXLarge"
                 android:text="@string/privacy_policy" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:background="@color/green_dark"
                 android:clickable="true"
+                android:textSize="@dimen/_13ssp"
+                android:fontFamily="@font/poppins_bold"
                 android:id="@+id/btn_daftar"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/daftar"
@@ -125,12 +137,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="@string/memiliki_akun" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="@dimen/_12ssp"
                     android:id="@+id/btn_masuk"
                     android:foreground="?attr/selectableItemBackground"
                     android:paddingLeft="@dimen/paddingSmall"

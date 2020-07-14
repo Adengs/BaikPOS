@@ -12,12 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
+import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.connection.ApiUtils;
 import com.codelabs.konspirasisnack.connection.AppConstant;
 import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.connection.RetrofitInterface;
 import com.codelabs.konspirasisnack.helper.Utils;
-import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.model.GetRegisterStep1;
 import com.codelabs.konspirasisnack.utils.CheckDevice;
 import com.codelabs.konspirasisnack.utils.RecentUtils;
@@ -188,7 +188,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View view) {
 
         if (view == btnMasuk) {
-            finish();
+            Intent intent = new Intent(RegisterActivity.this, SignInActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
 
         if (view == btnDaftar) {

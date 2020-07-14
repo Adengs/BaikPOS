@@ -32,18 +32,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/verifikasi"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/poppins_black"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <View
-                android:layout_width="@dimen/paddingXXXXLarge"
+                android:layout_width="@dimen/paddingXXXXXLarge"
                 android:layout_height="3dp"
                 android:background="@color/green_dark" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/paddingXXLarge"
                 android:text="@string/verifikasi_email" />
 
             <LinearLayout
@@ -63,6 +67,8 @@
                     android:layout_weight="1"
                     android:selectAllOnFocus="true"
                     android:gravity="center"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="@dimen/_13ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="number"
                     android:maxLength="1"
@@ -77,6 +83,8 @@
                     android:layout_weight="1"
                     android:selectAllOnFocus="true"
                     android:gravity="center"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="@dimen/_13ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="number"
                     android:maxLength="1"
@@ -91,6 +99,8 @@
                     android:layout_marginRight="@dimen/paddingXXXSmall"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="@dimen/_13ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="number"
                     android:maxLength="1"
@@ -105,6 +115,8 @@
                     android:selectAllOnFocus="true"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="@dimen/_13ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="number"
                     android:maxLength="1"
@@ -116,9 +128,11 @@
                 android:id="@+id/btn_lanjutkan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingXXXXLarge"
                 android:background="@color/green_dark"
                 android:clickable="true"
+                android:textSize="@dimen/_13ssp"
+                android:fontFamily="@font/poppins_bold"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/lanjutkan"
                 android:textColor="@color/white" />
@@ -135,6 +149,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="@string/tidak_terima_kode" />
 
                 <TextView
@@ -142,6 +158,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
+                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/poppins_regular"
                     android:foreground="?attr/selectableItemBackground"
                     android:paddingLeft="@dimen/paddingSmall"
                     android:paddingRight="@dimen/paddingSmall"

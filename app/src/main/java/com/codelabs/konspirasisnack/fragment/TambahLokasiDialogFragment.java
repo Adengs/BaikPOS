@@ -168,7 +168,6 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
                 gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                     @Override
                     public void onInfoWindowClick(Marker marker) {
-//                        edLokasi.setText(String.valueOf(marker.getPosition().latitude));
                         edLokasi.setText(address + " " + city + " " + country);
                     }
                 });

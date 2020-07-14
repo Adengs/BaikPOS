@@ -25,6 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.codelabs.konspirasisnack.EventBus.RefreshDetailOrder;
 import com.codelabs.konspirasisnack.EventBus.RefreshProduct;
 import com.codelabs.konspirasisnack.R;
@@ -470,10 +471,8 @@ public class PembayaranActivity extends AppCompatActivity {
                             isSuccessBayar = true;
                             hideDiskon();
                             DataManager.getInstance().doClearParamReservation();
-                            DataManager.getInstance().clearOrderDetail();
                             EventBus.getDefault().post(new RefreshProduct());
                             initSuccessPayment(response.getDATA());
-
 
                         } else {
                             Toast.makeText(PembayaranActivity.this, response.getMESSAGE(), Toast.LENGTH_SHORT).show();

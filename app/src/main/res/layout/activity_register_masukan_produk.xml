@@ -44,11 +44,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/masukan_produk"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/poppins_bold"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <View
-                        android:layout_width="@dimen/paddingXXXXLarge"
+                        android:layout_width="@dimen/paddingXXXXXLarge"
                         android:layout_height="3dp"
                         android:background="@color/green_dark" />
                 </LinearLayout>
@@ -68,6 +70,8 @@
                         android:paddingBottom="@dimen/paddingXSmall"
                         android:text="1"
                         android:textColor="@color/white"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_12ssp"
                         android:textStyle="bold" />
 
                     <View
@@ -82,6 +86,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/black"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_12ssp"
                         android:paddingLeft="@dimen/paddingMedium"
                         android:paddingTop="@dimen/paddingXSmall"
                         android:paddingRight="@dimen/paddingMedium"
@@ -134,7 +140,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingXXXXLarge"
                 android:orientation="horizontal">
 
 
@@ -151,6 +157,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/nama_produk"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/poppins_regular"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -168,6 +176,7 @@
                         android:textColor="@color/green_dark"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
                         android:text="Satuan" />
 
 
@@ -175,6 +184,8 @@
                         android:id="@+id/spinner_satuan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/poppins_regular"
                         android:backgroundTint="@color/black"
                         android:popupBackground="@color/white" />
 
@@ -195,7 +206,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingXXXXLarge"
                 android:orientation="horizontal">
 
 
@@ -212,6 +223,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/kategori_produk"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/poppins_regular"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -230,6 +243,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/stok"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/poppins_regular"
                         android:inputType="number"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true" />
@@ -240,7 +255,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingXXXXLarge"
                 android:orientation="horizontal">
 
 
@@ -257,6 +272,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/modal"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/poppins_regular"
                         android:inputType="number"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true" />
@@ -277,6 +294,8 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/jual"
                         android:inputType="number"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/poppins_regular"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -287,9 +306,11 @@
                 android:id="@+id/btn_lanjut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:layout_marginBottom="@dimen/paddingLarge"
                 android:background="@color/green_dark"
+                android:textSize="@dimen/_13ssp"
+                android:fontFamily="@font/poppins_bold"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/lanjutkan"

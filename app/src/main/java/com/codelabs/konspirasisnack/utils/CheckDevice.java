@@ -9,7 +9,7 @@ public class CheckDevice {
 
     public static Boolean isTablet() {
         boolean isTablet = AppController.getInstance().getResources().getConfiguration().smallestScreenWidthDp >= 600;
-        isTablet = true;
+//        isTablet = true;
 
         return isTablet;
     }

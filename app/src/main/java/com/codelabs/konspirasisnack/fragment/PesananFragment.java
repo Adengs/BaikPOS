@@ -1,5 +1,6 @@
 package com.codelabs.konspirasisnack.fragment;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.codelabs.konspirasisnack.adapter.OrderTambahanAdapter;
 import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.model.GetOrderDetail;
 import com.codelabs.konspirasisnack.model.GetProductDetail;
+import com.google.android.gms.location.FusedLocationProviderClient;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -57,7 +59,11 @@ public class PesananFragment extends Fragment implements View.OnClickListener {
     private String latitude;
     private String longitude;
     private String datetime;
-
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private Boolean mLocationPermissionsGranted = false;
+    private FusedLocationProviderClient mfusedLocationProviderClient;
 
     public PesananFragment() {
         // Required empty public constructor
@@ -131,14 +137,15 @@ public class PesananFragment extends Fragment implements View.OnClickListener {
     @Subscribe
     public void showTambahAlamat(ShowTambahAlamat alamat) {
         if (alamat.isShowing()) {
+//            getLocationPermission();
             linerLokasi.setVisibility(View.VISIBLE);
             tvTambahLokasi.setText("Tambah alamat");
             linerTampilLokasi.setVisibility(View.GONE);
         }else {
             linerLokasi.setVisibility(View.GONE);
-//            linerTampilLokasi.setVisibility(View.GONE);
         }
     }
+
 
 
     @Subscribe
@@ -162,12 +169,11 @@ public class PesananFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-       switch (view.getId()){
-           case R.id.liner_lokasi:
-               TambahLokasiDialogFragment tambahLokasiDialogFragment = new TambahLokasiDialogFragment();
-               tambahLokasiDialogFragment.show(getChildFragmentManager(), tambahLokasiDialogFragment.getTag());
-               break;
-       }
+        if (view == linerLokasi){
+            TambahLokasiDialogFragment tambahLokasiDialogFragment = new TambahLokasiDialogFragment();
+            tambahLokasiDialogFragment.show(getChildFragmentManager(), tambahLokasiDialogFragment.getTag());
+
+        }
 
     }
 

@@ -90,6 +90,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -106,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView imgBarcode;
     @BindView(R.id.img_list_order)
     ImageView imgListOrder;
+    @BindView(R.id.tv_order_red)
+    TextView tvOrderRed;
     @BindView(R.id.toolbar_kasir)
     LinearLayout toolbarKasir;
     @BindView(R.id.tv_penjualan)
@@ -281,6 +285,7 @@ public class MainActivity extends AppCompatActivity {
     private static final float DEFAULT_ZOOM = 15f;
     private Boolean mLocationPermissionsGranted = false;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private final int REQUEST_LOCATION_PERMISSION = 1;
 
 
     @Override
@@ -312,11 +317,7 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-//        tvNavbarNama = (TextView) headerView.findViewById(R.id.tv_nama_kasir_nav);
-
         navUserName = (TextView) headerView.findViewById(R.id.tv_nama_kasir_nav);
-
-        TextView tvOrderRed = (TextView) headerView.findViewById(R.id.tv_order_red);
         Button btnCloseCashier = (Button) headerView.findViewById(R.id.btn_tutup_kasir);
         btnCloseCashier.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -387,7 +388,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchData() {
-        getLocationPermission();
+//        getLocationPermission();
+        requestLocationPermission();
 
     }
 
@@ -910,8 +912,12 @@ public class MainActivity extends AppCompatActivity {
                                     EventBus.getDefault().post(response.getDATA().get(i));
                                     EventBus.getDefault().post(new ShowMeja(response.getDATA().get(i).getTypeId() == 1));
                                     EventBus.getDefault().post(new ShowProductOrderType(true));
-                                    EventBus.getDefault().post(new ShowTambahAlamat(response.getDATA().get(i).getTypeId() == 3));
+//                                    EventBus.getDefault().post(new ShowTambahAlamat(response.getDATA().get(i).getTypeId() == 3));
                                     DataManager.getInstance().clearTambahAlamat();
+                                    if (response.getDATA().get(i).getTypeId() == 3){
+                                        requestLocationPermission();
+                                    }
+
                                 }
 
 
@@ -1033,6 +1039,8 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Log.e("permission activity", "Request Code: " + requestCode);
@@ -1042,18 +1050,35 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        switch (requestCode) {
-            case REQUEST_CODE_ASK_PERMISSIONS:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                } else {
-                    Toast.makeText(this,"Anda tidak bisa mengakses alamat", Toast.LENGTH_SHORT).show();
-                }
-                break;
-                default:
-                    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+//        switch (requestCode) {
+//            case REQUEST_CODE_ASK_PERMISSIONS:
+//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                } else {
+//                    Toast.makeText(this,"Anda tidak bisa mengakses alamat", Toast.LENGTH_SHORT).show();
+//                }
+//                break;
+//                default:
+//                    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        }
 
     }
+
+    @AfterPermissionGranted(REQUEST_CODE_ASK_PERMISSIONS)
+    public void requestLocationPermission() {
+        String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
+            EventBus.getDefault().post(new ShowTambahAlamat(true));
+        }
+        else {
+            EasyPermissions.requestPermissions(this, "Please grant the location permission", REQUEST_CODE_ASK_PERMISSIONS, perms);
+
+        }
+    }
+
+
 
     @Override
     public void onBackPressed() {

@@ -49,7 +49,6 @@ import com.codelabs.konspirasisnack.EventBus.RefreshJenisPesanan;
 import com.codelabs.konspirasisnack.EventBus.RefreshMeja;
 import com.codelabs.konspirasisnack.EventBus.RefreshOrderByMeja;
 import com.codelabs.konspirasisnack.EventBus.RefreshProduct;
-import com.codelabs.konspirasisnack.EventBus.SetDataAlamat;
 import com.codelabs.konspirasisnack.EventBus.SetSearch;
 import com.codelabs.konspirasisnack.EventBus.ShowHideToolbar;
 import com.codelabs.konspirasisnack.EventBus.ShowMeja;
@@ -79,6 +78,7 @@ import com.codelabs.konspirasisnack.model.GetProductCategory;
 import com.codelabs.konspirasisnack.model.GetProductDetail;
 import com.codelabs.konspirasisnack.model.GetProducts;
 import com.codelabs.konspirasisnack.model.GetTable;
+import com.codelabs.konspirasisnack.model.GetTambahAlamatDelivery;
 import com.codelabs.konspirasisnack.model.ParamCreateOrder;
 import com.codelabs.konspirasisnack.utils.CheckDevice;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -179,6 +179,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private List<GetProductCategory.DATA> category;
     private GetCustomer.DATA selectedCustomer;
     private GetCreateReservation.DATA dataTable;
+    private GetTambahAlamatDelivery.DATAShipping dataShipping;
     private List<GetProductDetail.DATAProduct> selectedProduct;
     private List<GetOrderDetail.DATA.TransactionItems> selectedItemOrder = new ArrayList<>();
     private List<GetOrderDetail.DATA.TransactionItems> selectedItemOrderByMeja = new ArrayList<>();
@@ -204,6 +205,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private int DMOrderType;
     private int transaction_id;
     private ViewGroup container;
+    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private Boolean mLocationPermissionsGranted = false;
 
 
     @Override
@@ -229,6 +234,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         return view;
     }
+
+
+
+
+
 
     private void initStackbar(GetInvoiceNumber.DATA.Marketplace data) {
         Snackbar snackbar = Snackbar.make(container,
@@ -323,10 +333,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        mLocationPermissionsGranted = false;
         if (requestCode == MY_PERMISSIONS_REQUESTS && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             barcodeScanner.startCamera();
         }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+
+
     }
 
     private void initView() {
@@ -417,8 +431,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     viewPager.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     EventBus.getDefault().post(selectedProduct);
                     pesananFragment.setDataOrder(selectedItemOrder);
-                    pesananFragment.setDataAlamat(new SetDataAlamat("" + "-" ,"" + "-","" + "-", "" + "-"));
+                    EventBus.getDefault().post(new ShowTambahAlamat(true));
+//                    pesananFragment.setDataAlamat(new SetDataAlamat("" + "-" ,"" + "-","" + "-", "" + "-"));
+//                    pesananFragment.setDataAlamat(new SetDataAlamat(alamat,alamat,alamat,alamat));
                     pesananFragment.setDataOrderMeja(selectedItemOrderByMeja);
+
                 }
             });
 
@@ -501,30 +518,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     }
 
-//    @Subscribe
-//    public void onClickProduct(GetProducts.DATABean produk) {
-//        if (selectedOrderType != null) {
-//            AddOrderDialogFragment addOrderDialogFragment = new AddOrderDialogFragment();
-//            addOrderDialogFragment.show(getChildFragmentManager(), addOrderDialogFragment.getTag());
-//            Bundle data = new Bundle();
-//            data.putString("nama_produk", produk.getItemName());
-//            data.putString("img_produk", produk.getItemImage());
-//            data.putInt("id_product", produk.getItemId());
-//            addOrderDialogFragment.setArguments(data);
-//        } else {
-//            Toast.makeText(getActivity(), "Pilih jenis pesanan", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        if (selectedOrderDetail != null) {
-//            AddOrderDialogFragment addOrderDialogFragment = new AddOrderDialogFragment();
-//            addOrderDialogFragment.show(getChildFragmentManager(), addOrderDialogFragment.getTag());
-//            Bundle data = new Bundle();
-//            data.putString("nama_produk", produk.getItemName());
-//            data.putString("img_produk", produk.getItemImage());
-//            data.putInt("id_product", produk.getItemId());
-//            addOrderDialogFragment.setArguments(data);
-//        }
-//    }
 
     @Subscribe
     public void onClickProduct(GetProducts.DATABean produk) {

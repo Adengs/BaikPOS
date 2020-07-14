@@ -93,7 +93,6 @@ public class TambahProdukFragment extends DialogFragment {
     private static final int STORAGE_PERMISSION_IMAGE = 22;
     private LifeCycleCallBackManager lifeCycleCallBackManager;
     private FilePickUtils filePickUtils;
-    private String selectedImage;
     MultipartBody.Part imageFile = null;
     File imageFoto;
 
