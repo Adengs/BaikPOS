@@ -14,13 +14,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/paddingSmall"
+            android:paddingLeft="@dimen/paddingLarge"
             android:gravity="center"
+            android:fontFamily="@font/poppins_bold"
             android:text="Meja 3"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_12ssp" />
 
         <ImageView
             android:id="@+id/btn_close"
@@ -57,9 +57,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/paddingSmall"
                 android:text="@string/jum_orang"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_12ssp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -87,6 +87,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_toRightOf="@+id/btn_decrease"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins_bold"
                     android:width="38dp"
                     android:height="38dp"
                     android:clickable="true"
@@ -98,8 +99,7 @@
                     android:inputType="number"
                     android:text="1"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_12ssp" />
 
 
                 <Button
@@ -120,12 +120,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingXLarge"
                 android:layout_marginBottom="@dimen/paddingSmall"
                 android:text="@string/jum_meja"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/poppins_regular"/>
 
             <RadioGroup
                 android:id="@+id/radio_grup"
@@ -141,12 +141,13 @@
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/black"
                     android:checked="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12ssp"
                     android:clickable="false"
                     android:focusable="false"
                     android:text="@string/satu_meja" />
 
                 <RadioButton
-
                     android:id="@+id/rb_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -154,6 +155,8 @@
                     android:buttonTint="@color/black"
                     android:clickable="false"
                     android:focusable="false"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12ssp"
                     android:text="@string/gabung_meja" />
             </RadioGroup>
 
@@ -182,22 +185,21 @@
                     android:layout_marginBottom="@dimen/paddingSmall"
                     android:text="@string/pilih_meja"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12ssp" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_meja"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+                    android:layout_height="wrap_content"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_margin="@dimen/paddingXXSmall"
                     android:gravity="center|left"
-
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="horizontal">
-
 
                     <View
                         android:layout_width="@dimen/paddingMedium"
@@ -209,6 +211,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_12ssp"
                         android:layout_marginLeft="@dimen/paddingXSmall"
                         android:layout_marginRight="@dimen/paddingSmall"
                         android:text="@string/terisi" />
@@ -216,6 +220,7 @@
                     <View
                         android:layout_width="@dimen/paddingMedium"
                         android:layout_height="@dimen/paddingMedium"
+                        android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_gravity="center"
                         android:background="@color/black" />
 
@@ -223,6 +228,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_12ssp"
                         android:layout_marginLeft="@dimen/paddingXSmall"
                         android:layout_marginRight="@dimen/paddingSmall"
                         android:text="@string/pilih" />
@@ -231,12 +238,15 @@
                         android:layout_width="@dimen/paddingMedium"
                         android:layout_height="@dimen/paddingMedium"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@drawable/border_gray_3" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_12ssp"
                         android:layout_marginLeft="@dimen/paddingXSmall"
                         android:layout_marginRight="@dimen/paddingSmall"
                         android:text="@string/tersedia" />
@@ -266,15 +276,16 @@
             android:background="@color/white" />
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp">
 
             <ProgressBar
                 android:id="@+id/pb_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_centerInParent="true"
                 android:indeterminate="true"
                 android:indeterminateTint="@color/green_dark"
@@ -287,6 +298,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginBottom="@dimen/_20sdp"
                 android:layout_alignParentRight="true"
                 android:background="@color/green_dark"
                 android:clickable="true"

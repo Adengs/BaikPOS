@@ -3,10 +3,13 @@ package com.codelabs.konspirasisnack.fragment;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
@@ -32,8 +35,17 @@ import androidx.fragment.app.DialogFragment;
 
 import com.codelabs.konspirasisnack.EventBus.SetDataAlamat;
 import com.codelabs.konspirasisnack.R;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -43,6 +55,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import org.greenrobot.eventbus.EventBus;
@@ -86,18 +100,19 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final float DEFAULT_ZOOM = 15f;
     private Boolean mLocationPermissionsGranted = false;
+    private LocationCallback mLocationCallBack;
+    private static final int REQUEST_CHECK_SETTINGS = 0x1;
     private FusedLocationProviderClient mfusedLocationProviderClient;
-    private String address;
-    private String city;
-    private String country;
-    private String stringLat;
-    private String stringLong;
-    private String datetime;
-    private String street;
-    private String selectedTanggal;
-    private String selectedTime;
+    private SettingsClient mSettingsClient;
+    private LocationRequest mLocationRequest;
+    private LocationSettingsRequest mLocationSettingsRequest;
+    private Boolean mRequestingLocationUpdates;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 700;
+    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
+            UPDATE_INTERVAL_IN_MILLISECONDS / 2;
+    private static Location currentLocation;
+    private String address, city, country, stringLat, stringLong, datetime, selectedTanggal, selectedTime;
 
-    private int mYear, mMonth, mDay, mHour, mMinute;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -127,6 +142,9 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
                 gMap = mMap;
                 gMap.setMyLocationEnabled(true);
                 if (mLocationPermissionsGranted) {
+                    createLocationCallBack();
+                    createLocationRequest();
+                    buildLocationSettingsRequest();
                     getDeviceLocation();
 
                     if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -188,6 +206,17 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
 
     }
 
+    private void initMap() {
+        createLocationCallBack();
+        createLocationRequest();
+        buildLocationSettingsRequest();
+        checkLocationEnabled();
+
+
+    }
+
+
+
     private void initEvent() {
         btnClose.setOnClickListener(this);
         edWaktu.setOnClickListener(this);
@@ -202,6 +231,59 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
 
     private void fetchData() {
         getLocationPermission();
+    }
+
+    protected void createLocationRequest() {
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
+        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+
+
+
+
+    private void buildLocationSettingsRequest() {
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(mLocationRequest);
+        mLocationSettingsRequest = builder.build();
+    }
+
+    private void checkLocationEnabled() {// check if location is enabled
+        LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                && !manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+        {
+            getDeviceLocation();
+        }
+
+    }
+
+
+    private void createLocationCallBack() {
+        mLocationCallBack = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+
+                currentLocation = locationResult.getLastLocation();
+                stringLat = Double.toString(currentLocation.getLatitude());
+                stringLong = Double.toString(currentLocation.getLongitude());
+                myLocation();
+
+            }
+        };
+    }
+
+    private void myLocation() {
+        if (currentLocation != null) {
+            stringLat = String.valueOf(currentLocation.getLatitude());
+            stringLong = String.valueOf(currentLocation.getLongitude());
+            Log.d(TAG, "myLocation: " + stringLat + " " + stringLong);
+
+            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM);
+        }
     }
 
 
@@ -231,6 +313,7 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
                         }
                     }
                     mLocationPermissionsGranted = true;
+                    initMap();
 
                 }
             }
@@ -263,11 +346,18 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()){
-                            Location currentLocation = (Location) task.getResult();
+                            currentLocation = (Location) task.getResult();
 
-                            assert currentLocation != null;
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                    DEFAULT_ZOOM);
+                            if (currentLocation != null) {
+                                stringLat = Double.toString(currentLocation.getLatitude());
+                                stringLong = Double.toString(currentLocation.getLongitude());
+
+                                moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),DEFAULT_ZOOM);
+
+                            }
+                            else {
+                                startLocationUpdates();
+                            }
                         }else {
                             Toast.makeText(getActivity(), "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
@@ -279,11 +369,56 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
         }
     }
 
+    private void startLocationUpdates() {
+
+        mSettingsClient.checkLocationSettings(mLocationSettingsRequest)
+                .addOnSuccessListener(getActivity(), new OnSuccessListener<LocationSettingsResponse>() {
+                    @Override
+                    public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+
+                        //noinspection MissingPermission
+                        if (ActivityCompat.checkSelfPermission(getActivity() ,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+
+                            return;
+                        }
+                        mfusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallBack, null);
+                        getDeviceLocation();
+                    }
+                })
+                .addOnFailureListener(getActivity(), new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        int statusCode = ((ApiException) e).getStatusCode();
+                        switch (statusCode) {
+                            case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                                Log.i(TAG, "Location settings are not satisfied. Attempting to upgrade " +
+                                        "location settings ");
+                                try {
+                                    ResolvableApiException rae = (ResolvableApiException) e;
+                                    rae.startResolutionForResult(getActivity(), REQUEST_CHECK_SETTINGS);
+                                    Toast.makeText(getActivity(), "Anda harus mengaktifkan GPS perangkat", Toast.LENGTH_SHORT).show();
+                                } catch (IntentSender.SendIntentException sie) {
+                                    Log.i(TAG, "PendingIntent unable to execute request");
+                                }
+                                break;
+                            case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                                String errorMessage = "Location settings are inadequate, and cannot be " +
+                                        "fixed here. Fix in Settings.";
+                                Log.e(TAG, errorMessage);
+                                Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_LONG).show();
+                                mRequestingLocationUpdates = false;
+                        }
+                    }
+                });
+
+    }
+
     private void moveCamera(LatLng latLng, float zoom) {
         Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude);
 //        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
     }
+
 
 
     @Override
@@ -294,7 +429,7 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
 
         if (view == edTanggal) {
             //get current date
-          final Calendar c = Calendar.getInstance();
+            final Calendar c = Calendar.getInstance();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             SimpleDateFormat toFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
             String dt = edTanggal.getText().toString();
@@ -397,7 +532,6 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
             if (!valid())
                 return;
             datetime = selectedTanggal +"  " + selectedTime;
-//            datetime = edTanggal.getText().toString().trim() + " " +edWaktu.getText().toString().trim();
             EventBus.getDefault().post(new SetDataAlamat(address + "-", stringLat +"-", stringLong +"-", datetime + "-"));
             dismiss();
         }
@@ -420,6 +554,8 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
         }
         return true;
     }
+
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

@@ -51,9 +51,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="NAMA RESTORAN"
+                                android:fontFamily="@font/poppins_bold"
                                 android:textColor="@color/black"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
+                                android:textSize="@dimen/_12ssp"/>
 
 
                             <TextView
@@ -62,7 +62,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Budi Setiawan"
                                 android:textColor="@color/black"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/_12ssp" />
 
                         </LinearLayout>
 
@@ -77,7 +77,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="50dp"
                                 android:layout_toStartOf="@+id/img_barcode"
                                 android:layout_toLeftOf="@+id/img_barcode"
                                 android:background="@drawable/bg_edittext_rounded"
@@ -95,6 +96,7 @@
                                 android:textColorHint="@color/gray_txt" />
 
                             <ImageView
+                                android:visibility="gone"
                                 android:id="@+id/img_barcode"
                                 android:layout_width="wrap_content"
                                 android:tint="@color/green_dark"
@@ -154,6 +156,7 @@
                             android:id="@+id/spin_jenis_pesanan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
                             android:backgroundTint="@color/black" />
 
 
@@ -183,7 +186,7 @@
                             android:gravity="center"
                             android:background="@drawable/badge_background"
                             android:padding="3dp"
-                            android:text="0"
+                            android:text=""
                             android:textStyle="bold"
                             android:textColor="@android:color/white"
                             android:textSize="10sp" />

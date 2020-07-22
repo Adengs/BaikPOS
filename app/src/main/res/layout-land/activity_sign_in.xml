@@ -39,11 +39,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="@dimen/_12ssp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <View
-                android:layout_width="@dimen/paddingXXXXLarge"
+                android:layout_width="@dimen/paddingXXXXXLarge"
                 android:layout_height="3dp"
                 android:background="@color/green_dark" />
 
@@ -60,6 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="textEmailAddress"
                     android:singleLine="true" />
@@ -77,6 +81,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/kata_sandi"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="textPassword"
                     android:singleLine="true"
@@ -90,6 +96,8 @@
                 android:layout_marginTop="@dimen/paddingLarge"
                 android:background="@color/green_dark"
                 android:clickable="true"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/poppins_bold"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/masuk"
                 android:textColor="@color/white" />
@@ -105,6 +113,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12ssp"
                     android:text="@string/belum_memiliki" />
 
                 <TextView
@@ -112,6 +122,8 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:id="@+id/btn_daftar"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="@dimen/_12ssp"
                     android:foreground="?attr/selectableItemBackground"
                     android:paddingLeft="@dimen/paddingSmall"
                     android:paddingRight="@dimen/paddingSmall"

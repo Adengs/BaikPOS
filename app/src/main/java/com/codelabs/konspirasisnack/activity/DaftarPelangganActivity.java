@@ -2,6 +2,7 @@ package com.codelabs.konspirasisnack.activity;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.adapter.DaftarPelangganAdapter;
 import com.codelabs.konspirasisnack.connection.ApiUtils;
@@ -20,6 +22,7 @@ import com.codelabs.konspirasisnack.connection.AppConstant;
 import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.connection.RetrofitInterface;
 import com.codelabs.konspirasisnack.dialog.DialogTambahPelanggan;
+import com.codelabs.konspirasisnack.dialog.DialogTanpaPelanggan;
 import com.codelabs.konspirasisnack.helper.KeyboardUtils;
 import com.codelabs.konspirasisnack.helper.Utils;
 import com.codelabs.konspirasisnack.model.AddCustomer;
@@ -40,7 +43,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class DaftarPelangganActivity extends AppCompatActivity {
+public class DaftarPelangganActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -56,6 +59,8 @@ public class DaftarPelangganActivity extends AppCompatActivity {
     Toolbar toolbar;
     @BindView(R.id.pb_loading)
     ProgressBar pbLoading;
+    @BindView(R.id.tv_tanpa_pelanggan)
+    TextView tvTanpaPelanggan;
     DaftarPelangganAdapter adapter;
     private String search = "";
 
@@ -167,5 +172,15 @@ public class DaftarPelangganActivity extends AppCompatActivity {
     @OnClick(R.id.tv_tambah_pelanggan)
     public void onClickTambahPelanggan() {
         new DialogTambahPelanggan(this);
+    }
+
+    @OnClick(R.id.tv_tanpa_pelanggan)
+    public void onClickTanpaPelanggan() {
+        new DialogTanpaPelanggan(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

@@ -1,6 +1,5 @@
 package com.codelabs.konspirasisnack.fragment;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.codelabs.konspirasisnack.EventBus.SetDataAlamat;
 import com.codelabs.konspirasisnack.EventBus.ShowTambahAlamat;
 import com.codelabs.konspirasisnack.R;
@@ -21,7 +21,6 @@ import com.codelabs.konspirasisnack.adapter.OrderTambahanAdapter;
 import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.model.GetOrderDetail;
 import com.codelabs.konspirasisnack.model.GetProductDetail;
-import com.google.android.gms.location.FusedLocationProviderClient;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -51,19 +50,12 @@ public class PesananFragment extends Fragment implements View.OnClickListener {
     TextView tvTampilLokasi;
 
 
+
     OrderProdukAdapter adapter;
     OrderTambahanAdapter adapterTambahan;
     OrderMejaTambahanAdapter adapterOrderMeja;
 
-    private String address;
-    private String latitude;
-    private String longitude;
-    private String datetime;
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private Boolean mLocationPermissionsGranted = false;
-    private FusedLocationProviderClient mfusedLocationProviderClient;
+    private String address, latitude, longitude, datetime;
 
     public PesananFragment() {
         // Required empty public constructor
@@ -83,6 +75,18 @@ public class PesananFragment extends Fragment implements View.OnClickListener {
         ButterKnife.bind(this, view);
         linerLokasi.setOnClickListener(this);
         tvTampilLokasi.setText(DataManager.getInstance().getAddressTambah());
+
+        LinearLayoutManager layoutManagerOrderDetail = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        rvOrderTambahan.setLayoutManager(layoutManagerOrderDetail);
+        adapterTambahan = new OrderTambahanAdapter(getActivity());
+        rvOrderTambahan.setAdapter(adapterTambahan);
+
+
+        LinearLayoutManager layoutManagerMeja = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        rvOrderanMeja.setLayoutManager(layoutManagerMeja);
+        adapterOrderMeja = new OrderMejaTambahanAdapter(getActivity());
+        rvOrderanMeja.setAdapter(adapterOrderMeja);
+
 
         return view;
 
@@ -109,17 +113,12 @@ public class PesananFragment extends Fragment implements View.OnClickListener {
         adapter.setData(data);
     }
 
+
     public void setDataOrder(List<GetOrderDetail.DATA.TransactionItems> order) {
-        rvOrderTambahan.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapterTambahan = new OrderTambahanAdapter(getActivity());
-        rvOrderTambahan.setAdapter(adapterTambahan);
-        adapterTambahan.setDataOrder(order);
+        adapterTambahan.setDataOrderDetail(order);
     }
 
     public void setDataOrderMeja(List<GetOrderDetail.DATA.TransactionItems> orderMeja) {
-        rvOrderanMeja.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapterOrderMeja = new OrderMejaTambahanAdapter(getActivity());
-        rvOrderanMeja.setAdapter(adapterOrderMeja);
         adapterOrderMeja.setDataOrderMeja(orderMeja);
     }
 

@@ -1,5 +1,6 @@
 package com.codelabs.konspirasisnack.adapter;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.codelabs.konspirasisnack.EventBus.RefreshOrderByMeja;
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.connection.ApiUtils;
@@ -18,7 +20,6 @@ import com.codelabs.konspirasisnack.connection.AppConstant;
 import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.connection.RetrofitInterface;
 import com.codelabs.konspirasisnack.model.GetOrderByReservation;
-import com.codelabs.konspirasisnack.model.GetOrderDetail;
 import com.codelabs.konspirasisnack.model.GetTable;
 
 import org.greenrobot.eventbus.EventBus;
@@ -88,7 +89,6 @@ public class MejaAdapter extends RecyclerView.Adapter<MejaAdapter.ViewHolder> {
 
         private int transaction_id;
         private int reservationId;
-        private GetOrderDetail.DATA detailTransaction;
         private GetOrderByReservation.DATAReservation detailReservationOrder;
 
 
@@ -143,44 +143,7 @@ public class MejaAdapter extends RecyclerView.Adapter<MejaAdapter.ViewHolder> {
             });
         }
 
-//        private void getDetailOrder() {
-//            RetrofitInterface apiService = ApiUtils.getAPIService();
-//            String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
-//            Call<GetOrderDetail> call = apiService.getOrderDetail(auth, transaction_id);
-//            call.enqueue(new Callback<GetOrderDetail>() {
-//                @Override
-//                public void onResponse(Call<GetOrderDetail> call, Response<GetOrderDetail> data) {
-//                    if (data.isSuccessful()) {
-//                        GetOrderDetail response = data.body();
-//                        if (response != null) {
-//                            if (response.getSTATUS() == 200) {
-//                                detailTransaction = response.getDATA();
-////                                Toast.makeText(mContext, "Meja id" + " " + detailTransaction.getTransId(), Toast.LENGTH_SHORT).show();
-//                                DataManager.getInstance().setOrderDetail(detailTransaction);
-//                                EventBus.getDefault().post(new RefreshMeja());
-//
-//
-////                                Intent returnIntent = new Intent();
-////                                returnIntent.putExtra(AppConstant.ORDER_TAMBAHAN_MEJA, new Gson().toJson(detailTransaction));
-////                                ((Activity)mContext).setResult(Activity.RESULT_OK,returnIntent);
-////                                ((Activity)mContext).finish();
-//
-//                            }else {
-//                                Toast.makeText(mContext, response.getMESSAGE(),Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<GetOrderDetail> call, Throwable t) {
-//                    t.printStackTrace();
-//
-//                }
-//            });
-//
-//        }
-//
+
     }
 
 }

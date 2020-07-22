@@ -131,15 +131,18 @@
 
                         <Spinner
                             android:id="@+id/spin_lantai"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"></Spinner>
+                            android:layout_height="wrap_content"/>
 
                         <TextView
                             android:id="@+id/jumlah_meja"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/paddingXSmall"
-                            android:text="10 Meja" />
+                            android:textSize="@dimen/_8ssp"
+                            android:fontFamily="@font/poppins_regular"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -156,8 +159,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/paddingXSmall"
-                            android:layout_marginRight="@dimen/paddingSmall"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="@dimen/_8ssp"
                             android:text="Meja Kosong" />
 
                         <View
@@ -170,6 +175,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/paddingXSmall"
                             android:layout_marginRight="@dimen/paddingSmall"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="@dimen/_8ssp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
                             android:text="@string/meja_terisi" />
 
 
@@ -303,6 +312,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/green_dark"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="@dimen/_9ssp"
                         android:text="RP 0"
                         android:textColor="@color/white" />
                 </RelativeLayout>

@@ -215,6 +215,7 @@
 
 
     <string name="daftar_pelanggan">DAFTAR PELANGGAN</string>
+    <string name="non_pelanggan">TANPA PELANGGAN</string>
     <string name="daftar_pesanan">Daftar Pesanan</string>
     <string name="pesanan_baru">Pesanan Baru</string>
     <string name="daftar_produk">Daftar Produk</string>

@@ -20,8 +20,8 @@
             android:text="@string/pelanggan_baru"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_12ssp"
+            android:fontFamily="@font/poppins_bold" />
 
         <ImageView
             android:id="@+id/btn_close"
@@ -59,8 +59,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/poin"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/poppins_bold" />
 
             <EditText
                 android:id="@+id/txt_point"
@@ -78,6 +78,8 @@
                 android:paddingTop="@dimen/paddingXSmall"
                 android:paddingRight="@dimen/paddingSmall"
                 android:paddingBottom="@dimen/paddingXSmall"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="@dimen/_12ssp"
                 android:text="0" />
 
         </LinearLayout>
@@ -101,6 +103,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/nama"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -110,8 +114,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingSmall"
                 android:text="@string/jenis_kelamin"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/green_dark"
-                android:textSize="16sp" />
+                android:textSize="@dimen/_12ssp" />
 
             <Spinner
                 android:id="@+id/spin_jk"
@@ -139,6 +144,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/nohp"
                     android:inputType="phone"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -156,6 +163,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/alamat"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="@dimen/_12ssp"
                     android:imeOptions="flagNoExtractUi"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -201,6 +210,8 @@
                 android:background="@color/green_dark"
                 android:clickable="true"
                 android:focusable="true"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="@dimen/_12ssp"
                 android:foreground="?attr/selectableItemBackground"
                 android:src="@drawable/ic_close"
                 android:text="@string/simpan"

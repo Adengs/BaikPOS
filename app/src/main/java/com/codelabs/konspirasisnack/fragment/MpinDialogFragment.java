@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+
 import com.codelabs.konspirasisnack.EventBus.RefreshOutlet;
 import com.codelabs.konspirasisnack.EventBus.RefreshToolbar;
 import com.codelabs.konspirasisnack.R;
@@ -151,6 +152,7 @@ public class MpinDialogFragment extends DialogFragment {
 
         mAdapter = new SpinnerAdapterName(getContext(), responseData);
         spinnerCashier.setAdapter(mAdapter);
+
 
 
         List<EditText> listET = new ArrayList<>();

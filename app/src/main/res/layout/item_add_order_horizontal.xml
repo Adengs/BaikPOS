@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"
                 android:textStyle="bold"
                 android:text="Level Gula"/>
 

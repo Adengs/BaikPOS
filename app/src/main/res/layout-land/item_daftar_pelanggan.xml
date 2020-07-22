@@ -19,6 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
             android:text="Amar Hasan"
             android:textColor="@color/black" />
 
@@ -27,6 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
+            android:fontFamily="@font/poppins_regular"
             android:text="Pondok Aren"
             android:textColor="@color/black" />
 
@@ -36,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text="1000"
+            android:fontFamily="@font/poppins_regular"
             android:textAllCaps="true"
             android:textColor="@color/black" />
 
@@ -45,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
             android:text="L"
+            android:fontFamily="@font/poppins_regular"
             android:textAllCaps="true"
             android:textColor="@color/black" />
 
@@ -54,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="081312345678"
+            android:fontFamily="@font/poppins_regular"
             android:textAllCaps="true"
             android:textColor="@color/black" />
 

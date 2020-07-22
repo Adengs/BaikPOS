@@ -24,6 +24,7 @@
 
         <TextView
             android:textSize="12sp"
+            android:fontFamily="@font/poppins_regular"
             android:id="@+id/tv_promo_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/stok_habis"
+                android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/red_text"
                 android:textSize="10sp" />
         </RelativeLayout>
@@ -77,6 +79,7 @@
         android:textSize="12sp"
         android:textColor="@color/black"
         android:gravity="center"
+        android:fontFamily="@font/poppins_bold"
         android:id="@+id/tv_nama_produk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -95,6 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rp. 13.000"
+            android:fontFamily="@font/poppins_regular"
             android:textSize="12sp"
             android:textColor="@color/black" />
 
@@ -104,6 +108,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/gray_txt"
             android:layout_marginLeft="5dp"
+            android:fontFamily="@font/poppins_regular"
             android:layout_toRightOf="@+id/tv_harga_diskon"
             android:text="Rp. 13.000"
             android:textSize="12sp"/>
@@ -113,6 +118,7 @@
     <TextView
         android:id="@+id/tv_harga"
         android:textSize="12sp"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
         android:gravity="center"
         android:layout_width="match_parent"

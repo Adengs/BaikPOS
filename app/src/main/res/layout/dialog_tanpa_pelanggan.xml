@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -17,7 +18,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/paddingSmall"
             android:gravity="center"
-            android:text="@string/pelanggan_baru"
+            android:text="@string/non_pelanggan"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="@dimen/_12ssp"
@@ -50,44 +51,8 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:padding="@dimen/paddingLarge">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/poin"
-                android:fontFamily="@font/poppins_bold"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12ssp" />
-
-            <EditText
-                android:id="@+id/txt_point"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_edittext_rounded_gray_2"
-                android:drawableLeft="@drawable/ic_poin"
-                android:drawablePadding="@dimen/paddingXSmall"
-                android:imeOptions="flagNoExtractUi"
-                android:gravity="right"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="@dimen/_12ssp"
-                android:selectAllOnFocus="true"
-                android:singleLine="true"
-                android:inputType="number"
-                android:paddingLeft="@dimen/paddingSmall"
-                android:paddingTop="@dimen/paddingXSmall"
-                android:paddingRight="@dimen/paddingSmall"
-                android:paddingBottom="@dimen/paddingXSmall"
-                android:text="0" />
-
-        </LinearLayout>
-
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -109,19 +74,6 @@
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingSmall"
-                android:text="@string/jenis_kelamin"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="@color/green_dark"
-                android:textSize="@dimen/_12ssp" />
-
-            <Spinner
-                android:id="@+id/spin_jk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
         </LinearLayout>
 
 
@@ -147,25 +99,6 @@
                     android:imeOptions="flagNoExtractUi"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingSmall"
-
-                android:layout_marginBottom="@dimen/paddingSmall"
-                app:hintTextAppearance="@style/TextLabel">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txt_alamat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/alamat"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textSize="@dimen/_12ssp"
-                    android:imeOptions="flagNoExtractUi"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
 
         </LinearLayout>
     </LinearLayout>

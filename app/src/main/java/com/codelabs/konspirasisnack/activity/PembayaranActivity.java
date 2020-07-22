@@ -1,7 +1,9 @@
 package com.codelabs.konspirasisnack.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -20,14 +22,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.codelabs.konspirasisnack.EventBus.RefreshDetailOrder;
 import com.codelabs.konspirasisnack.EventBus.RefreshProduct;
+import com.codelabs.konspirasisnack.EventBus.ShowTambahAlamat;
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.adapter.PaymentItemAdapter;
 import com.codelabs.konspirasisnack.adapter.PaymentMethodAdapter;
@@ -235,6 +241,7 @@ public class PembayaranActivity extends AppCompatActivity {
     private SelectedProductInvoiceAdapter adapter;
     private PaymentMethodAdapter adapterPayment;
     private int transaction_id;
+    private final int REQUEST_PERMISSION = 123;
 
     private int diskon;
     private int pajak;
@@ -252,9 +259,33 @@ public class PembayaranActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pembayaran);
         ButterKnife.bind(this);
         getPaymentMethod();
+        checkPermission();
         CheckDevice.setScreenOrientation(this, CheckDevice.isTablet());
 
         initView();
+    }
+
+    private void checkPermission() {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+            && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+          ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                  REQUEST_PERMISSION);
+          return;
+
+      }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                ivEmail.setVisibility(View.VISIBLE);
+            }else {
+                ivEmail.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void initView() {
@@ -277,9 +308,6 @@ public class PembayaranActivity extends AppCompatActivity {
         textHapus.setOnClickListener(listenerButton3());
 
         transaction_id = getIntent().getIntExtra(AppConstant.TRANSACTION_ID, 0);
-
-
-//        tvToolbarTitle.setText(selectedInvoiceNumber.getInvoiceNo());
 
 
         rvInvoice.setLayoutManager(new LinearLayoutManager(this));
@@ -473,6 +501,7 @@ public class PembayaranActivity extends AppCompatActivity {
                             DataManager.getInstance().doClearParamReservation();
                             EventBus.getDefault().post(new RefreshProduct());
                             initSuccessPayment(response.getDATA());
+                            EventBus.getDefault().post(new ShowTambahAlamat(response.getDATA().getTransOrderType() == 3));
 
                         } else {
                             Toast.makeText(PembayaranActivity.this, response.getMESSAGE(), Toast.LENGTH_SHORT).show();
@@ -496,10 +525,6 @@ public class PembayaranActivity extends AppCompatActivity {
     }
 
     private void initSuccessPayment(PaymentModel.DATA data) {
-//        txtSuksesTagihan.setText(Utils.toCurrency(detailTransaction.getTransTotal().replace(".00", "")));
-//        txtSuksesPembayaran.setText(Utils.toCurrency(pay));
-
-
         txtNamaOutlet.setText(data.getOutlet().getOtName());
         txtTempat.setText(data.getOutlet().getOtAddress());
 
@@ -528,7 +553,6 @@ public class PembayaranActivity extends AppCompatActivity {
         int bayar = Integer.parseInt(pay);
         int kembalian = bayar - total;
 
-//        txtSuksesKembalian.setText(Utils.toCurrency(String.valueOf(kembalian)));
         txtPaymentKembali.setText(Utils.toCurrency(String.valueOf(kembalian)));
 
         rvItemPayment.setLayoutManager(new LinearLayoutManager(this));

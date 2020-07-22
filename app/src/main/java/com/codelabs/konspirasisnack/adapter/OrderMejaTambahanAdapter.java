@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.helper.Utils;
 import com.codelabs.konspirasisnack.model.GetOrderDetail;
@@ -26,16 +27,14 @@ import butterknife.ButterKnife;
 
 public class OrderMejaTambahanAdapter extends RecyclerView.Adapter<OrderMejaTambahanAdapter.ViewHolder> {
 
-    private List<GetOrderDetail.DATA.TransactionItems> dataOrder = new ArrayList<>();
+    private List<GetOrderDetail.DATA.TransactionItems> dataOrder;
     private Context mContext;
 
     public OrderMejaTambahanAdapter(Context context) {
         this.mContext = context;
+        dataOrder = new ArrayList<>();
     }
 
-    public List<GetOrderDetail.DATA.TransactionItems> getItems() {
-        return dataOrder;
-    }
 
     @NonNull
     @Override

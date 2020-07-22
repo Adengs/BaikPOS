@@ -16,7 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/paddingSmall"
+            android:layout_margin="@dimen/paddingXSmall"
             android:gravity="center_vertical">
 
             <ImageView
@@ -32,13 +32,29 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="@dimen/paddingSmall"
                 android:layout_toRightOf="@+id/iv_back"
                 android:gravity="center_horizontal"
                 android:text="@string/daftar_pelanggan"
                 android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_9ssp"
+                android:fontFamily="@font/poppins_bold"/>
+            <TextView
+                android:id="@+id/tv_tanpa_pelanggan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="@dimen/paddingSmall"
+                android:drawableLeft="@drawable/ic_pelanggan"
+                android:drawablePadding="@dimen/paddingSmall"
+                android:layout_toLeftOf="@+id/tv_tambah_pelanggan"
+                android:gravity="center_horizontal"
+                android:text="@string/non_pelanggan"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_9ssp"
+                android:fontFamily="@font/poppins_bold"/>
+
 
             <TextView
                 android:drawableTint="@color/green_dark"
@@ -50,14 +66,14 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="@dimen/_9ssp"
                 android:layout_marginRight="@dimen/paddingSmall"
                 android:drawableLeft="@drawable/ic_add"
                 android:drawablePadding="@dimen/paddingSmall"
                 android:gravity="center"
                 android:text="PELANGGAN BARU"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:textColor="@color/black" />
 
         </RelativeLayout>
 
@@ -80,6 +96,7 @@
             android:layout_marginRight="@dimen/paddingSmall"
             android:backgroundTint="@android:color/transparent"
             android:singleLine="true"
+            android:fontFamily="@font/poppins_regular"
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="@dimen/paddingSmall"
             android:hint="@string/cari_pelanggan"
@@ -103,16 +120,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/nama"
-                android:textAllCaps="true"
-                android:textStyle="bold" />
+                android:fontFamily="@font/poppins_bold"
+                android:textAllCaps="true" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
                 android:text="@string/alamat"
-                android:textAllCaps="true"
-                android:textStyle="bold" />
+                android:fontFamily="@font/poppins_bold"
+                android:textAllCaps="true" />
 
             <TextView
                 android:layout_width="0dp"
@@ -127,8 +144,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
                 android:text="@string/lp"
-                android:textAllCaps="true"
-                android:textStyle="bold" />
+                android:fontFamily="@font/poppins_bold"
+                android:textAllCaps="true" />
 
             <TextView
                 android:layout_width="0dp"
@@ -136,7 +153,7 @@
                 android:layout_weight="0.5"
                 android:text="@string/telepon"
                 android:textAllCaps="true"
-                android:textStyle="bold" />
+                android:fontFamily="@font/poppins_bold" />
 
         </LinearLayout>
 

@@ -52,6 +52,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/info_usaha"
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="@dimen/_9ssp"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -75,6 +77,8 @@
                         android:paddingRight="@dimen/paddingMedium"
                         android:paddingBottom="@dimen/paddingXSmall"
                         android:text="1"
+                        android:textSize="@dimen/_9ssp"
+                        android:fontFamily="@font/poppins_bold"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
@@ -94,6 +98,8 @@
                         android:paddingRight="@dimen/paddingMedium"
                         android:paddingBottom="@dimen/paddingXSmall"
                         android:text="2"
+                        android:textSize="@dimen/_9ssp"
+                        android:fontFamily="@font/poppins_bold"
                         android:textColor="@android:color/darker_gray"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -119,6 +125,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/nama_anda"
+                        android:textSize="@dimen/_9ssp"
+                        android:fontFamily="@font/poppins_regular"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -138,6 +146,8 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/no_telp"
                         android:inputType="phone"
+                        android:textSize="@dimen/_9ssp"
+                        android:fontFamily="@font/poppins_regular"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -163,6 +173,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/nama_usaha"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_9ssp"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -180,6 +192,8 @@
                         android:textColor="@color/green_dark"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_8ssp"
                         android:text="Jenis usaha" />
 
 
@@ -187,6 +201,8 @@
                             android:id="@+id/spinner_usaha"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="@dimen/_9ssp"
                             android:backgroundTint="@color/black"
                             android:popupBackground="@color/white" />
 
@@ -206,6 +222,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/alamat"
+                    android:textSize="@dimen/_9ssp"
+                    android:fontFamily="@font/poppins_regular"
                     android:imeOptions="flagNoExtractUi"
                     android:singleLine="true"
                     android:textColorHint="@color/green_dark" />
@@ -233,6 +251,8 @@
                         android:textColor="@color/green_dark"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_9ssp"
+                        android:fontFamily="@font/poppins_regular"
                         android:text="@string/pilih_provinsi" />
 
 
@@ -240,6 +260,8 @@
                             android:id="@+id/spinner_prov"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:textSize="@dimen/_9ssp"
                             android:backgroundTint="@color/black"
                             android:popupBackground="@color/white" />
 
@@ -258,12 +280,16 @@
                         android:textColor="@color/green_dark"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_9ssp"
                         android:text="@string/pilih_kota" />
 
                     <Spinner
                         android:id="@+id/spinner_cities"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_9ssp"
                         android:backgroundTint="@color/black"
                         android:popupBackground="@color/white" />
 
@@ -276,9 +302,11 @@
                 android:id="@+id/btn_lanjut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/paddingXLarge"
                 android:layout_marginBottom="@dimen/paddingLarge"
                 android:background="@color/green_dark"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="@dimen/_9ssp"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/lanjutkan"

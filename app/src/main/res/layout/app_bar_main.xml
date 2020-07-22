@@ -52,8 +52,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="NAMA RESTORAN"
+                                android:fontFamily="@font/poppins_bold"
                                 android:textColor="@color/black"
-                                android:textSize="16sp"
+                                android:textSize="@dimen/_12ssp"
                                 android:textStyle="bold" />
 
 
@@ -63,7 +64,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Budi Setiawan"
                                 android:textColor="@color/black"
-                                android:textSize="13sp" />
+                                android:textSize="@dimen/_12ssp" />
 
                         </LinearLayout>
 
@@ -141,6 +142,7 @@
                             android:id="@+id/edt_search"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/paddingXXXSmall"
                             android:layout_toLeftOf="@id/img_list_order"
@@ -186,7 +188,7 @@
                             android:gravity="center"
                             android:background="@drawable/badge_background"
                             android:padding="3dp"
-                            android:text="0"
+                            android:text=""
                             android:textStyle="bold"
                             android:textColor="@android:color/white"
                             android:textSize="10sp" />

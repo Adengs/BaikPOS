@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/nav_header_vertical_spacing"
                     android:text="@string/kasir"
-                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_regular"
                     android:textColor="@color/gray"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -51,8 +51,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/nama_kasir"
-                    android:textColor="@android:color/white"
-                    android:textSize="15sp"/>
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 
@@ -69,6 +69,7 @@
                     android:layout_marginBottom="@dimen/paddingLarge"
                     android:paddingStart="@dimen/_7sdp"
                     android:paddingEnd="@dimen/_7sdp"
+                    android:fontFamily="@font/poppins_bold"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:textColor="@android:color/black"

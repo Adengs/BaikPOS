@@ -48,9 +48,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="1"
+                        android:fontFamily="@font/poppins_bold"
                         android:textColor="@color/black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:textSize="13sp" />
 
                     <TextView
                         android:id="@+id/tv_nama_makanan"
@@ -64,7 +64,7 @@
                         android:text="Nama Makanan"
                         android:textColor="@color/black"
                         android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:fontFamily="@font/poppins_bold" />
 
 
                     <TextView
@@ -77,9 +77,9 @@
                         android:layout_toRightOf="@id/tv_nama_makanan"
                         android:gravity="end"
                         android:text="20.000"
+                        android:fontFamily="@font/poppins_bold"
                         android:textColor="@color/black"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:textSize="13sp" />
 
 
                     <ImageView
@@ -125,6 +125,7 @@
                         android:layout_marginRight="@dimen/paddingXXLarge"
                         android:layout_toRightOf="@id/tv_jumlah_order1"
                         android:text="Promo"
+                        android:fontFamily="@font/poppins_regular"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
 
@@ -139,6 +140,7 @@
                         android:layout_toRightOf="@id/tv_nama_makanan1"
                         android:gravity="end"
                         android:text="20.000"
+                        android:fontFamily="@font/poppins_regular"
                         android:textColor="@color/gray_txt"
                         android:textSize="13sp" />
 
@@ -159,7 +161,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_additional"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+                    android:layout_height="wrap_content"/>
 
                 <RelativeLayout
                     android:id="@+id/rela_3"
@@ -192,8 +194,8 @@
                         android:layout_toRightOf="@id/tv_tv_plus_gone"
                         android:text="Tidak usah pakai gula"
                         android:textColor="@color/txt_reservasi"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
+                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="13sp" />
 
 
                 </RelativeLayout>

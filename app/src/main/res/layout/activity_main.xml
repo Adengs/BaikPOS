@@ -43,6 +43,7 @@
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:gravity="center"
+                            android:fontFamily="@font/poppins_bold"
                             android:text="@string/logout_kasir"
                             android:drawableLeft="@drawable/ic_logout_kasir" />
                     </LinearLayout>

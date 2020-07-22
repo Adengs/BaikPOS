@@ -38,6 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/verifikasi"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/poppins_bold"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -49,6 +51,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/poppins_bold"
                 android:layout_marginTop="@dimen/paddingLarge"
                 android:text="@string/verifikasi_email" />
 
@@ -70,6 +74,8 @@
                     android:gravity="center"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="number"
+                    android:textSize="@dimen/_13ssp"
+                    android:fontFamily="@font/poppins_regular"
                     android:maxLength="1"
                     android:textColor="@color/green_dark" />
 
@@ -80,7 +86,8 @@
                     android:layout_marginLeft="@dimen/paddingXXXSmall"
                     android:layout_marginRight="@dimen/paddingXXXSmall"
                     android:layout_weight="1"
-
+                    android:textSize="@dimen/_13ssp"
+                    android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="number"
@@ -97,6 +104,8 @@
                     android:gravity="center"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="number"
+                    android:textSize="@dimen/_13ssp"
+                    android:fontFamily="@font/poppins_regular"
                     android:maxLength="1"
                     android:textColor="@color/green_dark" />
 
@@ -108,6 +117,8 @@
                     android:layout_marginRight="@dimen/paddingXXXSmall"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:textSize="@dimen/_13ssp"
+                    android:fontFamily="@font/poppins_regular"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="number"
                     android:maxLength="1"
@@ -122,6 +133,8 @@
                 android:layout_marginTop="@dimen/paddingLarge"
                 android:background="@color/green_dark"
                 android:clickable="true"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/poppins_bold"
                 android:foreground="?attr/selectableItemBackground"
                 android:text="@string/lanjutkan"
                 android:textColor="@color/white" />

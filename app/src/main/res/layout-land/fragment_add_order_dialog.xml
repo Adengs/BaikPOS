@@ -29,9 +29,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/nama_produk"
+                android:fontFamily="@font/poppins_bold"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="14sp" />
 
 
         </RelativeLayout>
@@ -89,6 +89,7 @@
                     android:layout_weight="1"
                     android:width="38dp"
                     android:height="38dp"
+                    android:fontFamily="@font/poppins_regular"
                     android:clickable="true"
                     android:digits="0123456789"
                     android:focusable="true"
@@ -159,11 +160,12 @@
                     android:layout_height="wrap_content"
                     android:text="Catatan"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:padding="16dp"
-                    android:textStyle="bold" />
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:padding="16dp" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_catatan2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -187,6 +189,7 @@
                     android:maxLines="3"
                     android:imeOptions="flagNoExtractUi"
                     android:gravity="top"
+                    android:fontFamily="@font/poppins_regular"
                     android:textSize="12sp"
                     android:layout_below="@+id/tv_catatan2"/>
 
@@ -210,6 +213,7 @@
                     android:layout_marginLeft="0dp"
                     android:background="@color/green_dark"
                     android:clickable="true"
+                    android:fontFamily="@font/poppins_bold"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:text="Rp 0"

@@ -2,6 +2,7 @@ package com.codelabs.konspirasisnack.activity.ui.home;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codelabs.konspirasisnack.R;
@@ -52,6 +54,7 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ViewHolder
         return new ViewHolder(itemView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GetProducts.DATABean selectedData = mData.get(position);
@@ -78,7 +81,6 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ViewHolder
         holder.llStok.setVisibility(selectedData.getActualStock() > 0 ? View.VISIBLE : View.GONE);
         holder.llStokHabis.setVisibility(selectedData.getActualStock() == 0 ? View.VISIBLE : View.GONE);
 
-//        Log.e("productsingo", (selectedData.getItemName()) + (selectedData.getItem_harga_jual_actual()));
     }
 
     public void setData(List<GetProducts.DATABean> data) {

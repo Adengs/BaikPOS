@@ -50,6 +50,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/masukan_produk"
+                        android:textSize="@dimen/_9ssp"
+                        android:fontFamily="@font/poppins_bold"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -68,6 +70,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/black"
+                        android:textSize="@dimen/_9ssp"
+                        android:fontFamily="@font/poppins_regular"
                         android:paddingLeft="@dimen/paddingMedium"
                         android:paddingTop="@dimen/paddingXSmall"
                         android:paddingRight="@dimen/paddingMedium"
@@ -89,6 +93,8 @@
                         android:layout_height="wrap_content"
                         android:background="@color/black"
                         android:paddingLeft="@dimen/paddingMedium"
+                        android:textSize="@dimen/_9ssp"
+                        android:fontFamily="@font/poppins_regular"
                         android:paddingTop="@dimen/paddingXSmall"
                         android:paddingRight="@dimen/paddingMedium"
                         android:paddingBottom="@dimen/paddingXSmall"
@@ -156,6 +162,8 @@
                         android:id="@+id/ed_nama_produk"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_9ssp"
                         android:hint="@string/nama_produk"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true" />
@@ -173,6 +181,8 @@
                     <TextView
                         android:textColor="@color/green_dark"
                         android:layout_width="match_parent"
+                        android:textSize="@dimen/_8ssp"
+                        android:fontFamily="@font/poppins_regular"
                         android:layout_height="wrap_content"
                         android:text="Satuan" />
 
@@ -181,6 +191,8 @@
                         android:id="@+id/spinner_satuan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_9ssp"
                         android:backgroundTint="@color/black"
                         android:popupBackground="@color/white" />
 
@@ -217,6 +229,8 @@
                         android:id="@+id/ed_kategori_produk"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_9ssp"
                         android:hint="@string/kategori_produk"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true" />
@@ -236,6 +250,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/stok"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_9ssp"
                         android:inputType="number"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true" />
@@ -263,6 +279,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/modal"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_9ssp"
                         android:inputType="number"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true" />
@@ -282,6 +300,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/jual"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textSize="@dimen/_9ssp"
                         android:inputType="number"
                         android:imeOptions="flagNoExtractUi"
                         android:singleLine="true"/>
@@ -295,6 +315,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingLarge"
                 android:layout_marginBottom="@dimen/paddingLarge"
+                android:fontFamily="@font/poppins_bold"
+                android:textSize="@dimen/_9ssp"
                 android:background="@color/green_dark"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"

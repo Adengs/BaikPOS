@@ -3,9 +3,7 @@ package com.codelabs.konspirasisnack.activity;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,12 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -54,7 +50,6 @@ import com.codelabs.konspirasisnack.EventBus.ShowProductOrderType;
 import com.codelabs.konspirasisnack.EventBus.ShowSearchKasir;
 import com.codelabs.konspirasisnack.EventBus.ShowTambahAlamat;
 import com.codelabs.konspirasisnack.R;
-import com.codelabs.konspirasisnack.adapter.KasKasirAwalAdapter;
 import com.codelabs.konspirasisnack.adapter.SpinnerAdapterOrderType;
 import com.codelabs.konspirasisnack.adapter.SpinnerOutlet;
 import com.codelabs.konspirasisnack.connection.ApiUtils;
@@ -97,7 +92,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.tv_nama_restoran)
     TextView tvNamaRestoran;
@@ -265,14 +260,11 @@ public class MainActivity extends AppCompatActivity {
     TextView tvLaporPenjualan;
 
 
+
     private NavigationView navigationView;
     private NavController navController;
-
-
     private AppBarConfiguration mAppBarConfiguration;
-    KasKasirAwalAdapter adapter;
     private int selectedId;
-    TextView tvNavbarNama;
     private Date selectedPenjualanDate;
     private int selectedOutletId = 0;
     private List<GetOutlet.DATA> dataOutlet;
@@ -280,27 +272,15 @@ public class MainActivity extends AppCompatActivity {
     private Date selectedLaporan;
     private Date selectedLaporanKomisi;
     private Date selectedLaporanPenjualan;
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float DEFAULT_ZOOM = 15f;
-    private Boolean mLocationPermissionsGranted = false;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private final int REQUEST_LOCATION_PERMISSION = 1;
-
     DialogFragment mpinFrag = new MpinDialogFragment();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null){
-            Fragment prev = getSupportFragmentManager().findFragmentByTag("mpin_dialog");
-            if (prev != null) {
-                MpinDialogFragment df = (MpinDialogFragment) prev;
-                df.dismiss();
-            }
 
-        }
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         CheckDevice.setScreenOrientation(this, CheckDevice.isTablet());
@@ -313,15 +293,6 @@ public class MainActivity extends AppCompatActivity {
         initEvent();
         initSetup();
         fetchData();
-
-
-        linerLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(), "test logout", Toast.LENGTH_SHORT).show();
-                dialogLogout();
-            }
-        });
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -353,6 +324,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         initVar(new RefreshToolbar());
+
+        if (savedInstanceState != null){
+            Fragment prev = getSupportFragmentManager().findFragmentByTag("mpin_dialog");
+            if (prev != null) {
+                MpinDialogFragment df = (MpinDialogFragment) prev;
+                df.dismiss();
+            }
+
+        }
     }
 
     @Subscribe
@@ -364,16 +344,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
 
-//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
-//        if (prev != null) {
-//            ft.remove(prev);
-//        }
-//        ft.addToBackStack(null);
-
         FragmentManager fm = getSupportFragmentManager();
         mpinFrag.show(fm, "mpin_dialog");
-
 
     }
 
@@ -386,6 +358,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initEvent() {
+        linerLogout.setOnClickListener(this);
         selectedId = DataManager.getInstance().getCashierId();
 
     }
@@ -395,7 +368,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchData() {
-//        getLocationPermission();
         requestLocationPermission();
 
     }
@@ -411,18 +383,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-    }
-
-    private void getLocationPermission() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-                    PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{
-                                Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_CODE_ASK_PERMISSIONS);
-                return;
-            }
-        }
     }
 
 
@@ -919,8 +879,8 @@ public class MainActivity extends AppCompatActivity {
                                     EventBus.getDefault().post(new ShowMeja(response.getDATA().get(i).getTypeId() == 1));
                                     EventBus.getDefault().post(new ShowProductOrderType(true));
 //                                    EventBus.getDefault().post(new ShowTambahAlamat(response.getDATA().get(i).getTypeId() == 3));
-                                    DataManager.getInstance().clearTambahAlamat();
-                                    if (response.getDATA().get(i).getTypeId() == 3) {
+//                                    DataManager.getInstance().clearTambahAlamat();
+                                    if (response.getDATA().get(i).getTypeId() == 3){
                                         requestLocationPermission();
                                     }
 
@@ -946,8 +906,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void setShowingSearchKasir(ShowSearchKasir showingSearchKasir) {
-        edtSearch.setVisibility(showingSearchKasir.isShowing() ? View.VISIBLE : View.GONE);
+    public void setShowingSearchKasir(ShowSearchKasir showingSearchKasir){
+        edtSearch.setVisibility(showingSearchKasir.isShowing()? View.VISIBLE:View.GONE);
     }
 
     public void doCloseCashier() {
@@ -1040,10 +1000,7 @@ public class MainActivity extends AppCompatActivity {
         toolbarLaporanPenjualn.setVisibility(View.GONE);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+
 
 
     @Override
@@ -1057,36 +1014,25 @@ public class MainActivity extends AppCompatActivity {
 
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-//        switch (requestCode) {
-//            case REQUEST_CODE_ASK_PERMISSIONS:
-//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                } else {
-//                    Toast.makeText(this,"Anda tidak bisa mengakses alamat", Toast.LENGTH_SHORT).show();
-//                }
-//                break;
-//                default:
-//                    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        }
-
     }
 
     @AfterPermissionGranted(REQUEST_CODE_ASK_PERMISSIONS)
     public void requestLocationPermission() {
         String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION};
         if (EasyPermissions.hasPermissions(this, perms)) {
-            Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
             EventBus.getDefault().post(new ShowTambahAlamat(true));
-        } else {
-            EasyPermissions.requestPermissions(this, "Please grant the location permission", REQUEST_CODE_ASK_PERMISSIONS, perms);
+        }
+        else {
+//            EasyPermissions.requestPermissions(this, "Please grant the location permission", REQUEST_CODE_ASK_PERMISSIONS, perms);
 
         }
     }
 
 
+
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
-//        Toast.makeText(getBaseContext(), "Press once again to exit", Toast.LENGTH_SHORT).show();
 
         if (backPressed + 2000 > System.currentTimeMillis()) {
             finish();
@@ -1095,6 +1041,14 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
         backPressed = System.currentTimeMillis();
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (linerLogout == view) {
+            dialogLogout();
+        }
 
     }
 }

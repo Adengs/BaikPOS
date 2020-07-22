@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.codelabs.konspirasisnack.EventBus.RefreshMeja;
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.adapter.SelectedMejaAdapter;
@@ -26,6 +27,7 @@ import com.codelabs.konspirasisnack.helper.DateUtils;
 import com.codelabs.konspirasisnack.model.GetCustomer;
 import com.codelabs.konspirasisnack.model.GetTable;
 import com.codelabs.konspirasisnack.model.ParamCreateReservation;
+import com.codelabs.konspirasisnack.utils.CheckDevice;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -97,7 +99,7 @@ public class DialogSelectMeja extends Dialog {
                 selecMeja.setPermSelected(true);
             }
         txtNamameja.setText(meja.getTableName());
-        rvMeja.setLayoutManager(new GridLayoutManager(getContext(), 5));
+        rvMeja.setLayoutManager(new GridLayoutManager(getContext(), CheckDevice.isTablet() ? 5 : 4));
         SelectedMejaAdapter adapter = new SelectedMejaAdapter(getContext(), onUpdateSelectedMeja);
         adapter.setData(data);
         rvMeja.setAdapter(adapter);

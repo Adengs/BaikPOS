@@ -172,7 +172,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private HomeViewModel homeViewModel;
     private PesananFragment pesananFragment;
     private int[] tabIcons = {
-            R.drawable.ic_pelanggan,
+            R.drawable.ic_list_order,
             R.drawable.ic_pelanggan
 
     };
@@ -202,12 +202,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private int pajakValue3;
     private long mLastClickTime = 0;
     private int promoMinValue;
-    private int DMOrderType;
     private int transaction_id;
     private ViewGroup container;
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private Boolean mLocationPermissionsGranted = false;
 
 
@@ -430,12 +426,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 public void onGlobalLayout() {
                     viewPager.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     EventBus.getDefault().post(selectedProduct);
-                    pesananFragment.setDataOrder(selectedItemOrder);
-                    EventBus.getDefault().post(new ShowTambahAlamat(true));
+//                    EventBus.getDefault().post(new ShowTambahAlamat(true));
 //                    pesananFragment.setDataAlamat(new SetDataAlamat("" + "-" ,"" + "-","" + "-", "" + "-"));
 //                    pesananFragment.setDataAlamat(new SetDataAlamat(alamat,alamat,alamat,alamat));
-                    pesananFragment.setDataOrderMeja(selectedItemOrderByMeja);
-
                 }
             });
 
@@ -488,10 +481,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     showMeja(new ShowMeja(false));
                 getCategory();
 
+                pesananFragment.setDataOrder(selectedItemOrder);
+                pesananFragment.setDataAlamatSave(selectedOrderDetail.getDataTransactionShipping());
+
             }
 
-            pesananFragment.setDataOrder(selectedItemOrder);
-            pesananFragment.setDataAlamatSave(selectedOrderDetail.getDataTransactionShipping());
+
 
 
             selectedProduct = new ArrayList<>();
@@ -506,6 +501,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     viewPager.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     EventBus.getDefault().post(selectedProduct);
                     pesananFragment.setDataOrderMeja(selectedItemOrderByMeja);
+
                 }
             });
 
@@ -651,39 +647,42 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initFloor(List<GetTable.DATA> data) {
-        List<String> sData = new ArrayList<>();
-        for (GetTable.DATA selectedData : data)
-            sData.add(selectedData.getFloorName());
-        ArrayAdapter<String> adapterLantai = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, sData) {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View v = super.getView(position, convertView, parent);
+        if (getActivity() != null) {
 
-                v.setPadding(0, v.getPaddingTop(), v.getPaddingRight(), v.getPaddingBottom());
+            List<String> sData = new ArrayList<>();
+            for (GetTable.DATA selectedData : data)
+                sData.add(selectedData.getFloorName());
+            ArrayAdapter<String> adapterLantai = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, sData) {
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View v = super.getView(position, convertView, parent);
 
-                return v;
-            }
-        };
-        spinLantai.setAdapter(adapterLantai);
-        spinLantai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    v.setPadding(0, v.getPaddingTop(), v.getPaddingRight(), v.getPaddingBottom());
 
-                if (getActivity() != null) {
-                    txtJumlahMeja.setText(data.get(i).getJumlahMeja() + " " + getString(R.string.meja));
-                    rvMeja.setLayoutManager(new GridLayoutManager(getActivity(), 4));
-                    adapterMeja = new MejaAdapter(getActivity());
-                    adapterMeja.setData(data.get(i).getMeja());
-                    rvMeja.setAdapter(adapterMeja);
+                    return v;
+                }
+            };
+            spinLantai.setAdapter(adapterLantai);
+            spinLantai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    if (getActivity() != null) {
+                        txtJumlahMeja.setText(data.get(i).getJumlahMeja() + " " + getString(R.string.meja));
+                        rvMeja.setLayoutManager(new GridLayoutManager(getActivity(), CheckDevice.isTablet() ? 4 : 3));
+                        adapterMeja = new MejaAdapter(getActivity());
+                        adapterMeja.setData(data.get(i).getMeja());
+                        rvMeja.setAdapter(adapterMeja);
+                    }
+
                 }
 
-            }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+                }
+            });
+        }
 
     }
 
@@ -725,14 +724,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
 
-//        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
 
-        LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
-        TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
-        tabContent.setText("  " + tabLayout.getTabAt(1).getText());
-        tabContent.setCompoundDrawablesWithIntrinsicBounds(tabIcons[1], 0, 0, 0);
-        tabLayout.getTabAt(1).setCustomView(tabContent);
+//
+//        LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab, null);
+//        TextView tabContent = (TextView) tabLinearLayout.findViewById(R.id.tabContent);
+//        tabContent.setText("  " + tabLayout.getTabAt(1).getText());
+//        tabContent.setCompoundDrawablesWithIntrinsicBounds(tabIcons[1], 0, 0, 0);
+//        tabLayout.getTabAt(1).setCustomView(tabContent);
+
 
     }
 
@@ -885,9 +887,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             getCategory();
             produkAdapter.setData(new ArrayList<>());
             selectedItemOrder = new ArrayList<>();
-            pesananFragment.setDataOrder(selectedItemOrder);
+//            pesananFragment.setDataOrder(selectedItemOrder);
             selectedItemOrderByMeja = new ArrayList<>();
-            pesananFragment.setDataOrderMeja(selectedItemOrderByMeja);
+//            pesananFragment.setDataOrderMeja(selectedItemOrderByMeja);
             selectedProduct = new ArrayList<>();
             EventBus.getDefault().post(selectedProduct);
             calculateTotal();
@@ -1066,26 +1068,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         ParamCreateOrder.ShippingData shipping = new ParamCreateOrder.ShippingData();
 
-            if (selectedOrderType != null) {
-                if (selectedOrderType.getTypeId() == 3) {
-                    if (selectedCustomer != null) {
-                        shipping.setName(selectedCustomer.getCustFullname());
-                    }else {
-                        Toast.makeText(getActivity(), "Pilih data pelanggan", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+        if (selectedOrderType != null) {
+            if (selectedOrderType.getTypeId() == 3) {
+                if (selectedCustomer != null) {
+                    shipping.setName(selectedCustomer.getCustFullname());
+                }else {
+                    Toast.makeText(getActivity(), "Pilih data pelanggan", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                    if (selectedOrderDetail == null && DataManager.getInstance().getAddressTambah().equals("")){
-                        Toast.makeText(getActivity(), "Pilih alamat delivery", Toast.LENGTH_SHORT).show();
-                        return;
-                    }else {
-                        shipping.setAddress(DataManager.getInstance().getAddressTambah());
-                        shipping.setLatitude(DataManager.getInstance().getLatitudeTambah());
-                        shipping.setLongitude(DataManager.getInstance().getLongitudeTambah());
-                        shipping.setDatetime(DataManager.getInstance().getDateTimeTambah());
-                    }
+                if (selectedOrderDetail == null && DataManager.getInstance().getAddressTambah().equals("")){
+                    Toast.makeText(getActivity(), "Pilih alamat delivery", Toast.LENGTH_SHORT).show();
+                    return;
+                }else {
+                    shipping.setAddress(DataManager.getInstance().getAddressTambah());
+                    shipping.setLatitude(DataManager.getInstance().getLatitudeTambah());
+                    shipping.setLongitude(DataManager.getInstance().getLongitudeTambah());
+                    shipping.setDatetime(DataManager.getInstance().getDateTimeTambah());
                 }
             }
+        }
 
 
         if (selectedOrderDetail != null){
@@ -1518,8 +1520,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             selectedProduct = new ArrayList<>();
                             selectedItemOrder = new ArrayList<>();
                             selectedItemOrderByMeja = new ArrayList<>();
-                            pesananFragment.setDataOrder(selectedItemOrder);
-                            pesananFragment.setDataOrderMeja(selectedItemOrderByMeja);
+//                            pesananFragment.setDataOrder(selectedItemOrder);
+//                            pesananFragment.setDataOrderMeja(selectedItemOrderByMeja);
                             EventBus.getDefault().post(selectedProduct);
                             EventBus.getDefault().post(new RefreshProduct());
                             EventBus.getDefault().post(new ShowTambahAlamat(response.getDATA().getTrans_order_type() == 3));

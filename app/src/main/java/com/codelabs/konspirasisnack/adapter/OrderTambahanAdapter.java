@@ -12,12 +12,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.helper.Utils;
 import com.codelabs.konspirasisnack.model.GetOrderDetail;
+
 import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -46,14 +51,9 @@ public class OrderTambahanAdapter extends RecyclerView.Adapter<OrderTambahanAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        // TODO: 02/04/20 Set Notenya dari mana?
-//        holder.tvCatatan.setText(data.getDetailItem());
-
-//        GetOrderDetail.DATA.TransactionItems data = this.dataOrder.get(position);
 
         GetOrderDetail.DATA.TransactionItems data = this.dataOrder.get(position);
         holder.tvCatatan.setText(data.getTrItemInfo());
-//        holder.tvNamaMakanan.setText(data.getDetailItem().getItemName());
         holder.tvNamaMakanan.setText(data.getTr_item_name());
         holder.tvHarga.setText(Utils.toCurrency(data.getTrItemTotalPrice().replace(".00","")));
         holder.tvJumlahOrder.setText(data.getTrItemQty().replace(".00",""));
@@ -64,8 +64,6 @@ public class OrderTambahanAdapter extends RecyclerView.Adapter<OrderTambahanAdap
         adapter.setData(data.getVariants());
         holder.rvVariants.setAdapter(adapter);
 
-
-
     }
 
     @Override
@@ -73,7 +71,7 @@ public class OrderTambahanAdapter extends RecyclerView.Adapter<OrderTambahanAdap
         return dataOrder.size();
     }
 
-    public void setDataOrder(List<GetOrderDetail.DATA.TransactionItems> data) {
+    public void setDataOrderDetail(List<GetOrderDetail.DATA.TransactionItems> data) {
         this.dataOrder = data;
         notifyDataSetChanged();
     }
@@ -81,28 +79,26 @@ public class OrderTambahanAdapter extends RecyclerView.Adapter<OrderTambahanAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-       @BindView(R.id.rv_variants)
-       RecyclerView rvVariants;
-
-       @BindView(R.id.rv_product)
-       RecyclerView rvProduct;
+        @BindView(R.id.rv_variants)
+        RecyclerView rvVariants;
+        @BindView(R.id.rv_product)
+        RecyclerView rvProduct;
         @BindView(R.id.tv_jumlah_order)
         TextView tvJumlahOrder;
         @BindView(R.id.tv_nama_makanan)
         TextView tvNamaMakanan;
         @BindView(R.id.tv_harga)
         TextView tvHarga;
-       @BindView(R.id.tv_tv_plus_gone)
-       TextView tvPlus;
-       @BindView(R.id.tv_nama_catatan)
-       TextView tvCatatan;
+        @BindView(R.id.tv_tv_plus_gone)
+        TextView tvPlus;
+        @BindView(R.id.tv_nama_catatan)
+        TextView tvCatatan;
         @BindView(R.id.rela_1)
         RelativeLayout rela1;
         @BindView(R.id.rela_3)
         RelativeLayout rela3;
-
-       @BindView(R.id.img_del)
-       ImageView liner;
+        @BindView(R.id.img_del)
+        ImageView liner;
 
 
         public ViewHolder(@NonNull View itemView) {
