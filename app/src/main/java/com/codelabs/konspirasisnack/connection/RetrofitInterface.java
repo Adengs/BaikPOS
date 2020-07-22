@@ -1,5 +1,7 @@
 package com.codelabs.konspirasisnack.connection;
 
+import androidx.annotation.Nullable;
+
 import com.codelabs.konspirasisnack.model.AbsenceIn;
 import com.codelabs.konspirasisnack.model.AbsenceOut;
 import com.codelabs.konspirasisnack.model.AddCategory;
@@ -295,6 +297,11 @@ public interface RetrofitInterface {
     @POST(AppConstant.AddProduct)
     @Multipart
     Call<AddProduct> addProduct(@Header(AppConstant.AuthTitle) String auth, @PartMap Map<String, RequestBody> partMap, @Part MultipartBody.Part file);
+
+    @Headers({AppConstant.AcceptTitle + ":" + AppConstant.AcceptValue})
+    @POST(AppConstant.EditProduct)
+    @Multipart
+    Call<AddProduct> editProduct(@Header(AppConstant.AuthTitle) String auth,@Path("id") String id, @PartMap Map<String, RequestBody> partMap, @Nullable @Part MultipartBody.Part file);
 
     @Headers({AppConstant.AcceptTitle + ":" + AppConstant.AcceptValue})
     @GET(AppConstant.GetOrderByReservation)

@@ -220,6 +220,7 @@
     <string name="daftar_produk">Daftar Produk</string>
     <string name="daftar_kategori">Daftar Kategori</string>
     <string name="tambah_produk">Tambah Produk</string>
+    <string name="edit_produk">Edit Produk</string>
     <string name="tambah_kategori">Tambah Kategori</string>
     <string name="tambah_karyawan">Tambah Karyawan</string>
     <string name="tambah_pembayaran_nontunai">Tambah Pembayaran</string>

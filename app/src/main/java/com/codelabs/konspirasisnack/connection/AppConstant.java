@@ -67,6 +67,7 @@ public class AppConstant {
     public static final String AddCategory = "product/category/create";
     public static final String EditCategori = "product/category/update/{id}";
     public static final String AddProduct = "product/create";
+    public static final String EditProduct = "product/update/{id}";
     public static final String GetOrderByReservation = "floor/get_order_by_reservation_id/{id}";
     public static final String GetReportKomisi = "report/komisi";
     public static final String GetReportTutupKasir = "report/close_cashier";

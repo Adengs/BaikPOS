@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/paddingSmall"
+            android:id="@+id/txt_title"
             android:gravity="center"
             android:text="@string/tambah_produk"
             android:textAllCaps="true"
@@ -175,7 +176,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/paddingSmall"
-
+                android:id="@+id/layStock"
                 app:hintTextAppearance="@style/TextLabel">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -192,7 +193,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/paddingSmall"
-
                 android:layout_marginBottom="@dimen/paddingSmall"
                 app:hintTextAppearance="@style/TextLabel">
 

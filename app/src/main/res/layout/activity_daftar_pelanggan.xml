@@ -43,6 +43,7 @@
             <TextView
                 android:id="@+id/tv_tambah_pelanggan"
                 android:layout_width="wrap_content"
+                android:drawableTint="@color/green_dark"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/iv_back"
                 android:layout_alignBottom="@+id/iv_back"

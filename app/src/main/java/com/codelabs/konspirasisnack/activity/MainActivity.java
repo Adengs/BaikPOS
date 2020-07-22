@@ -32,6 +32,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -287,10 +288,19 @@ public class MainActivity extends AppCompatActivity {
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private final int REQUEST_LOCATION_PERMISSION = 1;
 
+    DialogFragment mpinFrag = new MpinDialogFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null){
+            Fragment prev = getSupportFragmentManager().findFragmentByTag("mpin_dialog");
+            if (prev != null) {
+                MpinDialogFragment df = (MpinDialogFragment) prev;
+                df.dismiss();
+            }
+
+        }
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         CheckDevice.setScreenOrientation(this, CheckDevice.isTablet());
@@ -362,11 +372,8 @@ public class MainActivity extends AppCompatActivity {
 //        ft.addToBackStack(null);
 
         FragmentManager fm = getSupportFragmentManager();
-        DialogFragment mpinFrag = new MpinDialogFragment();
-        if (mpinFrag.isAdded()) {
-            return;
-        }
-        mpinFrag.show(fm, "title");
+        mpinFrag.show(fm, "mpin_dialog");
+
 
     }
 
@@ -417,7 +424,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 
 
     @Subscribe
@@ -914,7 +920,7 @@ public class MainActivity extends AppCompatActivity {
                                     EventBus.getDefault().post(new ShowProductOrderType(true));
 //                                    EventBus.getDefault().post(new ShowTambahAlamat(response.getDATA().get(i).getTypeId() == 3));
                                     DataManager.getInstance().clearTambahAlamat();
-                                    if (response.getDATA().get(i).getTypeId() == 3){
+                                    if (response.getDATA().get(i).getTypeId() == 3) {
                                         requestLocationPermission();
                                     }
 
@@ -940,8 +946,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Subscribe
-    public void setShowingSearchKasir(ShowSearchKasir showingSearchKasir){
-        edtSearch.setVisibility(showingSearchKasir.isShowing()? View.VISIBLE:View.GONE);
+    public void setShowingSearchKasir(ShowSearchKasir showingSearchKasir) {
+        edtSearch.setVisibility(showingSearchKasir.isShowing() ? View.VISIBLE : View.GONE);
     }
 
     public void doCloseCashier() {
@@ -1040,7 +1046,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Log.e("permission activity", "Request Code: " + requestCode);
@@ -1071,13 +1076,11 @@ public class MainActivity extends AppCompatActivity {
         if (EasyPermissions.hasPermissions(this, perms)) {
             Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
             EventBus.getDefault().post(new ShowTambahAlamat(true));
-        }
-        else {
+        } else {
             EasyPermissions.requestPermissions(this, "Please grant the location permission", REQUEST_CODE_ASK_PERMISSIONS, perms);
 
         }
     }
-
 
 
     @Override

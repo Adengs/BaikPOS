@@ -8,9 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codelabs.konspirasisnack.R;
+import com.codelabs.konspirasisnack.fragment.EditProdukDialogFragment;
 import com.codelabs.konspirasisnack.helper.Utils;
 import com.codelabs.konspirasisnack.model.GetProducts;
 import com.squareup.picasso.Picasso;
@@ -73,6 +75,13 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EditProdukDialogFragment dialog = EditProdukDialogFragment.newInstance(data.get(getAdapterPosition()));
+                    dialog.show(((FragmentActivity) context).getSupportFragmentManager(),"");
+                }
+            });
         }
     }
 }
