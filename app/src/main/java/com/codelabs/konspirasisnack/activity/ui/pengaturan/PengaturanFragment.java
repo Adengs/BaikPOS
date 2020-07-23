@@ -149,7 +149,7 @@ public class PengaturanFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_pengaturan, container, false);
         ButterKnife.bind(this, v);
 
-//        initDialogLoginOwner();
+        initDialogLoginOwner();
         initView();
 
         btnLogoutAplikasi.setOnClickListener(new View.OnClickListener() {

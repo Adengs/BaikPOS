@@ -142,9 +142,9 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
                 gMap = mMap;
                 gMap.setMyLocationEnabled(true);
                 if (mLocationPermissionsGranted) {
-                    createLocationCallBack();
-                    createLocationRequest();
-                    buildLocationSettingsRequest();
+//                    createLocationCallBack();
+//                    createLocationRequest();
+//                    buildLocationSettingsRequest();
                     getDeviceLocation();
 
                     if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -207,10 +207,10 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
     }
 
     private void initMap() {
-        createLocationCallBack();
-        createLocationRequest();
-        buildLocationSettingsRequest();
-        checkLocationEnabled();
+//        createLocationCallBack();
+//        createLocationRequest();
+//        buildLocationSettingsRequest();
+//        checkLocationEnabled();
 
 
     }
@@ -356,7 +356,7 @@ public class TambahLokasiDialogFragment extends DialogFragment implements OnMapR
 
                             }
                             else {
-                                startLocationUpdates();
+//                                startLocationUpdates();
                             }
                         }else {
                             Toast.makeText(getActivity(), "unable to get current location", Toast.LENGTH_SHORT).show();

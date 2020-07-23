@@ -368,4 +368,10 @@ public class MpinDialogFragment extends DialogFragment {
             }
         });
     }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        textC.performClick();
+        super.onDismiss(dialog);
+    }
 }

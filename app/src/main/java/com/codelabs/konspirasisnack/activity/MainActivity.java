@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,6 +27,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -86,8 +89,6 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import pub.devrel.easypermissions.AfterPermissionGranted;
-import pub.devrel.easypermissions.EasyPermissions;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -273,8 +274,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Date selectedLaporanKomisi;
     private Date selectedLaporanPenjualan;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-    private final int REQUEST_LOCATION_PERMISSION = 1;
     DialogFragment mpinFrag = new MpinDialogFragment();
+
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+
 
 
     @Override
@@ -335,6 +339,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public boolean checkLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                //Should we show an explanation?
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+                    new AlertDialog.Builder(this)
+                            .setTitle("Location Permission")
+                            .setMessage("Izinkan mengakses lokasi")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //Prompt the user once explanation has been shown
+                                    ActivityCompat.requestPermissions(MainActivity.this,
+                                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+                                }
+                            })
+                            .create()
+                            .show();
+                } else {
+                    //No explanation needed, we can request the permission.
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+                }
+            }
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     @Subscribe
     public void toKasir(DialogLoginOwnerBus bus) {
 
@@ -368,7 +407,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void fetchData() {
-        requestLocationPermission();
+//        requestLocationPermission();
+        checkLocationPermission();
 
     }
 
@@ -881,7 +921,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                                    EventBus.getDefault().post(new ShowTambahAlamat(response.getDATA().get(i).getTypeId() == 3));
 //                                    DataManager.getInstance().clearTambahAlamat();
                                     if (response.getDATA().get(i).getTypeId() == 3){
-                                        requestLocationPermission();
+//                                        requestLocationPermission();
+                                        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                                            EventBus.getDefault().post(new ShowTambahAlamat(true));
+                                        }else {
+                                            checkLocationPermission();
+                                        }
                                     }
 
                                 }
@@ -1006,28 +1051,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Log.e("permission activity", "Request Code: " + requestCode);
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                // If request cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] ==  PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // location-related task you need to do.
+
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                        EventBus.getDefault().post(new ShowTambahAlamat(true));
+                    }
+                } else {
+                    Toast.makeText(this, "Tidak dapat mengakses lokasi", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
         if (requestCode == 102 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             EventBus.getDefault().post(new PermissionCameraBus());
             // camera init
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
     }
 
-    @AfterPermissionGranted(REQUEST_CODE_ASK_PERMISSIONS)
-    public void requestLocationPermission() {
-        String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION};
-        if (EasyPermissions.hasPermissions(this, perms)) {
-//            Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
-            EventBus.getDefault().post(new ShowTambahAlamat(true));
-        }
-        else {
-//            EasyPermissions.requestPermissions(this, "Please grant the location permission", REQUEST_CODE_ASK_PERMISSIONS, perms);
-
-        }
-    }
+//    @AfterPermissionGranted(REQUEST_CODE_ASK_PERMISSIONS)
+//    public void requestLocationPermission() {
+//        String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION};
+//        if (EasyPermissions.hasPermissions(this, perms)) {
+////            Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
+//            EventBus.getDefault().post(new ShowTambahAlamat(true));
+//        }
+//        else {
+////            EasyPermissions.requestPermissions(this, "Please grant the location permission", REQUEST_CODE_ASK_PERMISSIONS, perms);
+//
+//        }
+//    }
 
 
 
