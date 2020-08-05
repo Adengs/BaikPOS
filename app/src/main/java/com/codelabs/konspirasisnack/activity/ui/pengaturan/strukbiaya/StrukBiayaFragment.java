@@ -118,7 +118,7 @@ public class StrukBiayaFragment extends Fragment {
         llProgress.setVisibility(View.VISIBLE);
         llMain.setVisibility(View.GONE);
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Call<GetSetting> call = apiService.getSetting(auth);
         call.enqueue(new Callback<GetSetting>() {
 
@@ -265,7 +265,7 @@ public class StrukBiayaFragment extends Fragment {
         llProgress.setVisibility(View.VISIBLE);
         llMain.setVisibility(View.GONE);
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Map<String, String> param = new HashMap<>();
         param.put("header", txtHeaderFooterStruk.getText().toString().trim());
         param.put("max_struk", txtJumlahCetak.getText().toString().trim());

@@ -189,11 +189,11 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/kota"
+                            android:text="@string/provinsi"
                             android:textSize="14sp" />
 
                         <Spinner
-                            android:id="@+id/txt_kota"
+                            android:id="@+id/txt_provinsi"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 
@@ -241,15 +241,14 @@
                         android:layout_marginRight="@dimen/paddingSmall"
                         android:layout_weight="2"
                         android:orientation="vertical">
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/provinsi"
+                            android:text="@string/kota"
                             android:textSize="14sp" />
 
                         <Spinner
-                            android:id="@+id/txt_provinsi"
+                            android:id="@+id/txt_kota"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
 
@@ -281,6 +280,63 @@
                             android:textSize="14sp" />
 
                     </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/paddingLarge"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/paddingSmall"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kecamatan"
+                            android:textSize="14sp" />
+
+                        <Spinner
+                            android:id="@+id/txt_kecamatan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kode_pos"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/txtPostalCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_border"
+                            android:imeOptions="flagNoExtractUi|actionNext"
+                            android:inputType="number"
+                            android:padding="@dimen/paddingSmall"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
 

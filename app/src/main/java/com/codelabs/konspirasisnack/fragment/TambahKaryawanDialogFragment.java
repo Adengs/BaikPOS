@@ -113,7 +113,7 @@ public class TambahKaryawanDialogFragment extends DialogFragment {
 
     private void getOutletList() {
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Call<GetOutlet> call = apiService.getOutlet(auth);
         call.enqueue(new Callback<GetOutlet>() {
             @Override
@@ -164,7 +164,7 @@ public class TambahKaryawanDialogFragment extends DialogFragment {
 
     private void getEmployeePosition() {
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Call<GetEmployeePosition> call = apiService.getEmployeePosition(auth);
         call.enqueue(new Callback<GetEmployeePosition>() {
             @Override
@@ -284,7 +284,7 @@ public class TambahKaryawanDialogFragment extends DialogFragment {
         Utils.changeVisibility(btnSubmit);
 
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Map<String, String> param = new HashMap<>();
         param.put("u_firstname", txtNama.getText().toString().trim());
         param.put("u_type", employeePosition.get(spinPosisi.getSelectedItemPosition()).getId());
@@ -305,6 +305,8 @@ public class TambahKaryawanDialogFragment extends DialogFragment {
                         if (response.getSTATUS() == 200) {
                             EventBus.getDefault().post(new RefreshKaryawan());
                             dismiss();
+                        }else{
+                            Utils.showToast(getContext(),data.message());
                         }
                     }
                 }

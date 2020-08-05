@@ -42,11 +42,13 @@ import com.codelabs.konspirasisnack.connection.RetrofitInterface;
 import com.codelabs.konspirasisnack.dialog.DialogLoginOwner;
 import com.codelabs.konspirasisnack.fragment.MpinDialogFragment;
 import com.codelabs.konspirasisnack.model.DoPost;
+import com.codelabs.konspirasisnack.model.GetRefreshToken;
 import com.codelabs.konspirasisnack.utils.CheckDevice;
 import com.codelabs.konspirasisnack.utils.RecentUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -150,7 +152,6 @@ public class PengaturanFragment extends Fragment {
         ButterKnife.bind(this, v);
 
         initDialogLoginOwner();
-        initView();
 
         btnLogoutAplikasi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,7 +183,21 @@ public class PengaturanFragment extends Fragment {
 
     }
 
-    private void initView() {
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+
+    @Subscribe
+    public void initView(GetRefreshToken refreshToken) {
 //        txtProdukKategori.setOnClickListener(getOnClickText(btnProdukKategori, vProdukKategori, txtProdukKategori));
         txtStrukBiaya.setOnClickListener(getOnClick(btnStrukBiaya, vStrukBiaya, txtStrukBiaya));
         txtPerangkat.setOnClickListener(getOnClick(btnPerangkat, vPerangkat, txtPerangkat));

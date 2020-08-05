@@ -297,6 +297,66 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/paddingLarge"
+                android:orientation="horizontal">
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/paddingXXXSmall"
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/paddingXXXXLarge"
+                    app:hintTextAppearance="@style/TextLabel"
+                    app:passwordToggleEnabled="true">
+
+                    <TextView
+                        android:textColor="@color/green_dark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Pilih Kecamatan" />
+
+
+                    <Spinner
+                        android:id="@+id/spinner_kecamatan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/black"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:popupBackground="@color/white" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/paddingXXXSmall"
+                    android:layout_marginTop="@dimen/paddingXXXXLarge"
+                    android:layout_weight="1"
+                    app:hintTextAppearance="@style/TextLabel"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/ed_postal_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/kode_pos"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:imeOptions="flagNoExtractUi"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
 
 
             <Button

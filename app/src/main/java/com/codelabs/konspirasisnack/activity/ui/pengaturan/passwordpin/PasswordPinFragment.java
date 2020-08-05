@@ -90,7 +90,7 @@ public class PasswordPinFragment extends Fragment {
         llMain.setVisibility(View.GONE);
         llProgress.setVisibility(View.VISIBLE);
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
 
         Call<GetProfil> call = apiService.getProfil(auth);
         call.enqueue(new Callback<GetProfil>() {
@@ -155,7 +155,7 @@ public class PasswordPinFragment extends Fragment {
 
     private void updateProfile(Map<String, String> param) {
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         llMain.setVisibility(View.GONE);
         llProgress.setVisibility(View.VISIBLE);
 
@@ -168,9 +168,13 @@ public class PasswordPinFragment extends Fragment {
                 if (data.isSuccessful()) {
                     GetProfil response = data.body();
                     if (response != null) {
-                        edPin.setText(null);
-                        edPassword.setText(null);
-                        Toast.makeText(getActivity(), response.getMESSAGE(), Toast.LENGTH_SHORT).show();
+                        if (response.getSTATUS() == 200) {
+                            edPin.setText(null);
+                            edPassword.setText(null);
+                            Toast.makeText(getActivity(), response.getMESSAGE(), Toast.LENGTH_SHORT).show();
+                        }else{
+                            Utils.showToast(getContext(),data.message());
+                        }
                     } else {
                     }
                 } else {

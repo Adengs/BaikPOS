@@ -64,7 +64,7 @@ public class PromoFragment extends Fragment {
         Utils.changeVisibility(pbLoading);
         Utils.changeVisibility(rvData);
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
 
         Call<GetPengaturanPromo> call = apiService.getPengaturanPromo(auth);
         call.enqueue(new Callback<GetPengaturanPromo>() {

@@ -23,7 +23,7 @@ public class AppConstant {
 
 
     //URL DEV
-    public static final String HostAPI = "http://159.65.14.50/pos-cl/pos-cl-gateway/api/v1/";
+    public static final String HostAPI = "http://159.65.14.50/snack-gateway/public/api/v1/";
 
 
     public static final String GetTokenClient = "auth/get_token";
@@ -58,6 +58,7 @@ public class AppConstant {
     public static final String RegisterProductInfo = "register/product_info";
     public static final String GetJenisUsaha = "merchant/categories";
     public static final String GetProvinces = "provinces";
+    public static final String GetKecamatan = "kecamatan";
     public static final String GetCities = "cities";
     public static final String GetVoucher = "vouchers";
     public static final String VoucherCheck = "voucher/check";

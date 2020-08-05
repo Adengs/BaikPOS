@@ -98,7 +98,7 @@ public class TambahStockDialogFragment extends DialogFragment {
 
     private void getProduct() {
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Map<String, String> params = new HashMap<>();
         callGetProduct = apiService.getProduct(auth, params);
         callGetProduct.enqueue(new Callback<GetProducts>() {
@@ -155,7 +155,7 @@ public class TambahStockDialogFragment extends DialogFragment {
         Utils.changeVisibility(btnSubmit);
 
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Map<String, String> param = new HashMap<>();
         param.put("product_id", products.get(spinProduk.getSelectedItemPosition()).getItemId() + "");
         param.put("stock", txtJumlah.getText().toString().trim());

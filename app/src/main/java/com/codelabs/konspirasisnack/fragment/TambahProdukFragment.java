@@ -124,7 +124,7 @@ public class TambahProdukFragment extends DialogFragment {
 
     private void getUnit() {
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Call<GetUnits> call = apiService.getUnits(auth);
         call.enqueue(new Callback<GetUnits>() {
             @Override
@@ -174,7 +174,7 @@ public class TambahProdukFragment extends DialogFragment {
 
     private void getCategory() {
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Call<GetProductCategory> call = apiService.getProductCategory(auth, "");
         call.enqueue(new Callback<GetProductCategory>() {
             @Override
@@ -285,7 +285,7 @@ public class TambahProdukFragment extends DialogFragment {
         Utils.changeVisibility(pbLoading);
         Utils.changeVisibility(btnSubmit);
 
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Map<String, RequestBody> param = new HashMap<>();
         param.put("product_name", AppConstant.createRequestBody(txtNamaProduk.getText().toString().trim()));
         param.put("category_id", AppConstant.createRequestBody(categoryList.get(spinKategori.getSelectedItemPosition()).getItemCatId() + ""));
@@ -311,6 +311,8 @@ public class TambahProdukFragment extends DialogFragment {
                         if (response.getSTATUS() == 200) {
                             EventBus.getDefault().post(response.getDATA());
                             dismiss();
+                        }else{
+                            Utils.showToast(getContext(),data.message());
                         }
                     }
                 }
@@ -333,10 +335,10 @@ public class TambahProdukFragment extends DialogFragment {
             Toast.makeText(getActivity(), getString(R.string.message_dialog_nama_produk), Toast.LENGTH_SHORT).show();
             return false;
         }
-//        if (TextUtils.isEmpty(selectedImage)) {
-//            Toast.makeText(getActivity(), getString(R.string.message_dialog_foto_produk), Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
+        if (imageFoto == null) {
+            Toast.makeText(getActivity(), getString(R.string.message_dialog_foto_produk), Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if (categoryList == null) {
             Toast.makeText(getActivity(), getString(R.string.message_dialog_kategori_produk), Toast.LENGTH_SHORT).show();
             return false;

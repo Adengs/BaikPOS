@@ -117,7 +117,7 @@ public class UbahStokDialogFragment extends DialogFragment {
 
     private void initJenisStok() {
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Call<GetStokType> call = apiService.getStockType(auth);
         call.enqueue(new Callback<GetStokType>() {
             @Override
@@ -173,7 +173,7 @@ public class UbahStokDialogFragment extends DialogFragment {
         Utils.changeVisibility(btnSubmit);
 
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Map<String, String> param = new HashMap<>();
         param.put("product_id", data.getItemId()+"");
         param.put("stock", txtJumlah.getText().toString().trim());

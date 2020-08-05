@@ -272,6 +272,9 @@ public class GetLogin {
         @SerializedName("outlet_city_id")
         private int outlet_city_id;
         @Expose
+        @SerializedName("outlet_kecamatan_id")
+        private int outlet_kecamatan_id;
+        @Expose
         @SerializedName("outlet_zip_code")
         private String outlet_zip_code;
         @Expose
@@ -432,6 +435,14 @@ public class GetLogin {
 
         public void setOt_email(String ot_email) {
             this.ot_email = ot_email;
+        }
+
+        public int getOutlet_kecamatan_id() {
+            return outlet_kecamatan_id;
+        }
+
+        public void setOutlet_kecamatan_id(int outlet_kecamatan_id) {
+            this.outlet_kecamatan_id = outlet_kecamatan_id;
         }
 
         public static class Country {

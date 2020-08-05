@@ -367,10 +367,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
                 }
             }
-            return false;
-        } else {
-            return true;
-        }
+                return false;
+            } else {
+                return true;
+            }
 
     }
 
@@ -408,7 +408,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void fetchData() {
 //        requestLocationPermission();
-        checkLocationPermission();
+//        checkLocationPermission();
 
     }
 
@@ -921,12 +921,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                                    EventBus.getDefault().post(new ShowTambahAlamat(response.getDATA().get(i).getTypeId() == 3));
 //                                    DataManager.getInstance().clearTambahAlamat();
                                     if (response.getDATA().get(i).getTypeId() == 3){
-//                                        requestLocationPermission();
                                         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
                                             EventBus.getDefault().post(new ShowTambahAlamat(true));
+//                                            EventBus.getDefault().post(new ShowTambahAlamat(response.getDATA().get(i).getTypeId() == 3));
                                         }else {
                                             checkLocationPermission();
                                         }
+                                    }else {
+                                        EventBus.getDefault().post(new ShowTambahAlamat(false));
                                     }
 
                                 }

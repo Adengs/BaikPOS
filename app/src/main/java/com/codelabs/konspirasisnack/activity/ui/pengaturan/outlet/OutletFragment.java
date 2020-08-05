@@ -25,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.codelabs.konspirasisnack.R;
+import com.codelabs.konspirasisnack.adapter.SpinnerKecamatanAdapter;
 import com.codelabs.konspirasisnack.adapter.SpinnerKotaAdapter;
 import com.codelabs.konspirasisnack.adapter.SpinnerProvinsiAdapter;
 import com.codelabs.konspirasisnack.connection.ApiUtils;
@@ -36,6 +37,7 @@ import com.codelabs.konspirasisnack.imagepicker.FilePickUtils;
 import com.codelabs.konspirasisnack.imagepicker.LifeCycleCallBackManager;
 import com.codelabs.konspirasisnack.model.DoPost;
 import com.codelabs.konspirasisnack.model.GetCities;
+import com.codelabs.konspirasisnack.model.GetKecamatan;
 import com.codelabs.konspirasisnack.model.GetLogin;
 import com.codelabs.konspirasisnack.model.GetProfil;
 import com.codelabs.konspirasisnack.model.GetProvince;
@@ -51,6 +53,9 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -86,6 +91,10 @@ public class OutletFragment extends Fragment {
     RelativeLayout rlProgress;
     @BindView(R.id.rl_main)
     ScrollView rlMain;
+    @BindView(R.id.txt_kecamatan)
+    Spinner txtKecamatan;
+    @BindView(R.id.txtPostalCode)
+    EditText txtPostalCode;
     private String provinceId;
     private String citiesId;
     private static final int CAMERA_PERMISSION = 11;
@@ -93,6 +102,8 @@ public class OutletFragment extends Fragment {
     private FilePickUtils filePickUtils;
     private String selectedImage = "";
     private LifeCycleCallBackManager lifeCycleCallBackManager;
+    private int kecamatanId;
+    private File imageFoto;
 
     public OutletFragment() {
         // Required empty public constructor
@@ -141,6 +152,7 @@ public class OutletFragment extends Fragment {
             bitmap.compress(Bitmap.CompressFormat.PNG, 70, byteArrayOutputStream);
             byte[] byteArray = byteArrayOutputStream.toByteArray();
             selectedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+            imageFoto = new File(fileUri);
         }
     };
 
@@ -148,7 +160,7 @@ public class OutletFragment extends Fragment {
         rlMain.setVisibility(View.GONE);
         rlProgress.setVisibility(View.VISIBLE);
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
 
         Call<GetProfil> call = apiService.getProfil(auth);
         call.enqueue(new Callback<GetProfil>() {
@@ -190,12 +202,77 @@ public class OutletFragment extends Fragment {
         txtNegara.setText(data.getOutlet().getCountry().getCountryName());
         txtNohp.setText(data.getOutlet().getOt_phone_no());
         txtEmail.setText(data.getOutlet().getOt_email());
-        Picasso.get().load(data.getOutlet().getOt_image_url()).into(ivPic);
+        txtPostalCode.setText(data.getOutlet().getOutlet_zip_code());
+        if (!data.getOutlet().getOt_image_url().equals(""))
+            Picasso.get().load(data.getOutlet().getOt_image_url()).into(ivPic);
 
         provinceId = data.getOutlet().getProvince().getProvinceId();
         citiesId = data.getOutlet().getCity().getRegencyId();
+        kecamatanId = data.getOutlet().getOutlet_kecamatan_id();
         initDataCities();
         initDataProvinsi();
+        iniDataKecamatan();
+    }
+
+    private void iniDataKecamatan() {
+        RetrofitInterface apiService = ApiUtils.getAPIService();
+        String auth = AppConstant.AcceptTitle + AppConstant.AcceptValue;
+        Call<GetKecamatan> call = apiService.getKecamatan(auth, citiesId);
+        call.enqueue(new Callback<GetKecamatan>() {
+            @Override
+            public void onResponse(Call<GetKecamatan> call, Response<GetKecamatan> data) {
+                if (data.isSuccessful()) {
+                    GetKecamatan response = data.body();
+                    if (response != null) {
+                        if (response.getSTATUS() == 200) {
+                            initKecamatan(response.getDATA());
+
+                        } else {
+                            Toast.makeText(getActivity(), response.getMESSAGE(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), "Response data kosong", Toast.LENGTH_SHORT).show();
+
+                    }
+                } else {
+                    RecentUtils.handleRetrofitError(data.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetKecamatan> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+    }
+
+    private void initKecamatan(List<GetKecamatan.DATA> data) {
+        SpinnerKecamatanAdapter mAdapterProv = new SpinnerKecamatanAdapter(getActivity(), data);
+        txtKecamatan.setAdapter(mAdapterProv);
+
+        int selection = 0;
+        for (GetKecamatan.DATA cities : data) {
+            if (cities.getSubdistrictId() == kecamatanId)
+                txtKecamatan.setSelection(selection);
+            selection++;
+
+        }
+
+        txtKecamatan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                GetKecamatan.DATA item = mAdapterProv.getItem(position);
+                kecamatanId = item.getSubdistrictId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 
     private void initDataProvinsi() {
@@ -312,6 +389,7 @@ public class OutletFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 GetCities.DATACities item = mAdapterCities.getItem(position);
                 citiesId = item.getRegency_id();
+                iniDataKecamatan();
             }
 
             @Override
@@ -329,18 +407,25 @@ public class OutletFragment extends Fragment {
         rlProgress.setVisibility(View.VISIBLE);
 
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
-        Map<String, String> param = new HashMap<>();
-        param.put("outlet_name", txtNamaOutlet.getText().toString().trim());
-        param.put("outlet_address", txtAlamat.getText().toString().trim());
-        param.put("outlet_phone_no", txtNohp.getText().toString().trim());
-        param.put("outlet_email", txtEmail.getText().toString().trim());
-        param.put("outlet_province_id", provinceId);
-        param.put("outlet_city_id", citiesId);
-        if (!TextUtils.isEmpty(selectedImage.trim()))
-            param.put("outlet_image", "data:image/jpeg;base64,"+selectedImage);
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
+        Map<String, RequestBody> param = new HashMap<>();
+        param.put("outlet_name", AppConstant.createRequestBody(txtNamaOutlet.getText().toString().trim()));
+        param.put("outlet_address", AppConstant.createRequestBody(txtAlamat.getText().toString().trim()));
+        param.put("outlet_phone_no", AppConstant.createRequestBody(txtNohp.getText().toString().trim()));
+        param.put("outlet_email", AppConstant.createRequestBody(txtEmail.getText().toString().trim()));
+        param.put("outlet_province_id", AppConstant.createRequestBody(provinceId));
+        param.put("outlet_city_id", AppConstant.createRequestBody(citiesId));
+        param.put("outlet_kecamatan_id", AppConstant.createRequestBody(kecamatanId + ""));
+        param.put("postal_code", AppConstant.createRequestBody(txtPostalCode.getText().toString().trim()));
+        MultipartBody.Part body = null;
+        if (imageFoto != null) {
+            imageFoto = new File(imageFoto.getPath());
+            RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), imageFoto);
+            body = MultipartBody.Part.createFormData("outlet_image", imageFoto.getName(), requestFile);
 
-        Call<DoPost> call = apiService.editOutlet(auth, param);
+        }
+
+        Call<DoPost> call = apiService.editOutlet(auth, param, body);
         call.enqueue(new Callback<DoPost>() {
             @Override
             public void onResponse(Call<DoPost> call, Response<DoPost> data) {
@@ -388,6 +473,10 @@ public class OutletFragment extends Fragment {
         }
         if (TextUtils.isEmpty(txtNohp.getText().toString().trim())) {
             Toast.makeText(getActivity(), "No Telepon tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(txtPostalCode.getText().toString().trim())) {
+            Toast.makeText(getActivity(), "Kode POS tidak boleh kosong", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

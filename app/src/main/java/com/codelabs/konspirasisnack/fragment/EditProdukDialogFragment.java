@@ -152,7 +152,7 @@ public class EditProdukDialogFragment extends DialogFragment {
 
     private void getUnit() {
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Call<GetUnits> call = apiService.getUnits(auth);
         call.enqueue(new Callback<GetUnits>() {
             @Override
@@ -211,7 +211,7 @@ public class EditProdukDialogFragment extends DialogFragment {
 
     private void getCategory() {
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Call<GetProductCategory> call = apiService.getProductCategory(auth, "");
         call.enqueue(new Callback<GetProductCategory>() {
             @Override
@@ -330,7 +330,7 @@ public class EditProdukDialogFragment extends DialogFragment {
         Utils.changeVisibility(pbLoading);
         Utils.changeVisibility(btnSubmit);
 
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Map<String, RequestBody> param = new HashMap<>();
         param.put("product_name", AppConstant.createRequestBody(txtNamaProduk.getText().toString().trim()));
         param.put("category_id", AppConstant.createRequestBody(categoryList.get(spinKategori.getSelectedItemPosition()).getItemCatId() + ""));
@@ -357,6 +357,8 @@ public class EditProdukDialogFragment extends DialogFragment {
                         if (response.getSTATUS() == 200) {
                             EventBus.getDefault().post(response.getDATA());
                             dismiss();
+                        }else{
+                            Utils.showToast(getContext(),data.message());
                         }
                     }
                 }

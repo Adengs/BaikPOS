@@ -94,7 +94,7 @@ public class StokFragment extends Fragment {
         Utils.changeVisibility(pbLoading);
         Utils.changeVisibility(rvData);
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Call<GetStock> call = apiService.getStock(auth, params);
         call.enqueue(new Callback<GetStock>() {
             @Override

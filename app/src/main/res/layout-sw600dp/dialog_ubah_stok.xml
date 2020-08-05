@@ -132,6 +132,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txt_jumlah"
                     android:layout_width="match_parent"
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     android:hint="@string/jumlah"
                     android:imeOptions="flagNoExtractUi"/>

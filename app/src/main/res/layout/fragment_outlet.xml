@@ -189,6 +189,25 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/paddingSmall"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/provinsi"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:id="@+id/txt_provinsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -211,6 +230,8 @@
             </LinearLayout>
 
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -220,21 +241,47 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/provinsi"
+                    android:text="@string/kecamatan"
                     android:textSize="14sp" />
 
                 <Spinner
-                    android:id="@+id/txt_provinsi"
+                    android:id="@+id/txt_kecamatan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kode_pos"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/txtPostalCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_border"
+                    android:imeOptions="flagNoExtractUi|actionNext"
+                    android:inputType="number"
+                    android:padding="@dimen/paddingSmall"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/paddingSmall"
                 android:orientation="vertical">
 
                 <TextView

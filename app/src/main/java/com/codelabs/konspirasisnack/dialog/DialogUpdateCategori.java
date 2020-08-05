@@ -99,7 +99,7 @@ public class DialogUpdateCategori extends Dialog {
 
         RetrofitInterface apiService = ApiUtils.getAPIService();
 
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken_cashier();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Map<String, String> param = new HashMap<>();
         param.put("category_name", txtNamaKategori.getText().toString().trim());
         param.put("sequence", txtUrutan.getText().toString().trim());
@@ -115,6 +115,8 @@ public class DialogUpdateCategori extends Dialog {
                         if (response.getSTATUS() == 200) {
                             EventBus.getDefault().post(response.getDATA());
                             dismiss();
+                        }else{
+                            Utils.showToast(getContext(),data.message());
                         }
                     }
                 }

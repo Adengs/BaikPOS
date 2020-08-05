@@ -11,17 +11,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.adapter.SpinnerJenisUsahaAdapter;
+import com.codelabs.konspirasisnack.adapter.SpinnerKecamatanAdapter;
 import com.codelabs.konspirasisnack.adapter.SpinnerKotaAdapter;
 import com.codelabs.konspirasisnack.adapter.SpinnerProvinsiAdapter;
 import com.codelabs.konspirasisnack.connection.ApiUtils;
 import com.codelabs.konspirasisnack.connection.AppConstant;
 import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.connection.RetrofitInterface;
-import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.model.DoPost;
 import com.codelabs.konspirasisnack.model.GetCities;
 import com.codelabs.konspirasisnack.model.GetJenisUsaha;
+import com.codelabs.konspirasisnack.model.GetKecamatan;
 import com.codelabs.konspirasisnack.model.GetProvince;
 import com.codelabs.konspirasisnack.utils.CheckDevice;
 import com.codelabs.konspirasisnack.utils.RecentUtils;
@@ -38,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterInformasiUsahaActivity extends BaseActivity implements View.OnClickListener{
+public class RegisterInformasiUsahaActivity extends BaseActivity implements View.OnClickListener {
 
     @BindView(R.id.ed_nama)
     TextInputEditText edNama;
@@ -67,7 +69,10 @@ public class RegisterInformasiUsahaActivity extends BaseActivity implements View
 
     @BindView(R.id.tv_test)
     TextView tvTest;
-
+    @BindView(R.id.spinner_kecamatan)
+    Spinner spinnerKecamatan;
+    @BindView(R.id.ed_postal_code)
+    TextInputEditText edPostalCode;
 
 
     private SpinnerJenisUsahaAdapter mAdapterUsaha;
@@ -78,11 +83,14 @@ public class RegisterInformasiUsahaActivity extends BaseActivity implements View
     private Call<GetCities> callCities;
     private List<GetJenisUsaha.DATAUsaha> responseJenisUsaha = new ArrayList<>();
     private List<GetProvince.DATAProvince> responseProvince = new ArrayList<>();
+    private List<GetKecamatan.DATA> responseKecamatan = new ArrayList<>();
     private List<GetCities.DATACities> responseCities = new ArrayList<>();
     private int selectedIdUser;
     private String provinceId;
     private int usahaId;
     private String cityId;
+    private SpinnerKecamatanAdapter mAdapterKecamatan;
+    private int kecamatanId = -1;
 
 
     @Override
@@ -111,6 +119,8 @@ public class RegisterInformasiUsahaActivity extends BaseActivity implements View
         mAdapterCities = new SpinnerKotaAdapter(this, responseCities);
         spinnerCities.setAdapter(mAdapterCities);
 
+        mAdapterKecamatan = new SpinnerKecamatanAdapter(this, responseKecamatan);
+        spinnerKecamatan.setAdapter(mAdapterKecamatan);
 
 
 //        Utils.setNoStatusBar(getWindow());
@@ -160,10 +170,66 @@ public class RegisterInformasiUsahaActivity extends BaseActivity implements View
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 GetCities.DATACities item = mAdapterCities.getItem(position);
                 cityId = item.getRegency_id();
+                loadKecamatan();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerKecamatan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                GetKecamatan.DATA item = mAdapterKecamatan.getItem(position);
+                kecamatanId = item.getSubdistrictId();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+
+    private void loadKecamatan() {
+        RetrofitInterface apiService = ApiUtils.getAPIService();
+        String auth = AppConstant.AcceptTitle + AppConstant.AcceptValue;
+        Call<GetKecamatan> call = apiService.getKecamatan(auth,cityId);
+        call.enqueue(new Callback<GetKecamatan>() {
+            @Override
+            public void onResponse(Call<GetKecamatan> call, Response<GetKecamatan> data) {
+                if (data.isSuccessful()) {
+                    GetKecamatan response = data.body();
+                    if (response != null) {
+                        if (response.getSTATUS() == 200) {
+                            responseKecamatan = response.getDATA();
+                            mAdapterKecamatan.clear();
+                            mAdapterKecamatan.addAll(data.body().getDATA());
+                            mAdapterKecamatan.notifyDataSetChanged();
+
+                        } else {
+                            showToast(response.getMESSAGE());
+                        }
+                    } else {
+                        showToast("Response data kosong");
+                    }
+                } else {
+                    RecentUtils.handleRetrofitError(data.code());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<GetKecamatan> call, Throwable t) {
+                if (!call.isCanceled()) {
+                    hideDialogProgress();
+                    showToast("Network Failure :( please try again later");
+                }
+                t.printStackTrace();
 
             }
         });
@@ -198,20 +264,20 @@ public class RegisterInformasiUsahaActivity extends BaseActivity implements View
                             mAdapterUsaha.addAll(data.body().getDATA());
                             mAdapterUsaha.notifyDataSetChanged();
 
-                        }else {
+                        } else {
                             showToast(response.getMESSAGE());
                         }
-                    }else {
+                    } else {
                         showToast("Response data kosong");
                     }
-                }else {
+                } else {
                     RecentUtils.handleRetrofitError(data.code());
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<GetJenisUsaha> call,@NonNull Throwable t) {
-                if (!call.isCanceled()){
+            public void onFailure(@NonNull Call<GetJenisUsaha> call, @NonNull Throwable t) {
+                if (!call.isCanceled()) {
                     hideDialogProgress();
                     showToast("Network Failure :( please try again later");
                 }
@@ -236,20 +302,20 @@ public class RegisterInformasiUsahaActivity extends BaseActivity implements View
                             mAdapterProv.addAll(data.body().getDATA());
                             mAdapterProv.notifyDataSetChanged();
 
-                        }else {
+                        } else {
                             showToast(response.getMESSAGE());
                         }
-                    }else {
+                    } else {
                         showToast("Response data kosong");
                     }
-                }else {
+                } else {
                     RecentUtils.handleRetrofitError(data.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<GetProvince> call, @NonNull Throwable t) {
-                if (!call.isCanceled()){
+                if (!call.isCanceled()) {
                     hideDialogProgress();
                     showToast("Network Failure :( please try again later");
                 }
@@ -276,20 +342,20 @@ public class RegisterInformasiUsahaActivity extends BaseActivity implements View
                             mAdapterCities.clear();
                             mAdapterCities.addAll(data.body().getDATA());
                             mAdapterCities.notifyDataSetChanged();
-                        }else {
+                        } else {
                             showToast(response.getMESSAGE());
                         }
-                    }else {
+                    } else {
                         showToast("Response data kosong");
                     }
-                }else {
+                } else {
                     RecentUtils.handleRetrofitError(data.code());
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<GetCities> call,@NonNull Throwable t) {
-                if (!call.isCanceled()){
+            public void onFailure(@NonNull Call<GetCities> call, @NonNull Throwable t) {
+                if (!call.isCanceled()) {
                     hideDialogProgress();
                     showToast("Network Failure :( please try again later");
                 }
@@ -299,12 +365,12 @@ public class RegisterInformasiUsahaActivity extends BaseActivity implements View
     }
 
 
-
     private void doSignUpCompany() {
         String nama = edNama.getText().toString();
         String noTelp = edNoTelp.getText().toString();
         String namaUsaha = edNamaUsaha.getText().toString();
         String alamat = edAlamat.getText().toString();
+        String postalCode = edPostalCode.getText().toString();
 
         if (TextUtils.isEmpty(nama)) {
             showToast("Mohon masukkan nama");
@@ -326,6 +392,16 @@ public class RegisterInformasiUsahaActivity extends BaseActivity implements View
             return;
         }
 
+        if (responseKecamatan.size() == 0) {
+            showToast("Anda belum memilih kecamatan");
+            return;
+        }
+
+        if (TextUtils.isEmpty(postalCode)) {
+            showToast("Mohon masukkan kode POS");
+            return;
+        }
+
         Map<String, String> params = new HashMap<>();
         params.put("user_id", selectedIdUser + "");
         params.put("fullname", nama);
@@ -334,7 +410,9 @@ public class RegisterInformasiUsahaActivity extends BaseActivity implements View
         params.put("company_address", alamat);
         params.put("company_type_id", usahaId + "");
         params.put("province_id", provinceId + "");
-        params.put("city_id", cityId + "" );
+        params.put("city_id", cityId + "");
+        params.put("kecamatan_id", kecamatanId + "");
+        params.put("postal_code", postalCode + "");
 
         showDialogProgress("Proses data register");
 
@@ -350,26 +428,26 @@ public class RegisterInformasiUsahaActivity extends BaseActivity implements View
                     if (response != null) {
                         if (response.getSTATUS() == 200) {
                             showToast(response.getMESSAGE());
-                            Intent intent = new Intent(RegisterInformasiUsahaActivity.this, RegisterMasukanProdukActivity.class);
+                            Intent intent = new Intent(RegisterInformasiUsahaActivity.this, SignInActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
 
-                        }else {
+                        } else {
                             showToast(response.getMESSAGE());
                         }
-                    }else {
+                    } else {
                         showToast("Response data kosong");
                     }
-                }else {
+                } else {
                     RecentUtils.handleRetrofitError(data.code());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<DoPost> call, @NonNull Throwable t) {
-                if (!call.isCanceled()){
+                if (!call.isCanceled()) {
                     hideDialogProgress();
                     showToast("Network Failure :( please try again later");
                 }
@@ -378,7 +456,6 @@ public class RegisterInformasiUsahaActivity extends BaseActivity implements View
         });
 
     }
-
 
 
     @Override

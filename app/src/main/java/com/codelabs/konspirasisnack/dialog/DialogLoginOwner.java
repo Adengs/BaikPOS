@@ -15,6 +15,7 @@ import com.codelabs.konspirasisnack.connection.AppConstant;
 import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.connection.RetrofitInterface;
 import com.codelabs.konspirasisnack.model.DoPost;
+import com.codelabs.konspirasisnack.model.GetRefreshToken;
 import com.codelabs.konspirasisnack.utils.RecentUtils;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -111,15 +112,17 @@ public class DialogLoginOwner extends Dialog {
 
         RetrofitInterface apiService = ApiUtils.getAPIService();
 
-        Call<DoPost> call = apiService.doLoginSetting(auth,params);
-        call.enqueue(new Callback<DoPost>() {
+        Call<GetRefreshToken> call = apiService.doLoginSetting(auth,params);
+        call.enqueue(new Callback<GetRefreshToken>() {
             @Override
-            public void onResponse(@NonNull Call<DoPost> call, @NonNull Response<DoPost> data) {
+            public void onResponse(@NonNull Call<GetRefreshToken> call, @NonNull Response<GetRefreshToken> data) {
                 hideDialogProgress();
                 if (data.isSuccessful()) {
-                    DoPost response = data.body();
+                    GetRefreshToken response = data.body();
                     if (response != null) {
                         if (response.getSTATUS() == 200) {
+                            DataManager.setTempJson("TOKEN_SETTING",response.getDATA().getToken());
+                            EventBus.getDefault().post(response);
                             dismiss();
                         } else {
                             showToast(response.getMESSAGE());
@@ -133,7 +136,7 @@ public class DialogLoginOwner extends Dialog {
             }
 
             @Override
-            public void onFailure(@NonNull Call<DoPost> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<GetRefreshToken> call, @NonNull Throwable t) {
                 hideDialogProgress();
                 showToast("Network Failure : ( please try again later");
                 t.printStackTrace();

@@ -97,7 +97,7 @@ public class KategoriFragment extends Fragment {
         Utils.changeVisibility(pbLoading);
         Utils.changeVisibility(rvData);
         RetrofitInterface apiService = ApiUtils.getAPIService();
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Call<GetProductCategory> call = apiService.getProductCategory(auth,category);
         call.enqueue(new Callback<GetProductCategory>() {
             @Override

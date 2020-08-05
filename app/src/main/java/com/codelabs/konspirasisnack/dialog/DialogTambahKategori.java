@@ -30,6 +30,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,7 +69,7 @@ public class DialogTambahKategori extends Dialog {
 
         RetrofitInterface apiService = ApiUtils.getAPIService();
 
-        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken_cashier();
+        String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
         Map<String, String> param = new HashMap<>();
         param.put("category_name", txtNamaKategori.getText().toString().trim());
         param.put("sequence", txtUrutan.getText().toString().trim());
@@ -84,6 +85,8 @@ public class DialogTambahKategori extends Dialog {
                         if (response.getSTATUS() == 200) {
                             EventBus.getDefault().post(response.getDATA());
                             dismiss();
+                        }else{
+                            Utils.showToast(getContext(),data.message());
                         }
                     }
                 }

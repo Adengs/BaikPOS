@@ -20,6 +20,7 @@ import com.codelabs.konspirasisnack.model.GetEmployee_list;
 import com.codelabs.konspirasisnack.model.GetInvoiceNumber;
 import com.codelabs.konspirasisnack.model.GetJenisUsaha;
 import com.codelabs.konspirasisnack.model.GetKaryawan;
+import com.codelabs.konspirasisnack.model.GetKecamatan;
 import com.codelabs.konspirasisnack.model.GetLogin;
 import com.codelabs.konspirasisnack.model.GetLoginCashier;
 import com.codelabs.konspirasisnack.model.GetOpenCashier;
@@ -88,7 +89,7 @@ public interface RetrofitInterface {
     @Headers({AppConstant.AcceptTitle + ":" + AppConstant.AcceptValue})
     @POST(AppConstant.LoginSetting)
     @FormUrlEncoded
-    Call<DoPost> doLoginSetting(@Header(AppConstant.AuthTitle) String auth, @FieldMap Map<String, String> names);
+    Call<GetRefreshToken> doLoginSetting(@Header(AppConstant.AuthTitle) String auth, @FieldMap Map<String, String> names);
 
     @Headers({AppConstant.AcceptTitle + ":" + AppConstant.AcceptValue})
     @GET(AppConstant.Me)
@@ -234,6 +235,10 @@ public interface RetrofitInterface {
     @GET(AppConstant.GetProvinces)
     Call<GetProvince> getProvince(@Header(AppConstant.AcceptTitle) String auth);
 
+    @Headers({AppConstant.AcceptTitle + ":" + AppConstant.AcceptValue})
+    @GET(AppConstant.GetKecamatan)
+    Call<GetKecamatan> getKecamatan(@Header(AppConstant.AcceptTitle) String auth, @Query("city_id") String cityId);
+
 
     @Headers({AppConstant.AcceptTitle + ":" + AppConstant.AcceptValue})
     @GET(AppConstant.GetCities)
@@ -340,8 +345,8 @@ public interface RetrofitInterface {
 
     @Headers({AppConstant.AcceptTitle + ":" + AppConstant.AcceptValue})
     @POST(AppConstant.EditOutlet)
-    @FormUrlEncoded
-    Call<DoPost> editOutlet(@Header(AppConstant.AuthTitle) String auth, @FieldMap Map<String, String> names);
+    @Multipart
+    Call<DoPost> editOutlet(@Header(AppConstant.AuthTitle) String auth, @PartMap Map<String, RequestBody> names, @Nullable @Part MultipartBody.Part image);
 
     @Headers({AppConstant.AcceptTitle + ":" + AppConstant.AcceptValue})
     @GET(AppConstant.GetSetting)

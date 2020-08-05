@@ -495,7 +495,7 @@ public class PembayaranActivity extends AppCompatActivity {
                     if (response != null) {
                         if (response.getSTATUS() == 200) {
 
-                            Toast.makeText(PembayaranActivity.this, "bayar" + "" + response.getMESSAGE(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PembayaranActivity.this,  response.getMESSAGE(), Toast.LENGTH_SHORT).show();
                             isSuccessBayar = true;
                             hideDiskon();
                             DataManager.getInstance().doClearParamReservation();

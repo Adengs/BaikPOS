@@ -447,6 +447,10 @@ public class DataManager {
         return getTempJson("token");
     }
 
+    public String getTokenSetting() {
+        return getTempJson("TOKEN_SETTING");
+    }
+
     public void setToken(String val) {
         setTempJson("token", val);
     }

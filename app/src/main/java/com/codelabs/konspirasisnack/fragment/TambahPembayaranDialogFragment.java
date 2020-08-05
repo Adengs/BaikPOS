@@ -242,6 +242,8 @@ public class TambahPembayaranDialogFragment extends DialogFragment {
                         if (response.getSTATUS() == 200) {
                             EventBus.getDefault().post(new RefreshPaymentMethod());
                             dismiss();
+                        }else{
+                            Utils.showToast(getContext(),data.message());
                         }
                     }
                 }

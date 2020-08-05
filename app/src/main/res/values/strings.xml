@@ -5,6 +5,7 @@
     // for application
     <string name="daftar">DAFTAR</string>
     <string name="email">Email</string>
+    <string name="kode_pos">Kode POS</string>
     <string name="kriteria">Kriteria</string>
     <string name="kata_sandi">Kata Sandi</string>
     <string name="ulang_kata_sandi">Ulangi kata sandi</string>
@@ -34,6 +35,7 @@
     <string name="jenis_usaha">Jenis usaha</string>
     <string name="pilih_jenis_usaha">Pilih jenis usaha</string>
     <string name="kota">Kota</string>
+    <string name="kecamatan">Kecamatan</string>
     <string name="pilih_kota">Pilih kota</string>
     <string name="masukan_produk">Masukan Produk</string>
     <string name="nama_produk">Nama produk</string>
