@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 29
@@ -78,6 +80,10 @@ dependencies {
 
     //Crashlytics
     implementation 'ch.acra:acra:4.8.5'
+
+    //Firebase Crashlytics
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.1'
 
     //Maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'

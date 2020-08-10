@@ -2,29 +2,20 @@ package com.codelabs.konspirasisnack;
 
 import android.app.Application;
 
-import org.acra.ACRA;
-import org.acra.ReportingInteractionMode;
-import org.acra.annotation.ReportsCrashes;
-
-
-@ReportsCrashes(
-        mailTo = "report.sendme@gmail.com",
-//        mailTo = "bugmepos@mailinator.com",
-        mode = ReportingInteractionMode.TOAST,
-        resToastText = R.string.crash_toast_text
-)
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 
 public class AppController extends Application {
 
     public static final String TAG = AppController.class.getSimpleName();
     private static AppController mInstance;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
 
     @Override
     public void onCreate(){
         super.onCreate();
-        ACRA.init(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mInstance = this;
     }
 

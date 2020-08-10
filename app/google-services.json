@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1070267588976",
+    "firebase_url": "https://konspirasi-snack.firebaseio.com",
+    "project_id": "konspirasi-snack",
+    "storage_bucket": "konspirasi-snack.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070267588976:android:771b52fc139741e3c6afb5",
+        "android_client_info": {
+          "package_name": "com.codelabs.konspirasisnack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1070267588976-kaen7dakq93t0rcnmbo467e2igr8u0lc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codelabs.konspirasisnack",
+            "certificate_hash": "7a1db7f46842ed53b7d3cc0f75b2799dafc731c5"
+          }
+        },
+        {
+          "client_id": "1070267588976-4f0cfe06lh401ndgprai79a0qea8u9df.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaMehG3XgMQb_JecaA4_ewLnqYWcApK6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1070267588976-4f0cfe06lh401ndgprai79a0qea8u9df.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -52,6 +52,10 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -548,7 +552,7 @@ public class AbsensiFragment extends Fragment implements View.OnClickListener {
 
         imageFoto = new File(imageFoto.getPath());
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), imageFoto);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("ab_image", imageFoto.getName(),requestFile);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("ab_image", imageFoto.getName(), requestFile);
 
         RetrofitInterface apiService = ApiUtils.getAPIService();
         Call<AbsenceIn> call = apiService.absenceIn(auth, params, body);
@@ -634,7 +638,7 @@ public class AbsensiFragment extends Fragment implements View.OnClickListener {
 
         imageFoto = new File(imageFoto.getPath());
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), imageFoto);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("ab_image", imageFoto.getName(),requestFile);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("ab_image", imageFoto.getName(), requestFile);
 
         RetrofitInterface apiService = ApiUtils.getAPIService();
         Call<AbsenceOut> call = apiService.absenceOut(auth, params, body);
@@ -743,11 +747,37 @@ public class AbsensiFragment extends Fragment implements View.OnClickListener {
                     public void onPictureTaken(byte[] data, Camera camera) {
 //                        bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 //                        selectedImage = "data:image/jpeg;base64," + convert(bitmap);
-                        bitmap = BitmapFactory.decodeFile(imageFoto.getPath());
-                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 20, byteArrayOutputStream);
-                        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"),imageFoto);
-                        imageFile = MultipartBody.Part.createFormData("ab_image", imageFoto.getName(), requestFile);
+//                        bitmap = BitmapFactory.decodeFile(imageFoto.getPath());
+//                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//                        bitmap.compress(Bitmap.CompressFormat.PNG, 20, byteArrayOutputStream);
+//                        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), imageFoto);
+//                        imageFile = MultipartBody.Part.createFormData("ab_image", imageFoto.getName(), requestFile);
+
+                        try {
+                            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                            String fileName = "Konspirasi_Snack_" + timeStamp ;
+
+                            File f = new File(getActivity().getCacheDir(), fileName);
+                            f.createNewFile();
+
+                            bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 20 /*ignored for PNG*/, bos);
+                            byte[] bitmapdata = bos.toByteArray();
+                            FileOutputStream fos = null;
+                            fos = new FileOutputStream(f);
+
+                            fos.write(bitmapdata);
+                            fos.flush();
+                            fos.close();
+
+                            imageFoto = f;
+//                            RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), f);
+//                            imageFile = MultipartBody.Part.createFormData("ab_image", f.getName(), requestFile);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
                         if (!CheckDevice.isTablet()) {
                             layAbsen.setVisibility(View.VISIBLE);
