@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -15,6 +16,7 @@ import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.fragment.EditProdukDialogFragment;
 import com.codelabs.konspirasisnack.helper.Utils;
 import com.codelabs.konspirasisnack.model.GetProducts;
+import com.codelabs.konspirasisnack.model.GetRefreshToken;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ViewHolder> {
+    public GetRefreshToken user;
     private List<GetProducts.DATABean> data;
     private Context context;
 
@@ -78,8 +81,13 @@ public class ProdukAdapter extends RecyclerView.Adapter<ProdukAdapter.ViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    EditProdukDialogFragment dialog = EditProdukDialogFragment.newInstance(data.get(getAdapterPosition()));
-                    dialog.show(((FragmentActivity) context).getSupportFragmentManager(),"");
+                    if (user.data.user.uOutletId == 1) {
+                        EditProdukDialogFragment dialog = EditProdukDialogFragment.newInstance(data.get(getAdapterPosition()));
+                        dialog.show(((FragmentActivity) context).getSupportFragmentManager(), "");
+                    }else{
+                        Toast.makeText(context, "Hanya user pusat yang dapat mengubah produk", Toast.LENGTH_SHORT).show();
+
+                    }
                 }
             });
         }

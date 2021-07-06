@@ -334,7 +334,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="Jalanin aja dulu, Kalo cocok Jadian"
+                                android:text="Jl. Mandar III Blok DC10, No.66, Pd. Karya, Kec. Pd. Aren, Kota Tangerang Selatan, Banten 15225"
                                 android:textColor="@color/black" />
                         </LinearLayout>
 

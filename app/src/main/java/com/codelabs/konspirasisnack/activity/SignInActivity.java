@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -13,12 +14,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.connection.ApiUtils;
 import com.codelabs.konspirasisnack.connection.AppConstant;
 import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.connection.RetrofitInterface;
 import com.codelabs.konspirasisnack.helper.Utils;
-import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.model.GetLogin;
 import com.codelabs.konspirasisnack.model.GetRefreshToken;
 import com.codelabs.konspirasisnack.model.GetTokenClient;
@@ -26,6 +27,11 @@ import com.codelabs.konspirasisnack.utils.CheckDevice;
 import com.codelabs.konspirasisnack.utils.RecentUtils;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -140,13 +146,13 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                 if (data.isSuccessful()) {
                     GetRefreshToken response = data.body();
                     if (response != null) {
-                        if (response.getSTATUS() == 200) {
-                            DataManager.getInstance().setToken(response.getDATA().getToken());
+                        if (response.status == 200) {
+                            DataManager.getInstance().setToken(response.data.token);
 
                             goToHome();
 
                         } else {
-                            showToast(response.getMESSAGE());
+                            showToast(response.message);
                         }
                     } else {
 //                        showToast("Empty response data");
@@ -228,7 +234,32 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                         showToast("Empty response data");
                     }
                 } else {
-                    RecentUtils.handleRetrofitError(data.code());
+                    StringBuilder error = new StringBuilder();
+                    try {
+                        BufferedReader bufferedReader = null;
+                        if (data.errorBody() != null) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(
+                                    data.errorBody().byteStream()));
+
+                            String eLine = null;
+                            while ((eLine = bufferedReader.readLine()) != null) {
+                                error.append(eLine);
+                            }
+                            bufferedReader.close();
+                        }
+
+                    } catch (Exception e) {
+                        error.append(e.getMessage());
+                    }
+
+                    Log.e("Error", error.toString());
+                    try {
+                        JSONObject objek = new JSONObject(error.toString());
+                        RecentUtils.handleRetrofitError(data.code(),objek.getString("MESSAGE"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
 
@@ -268,7 +299,31 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                         showToast("Empty response data");
                     }
                 }else {
-                    RecentUtils.handleRetrofitError(data.code());
+                    StringBuilder error = new StringBuilder();
+                    try {
+                        BufferedReader bufferedReader = null;
+                        if (data.errorBody() != null) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(
+                                    data.errorBody().byteStream()));
+
+                            String eLine = null;
+                            while ((eLine = bufferedReader.readLine()) != null) {
+                                error.append(eLine);
+                            }
+                            bufferedReader.close();
+                        }
+
+                    } catch (Exception e) {
+                        error.append(e.getMessage());
+                    }
+
+                    Log.e("Error", error.toString());
+                    try {
+                        JSONObject objek = new JSONObject(error.toString());
+                        RecentUtils.handleRetrofitError(data.code(),objek.getString("MESSAGE"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 

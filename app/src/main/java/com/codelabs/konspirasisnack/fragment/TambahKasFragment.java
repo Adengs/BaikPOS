@@ -6,10 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.Gravity;
@@ -25,6 +21,9 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 import com.codelabs.konspirasisnack.EventBus.RefreshKasKasir;
 import com.codelabs.konspirasisnack.R;

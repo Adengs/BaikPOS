@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.model.GetProductDetail;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

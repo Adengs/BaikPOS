@@ -1,6 +1,7 @@
 package com.codelabs.konspirasisnack.activity.ui.penjualan;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,6 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 import com.codelabs.konspirasisnack.EventBus.SetDate;
 import com.codelabs.konspirasisnack.EventBus.ShowHideToolbar;
@@ -98,7 +98,14 @@ public class PenjualanFragment extends Fragment {
         adapter = new PenjualanAdapter(getActivity());
         adapter.setData(new ArrayList<>());
         rvData.setAdapter(adapter);
-        getData();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                getData();
+            }
+        }, 3000);
+
     }
 
     void getData() {

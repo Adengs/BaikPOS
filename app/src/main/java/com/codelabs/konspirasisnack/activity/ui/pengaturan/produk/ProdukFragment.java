@@ -14,18 +14,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.codelabs.konspirasisnack.EventBus.DialogTambahProdukBus;
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.connection.ApiUtils;
 import com.codelabs.konspirasisnack.connection.AppConstant;
 import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.connection.RetrofitInterface;
+import com.codelabs.konspirasisnack.fragment.TambahProdukFragment;
 import com.codelabs.konspirasisnack.helper.KeyboardUtils;
 import com.codelabs.konspirasisnack.helper.Utils;
 import com.codelabs.konspirasisnack.model.AddProduct;
 import com.codelabs.konspirasisnack.model.GetProducts;
+import com.codelabs.konspirasisnack.model.GetRefreshToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -51,12 +55,14 @@ public class ProdukFragment extends Fragment {
     ProdukAdapter adapter;
     @BindView(R.id.pb_loading)
     ProgressBar pbLoading;
+    private GetRefreshToken data;
 
     public ProdukFragment() {
     }
 
-    public static ProdukFragment newInstance() {
+    public static ProdukFragment newInstance(GetRefreshToken data) {
         ProdukFragment fragment = new ProdukFragment();
+        fragment.data = data;
         return fragment;
     }
 
@@ -110,6 +116,7 @@ public class ProdukFragment extends Fragment {
                     GetProducts response = data.body();
                     if (response != null) {
                         if (response.getSTATUS() == 200) {
+                            adapter.user = ProdukFragment.this.data;
                             adapter.setData(data.body().getDATA());
 
                         } else {
@@ -133,6 +140,17 @@ public class ProdukFragment extends Fragment {
     }
 
 
+    @Subscribe
+    public void dialogTambahProduk(DialogTambahProdukBus bus){
+        if (data.data.user.uOutletId == 1) {
+            FragmentManager fm = getChildFragmentManager();
+            TambahProdukFragment newFragment = new TambahProdukFragment();
+            newFragment.show(fm, "title");
+        }else{
+            Toast.makeText(getContext(), "Hanya user pusat yang dapat menambah produk", Toast.LENGTH_SHORT).show();
+        }
+
+    }
     @Override
     public void onStart() {
         super.onStart();

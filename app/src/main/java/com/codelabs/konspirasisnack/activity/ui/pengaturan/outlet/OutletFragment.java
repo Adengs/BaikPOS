@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,13 @@ import com.codelabs.konspirasisnack.model.GetProvince;
 import com.codelabs.konspirasisnack.utils.RecentUtils;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -236,7 +242,31 @@ public class OutletFragment extends Fragment {
 
                     }
                 } else {
-                    RecentUtils.handleRetrofitError(data.code());
+                    StringBuilder error = new StringBuilder();
+                    try {
+                        BufferedReader bufferedReader = null;
+                        if (data.errorBody() != null) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(
+                                    data.errorBody().byteStream()));
+
+                            String eLine = null;
+                            while ((eLine = bufferedReader.readLine()) != null) {
+                                error.append(eLine);
+                            }
+                            bufferedReader.close();
+                        }
+
+                    } catch (Exception e) {
+                        error.append(e.getMessage());
+                    }
+
+                    Log.e("Error", error.toString());
+                    try {
+                        JSONObject objek = new JSONObject(error.toString());
+                        RecentUtils.handleRetrofitError(data.code(),objek.getString("MESSAGE"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -297,7 +327,31 @@ public class OutletFragment extends Fragment {
 
                     }
                 } else {
-                    RecentUtils.handleRetrofitError(data.code());
+                    StringBuilder error = new StringBuilder();
+                    try {
+                        BufferedReader bufferedReader = null;
+                        if (data.errorBody() != null) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(
+                                    data.errorBody().byteStream()));
+
+                            String eLine = null;
+                            while ((eLine = bufferedReader.readLine()) != null) {
+                                error.append(eLine);
+                            }
+                            bufferedReader.close();
+                        }
+
+                    } catch (Exception e) {
+                        error.append(e.getMessage());
+                    }
+
+                    Log.e("Error", error.toString());
+                    try {
+                        JSONObject objek = new JSONObject(error.toString());
+                        RecentUtils.handleRetrofitError(data.code(),objek.getString("MESSAGE"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }
@@ -360,7 +414,31 @@ public class OutletFragment extends Fragment {
 
                     }
                 } else {
-                    RecentUtils.handleRetrofitError(data.code());
+                    StringBuilder error = new StringBuilder();
+                    try {
+                        BufferedReader bufferedReader = null;
+                        if (data.errorBody() != null) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(
+                                    data.errorBody().byteStream()));
+
+                            String eLine = null;
+                            while ((eLine = bufferedReader.readLine()) != null) {
+                                error.append(eLine);
+                            }
+                            bufferedReader.close();
+                        }
+
+                    } catch (Exception e) {
+                        error.append(e.getMessage());
+                    }
+
+                    Log.e("Error", error.toString());
+                    try {
+                        JSONObject objek = new JSONObject(error.toString());
+                        RecentUtils.handleRetrofitError(data.code(),objek.getString("MESSAGE"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -444,7 +522,31 @@ public class OutletFragment extends Fragment {
 
                     }
                 } else {
-                    RecentUtils.handleRetrofitError(data.code());
+                    StringBuilder error = new StringBuilder();
+                    try {
+                        BufferedReader bufferedReader = null;
+                        if (data.errorBody() != null) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(
+                                    data.errorBody().byteStream()));
+
+                            String eLine = null;
+                            while ((eLine = bufferedReader.readLine()) != null) {
+                                error.append(eLine);
+                            }
+                            bufferedReader.close();
+                        }
+
+                    } catch (Exception e) {
+                        error.append(e.getMessage());
+                    }
+
+                    Log.e("Error", error.toString());
+                    try {
+                        JSONObject objek = new JSONObject(error.toString());
+                        RecentUtils.handleRetrofitError(data.code(),objek.getString("MESSAGE"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 

@@ -40,6 +40,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.codelabs.konspirasisnack.EventBus.BarcodeScanner;
 import com.codelabs.konspirasisnack.EventBus.DialogLoginOwnerBus;
+import com.codelabs.konspirasisnack.EventBus.DialogTambahKategoriBus;
+import com.codelabs.konspirasisnack.EventBus.DialogTambahProdukBus;
 import com.codelabs.konspirasisnack.EventBus.OnClickDetailPesanan;
 import com.codelabs.konspirasisnack.EventBus.PermissionCameraBus;
 import com.codelabs.konspirasisnack.EventBus.RefreshJenisPesanan;
@@ -59,12 +61,10 @@ import com.codelabs.konspirasisnack.connection.ApiUtils;
 import com.codelabs.konspirasisnack.connection.AppConstant;
 import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.connection.RetrofitInterface;
-import com.codelabs.konspirasisnack.dialog.DialogTambahKategori;
 import com.codelabs.konspirasisnack.fragment.MpinDialogFragment;
 import com.codelabs.konspirasisnack.fragment.TambahKaryawanDialogFragment;
 import com.codelabs.konspirasisnack.fragment.TambahKasFragment;
 import com.codelabs.konspirasisnack.fragment.TambahPembayaranDialogFragment;
-import com.codelabs.konspirasisnack.fragment.TambahProdukFragment;
 import com.codelabs.konspirasisnack.fragment.TambahStockDialogFragment;
 import com.codelabs.konspirasisnack.helper.DateUtils;
 import com.codelabs.konspirasisnack.helper.KeyboardUtils;
@@ -78,7 +78,11 @@ import com.google.android.material.navigation.NavigationView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -576,16 +580,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnTambahKategori.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DialogTambahKategori(MainActivity.this);
+                EventBus.getDefault().post(new DialogTambahKategoriBus());
             }
         });
 
         btnTambahProduk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fm = getSupportFragmentManager();
-                TambahProdukFragment newFragment = new TambahProdukFragment();
-                newFragment.show(fm, "title");
+                EventBus.getDefault().post(new DialogTambahProdukBus());
 
 
             }
@@ -868,7 +870,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     }
                 } else {
-                    RecentUtils.handleRetrofitError(data.code());
+                    StringBuilder error = new StringBuilder();
+                    try {
+                        BufferedReader bufferedReader = null;
+                        if (data.errorBody() != null) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(
+                                    data.errorBody().byteStream()));
+
+                            String eLine = null;
+                            while ((eLine = bufferedReader.readLine()) != null) {
+                                error.append(eLine);
+                            }
+                            bufferedReader.close();
+                        }
+
+                    } catch (Exception e) {
+                        error.append(e.getMessage());
+                    }
+
+                    Log.e("Error", error.toString());
+                    try {
+                        JSONObject objek = new JSONObject(error.toString());
+                        RecentUtils.handleRetrofitError(data.code(),objek.getString("MESSAGE"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 processLogout();

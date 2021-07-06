@@ -16,15 +16,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.codelabs.konspirasisnack.EventBus.DialogTambahKategoriBus;
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.connection.ApiUtils;
 import com.codelabs.konspirasisnack.connection.AppConstant;
 import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.connection.RetrofitInterface;
+import com.codelabs.konspirasisnack.dialog.DialogTambahKategori;
 import com.codelabs.konspirasisnack.helper.KeyboardUtils;
 import com.codelabs.konspirasisnack.helper.Utils;
 import com.codelabs.konspirasisnack.model.AddCategory;
 import com.codelabs.konspirasisnack.model.GetProductCategory;
+import com.codelabs.konspirasisnack.model.GetRefreshToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -50,14 +53,16 @@ public class KategoriFragment extends Fragment {
     KategoriAdapter adapter;
     @BindView(R.id.pb_loading)
     ProgressBar pbLoading;
+    private GetRefreshToken data;
 
     public KategoriFragment() {
         // Required empty public constructor
     }
 
-    public static Fragment newInstance() {
+    public static Fragment newInstance(GetRefreshToken data) {
 
         Fragment fragment = new KategoriFragment();
+        ((KategoriFragment) fragment).data = data;
         return fragment;
     }
 
@@ -108,6 +113,7 @@ public class KategoriFragment extends Fragment {
                     GetProductCategory response = data.body();
                     if (response != null) {
                         if (response.getSTATUS() == 200) {
+                            adapter.user = KategoriFragment.this.data;
                             adapter.setData(response.getDATA());
                         } else {
                             Toast.makeText(getActivity(), response.getMESSAGE(), Toast.LENGTH_SHORT).show();
@@ -142,6 +148,15 @@ public class KategoriFragment extends Fragment {
         EventBus.getDefault().unregister(this);
     }
 
+    @Subscribe
+    public void showDialogKategori(DialogTambahKategoriBus blabla){
+        if (data.data.user.uOutletId == 1) {
+            new DialogTambahKategori(getContext());
+        }else{
+            Toast.makeText(getActivity(), "Hanya user pusat yang dapat menambahkan kategori", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
     @Subscribe
     public void refreshCategory(AddCategory.DATA data){

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.dialog.DialogUpdateCategori;
 import com.codelabs.konspirasisnack.model.GetProductCategory;
+import com.codelabs.konspirasisnack.model.GetRefreshToken;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.ViewHolder> {    private List<GetProductCategory.DATA> data;
+public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.ViewHolder> {
+    public GetRefreshToken user;
+    private List<GetProductCategory.DATA> data;
     private Context context;
 
     public KategoriAdapter(Context context) {
@@ -69,7 +73,12 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new DialogUpdateCategori(context,data.get(getAdapterPosition()));
+                    if (user.data.user.uOutletId == 1) {
+                        new DialogUpdateCategori(context, data.get(getAdapterPosition()));
+                    }else{
+                        Toast.makeText(context, "Hanya user pusat yang dapat mengubah kategori", Toast.LENGTH_SHORT).show();
+
+                    }
                 }
             });
         }

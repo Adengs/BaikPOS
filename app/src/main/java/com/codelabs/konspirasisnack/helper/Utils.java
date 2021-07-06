@@ -1,5 +1,6 @@
 package com.codelabs.konspirasisnack.helper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 public class Utils {
@@ -54,4 +57,28 @@ public class Utils {
         kursIndonesia.setDecimalFormatSymbols(formatRp);
         return kursIndonesia.format(Double.parseDouble(price)).replace(",", ".");
     }
+    public static String changeDateFormat(String initialDate, String previous, String toFormat) {
+        if (initialDate == null) {
+            return "";
+        }
+        if (initialDate.equals("0000-00-00") || initialDate.equals("")) {
+            return "";
+        }
+        String convertedDate = null;
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat inputFormat = new SimpleDateFormat(previous);
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat outputFormat = new SimpleDateFormat(toFormat);
+
+        Date date;
+
+        try {
+            date = inputFormat.parse(initialDate);
+            convertedDate = outputFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return convertedDate + "";
+    }
+
+
 }

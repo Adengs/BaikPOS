@@ -3,6 +3,7 @@ package com.codelabs.konspirasisnack.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
@@ -14,13 +15,16 @@ import com.codelabs.konspirasisnack.connection.ApiUtils;
 import com.codelabs.konspirasisnack.connection.AppConstant;
 import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.connection.RetrofitInterface;
-import com.codelabs.konspirasisnack.model.DoPost;
 import com.codelabs.konspirasisnack.model.GetRefreshToken;
 import com.codelabs.konspirasisnack.utils.RecentUtils;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -120,18 +124,42 @@ public class DialogLoginOwner extends Dialog {
                 if (data.isSuccessful()) {
                     GetRefreshToken response = data.body();
                     if (response != null) {
-                        if (response.getSTATUS() == 200) {
-                            DataManager.setTempJson("TOKEN_SETTING",response.getDATA().getToken());
+                        if (response.status == 200) {
+                            DataManager.setTempJson("TOKEN_SETTING",response.data.token);
                             EventBus.getDefault().post(response);
                             dismiss();
                         } else {
-                            showToast(response.getMESSAGE());
+                            showToast(response.message);
                         }
                     } else {
                         showToast("Empty response data");
                     }
                 } else {
-                    RecentUtils.handleRetrofitError(data.code());
+                    StringBuilder error = new StringBuilder();
+                    try {
+                        BufferedReader bufferedReader = null;
+                        if (data.errorBody() != null) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(
+                                    data.errorBody().byteStream()));
+
+                            String eLine = null;
+                            while ((eLine = bufferedReader.readLine()) != null) {
+                                error.append(eLine);
+                            }
+                            bufferedReader.close();
+                        }
+
+                    } catch (Exception e) {
+                        error.append(e.getMessage());
+                    }
+
+                    Log.e("Error", error.toString());
+                    try {
+                        JSONObject objek = new JSONObject(error.toString());
+                        RecentUtils.handleRetrofitError(data.code(),objek.getString("MESSAGE"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 

@@ -14,7 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.adapter.DaftarPelangganAdapter;
 import com.codelabs.konspirasisnack.connection.ApiUtils;

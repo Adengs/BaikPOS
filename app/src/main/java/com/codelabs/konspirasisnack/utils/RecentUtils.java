@@ -131,7 +131,7 @@ public class RecentUtils {
         return result;
     }
 
-    public static void handleRetrofitError(int code) {
+    public static void handleRetrofitError(int code, String message) {
         switch (code) {
             case 404:
                 Toast.makeText(AppController.getInstance().getApplicationContext(), "Not found", Toast.LENGTH_SHORT).show();
@@ -140,7 +140,7 @@ public class RecentUtils {
                 Toast.makeText(AppController.getInstance().getApplicationContext(), "Server broken", Toast.LENGTH_SHORT).show();
                 break;
             default:
-                Toast.makeText(AppController.getInstance().getApplicationContext(), "Unknown error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AppController.getInstance().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                 break;
         }
     }

@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 
 import com.codelabs.konspirasisnack.R;
 import com.codelabs.konspirasisnack.model.GetKecamatan;
-import com.codelabs.konspirasisnack.model.GetProvince;
 
 import java.util.ArrayList;
 import java.util.List;

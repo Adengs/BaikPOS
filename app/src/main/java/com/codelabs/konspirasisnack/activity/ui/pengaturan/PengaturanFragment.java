@@ -4,6 +4,7 @@ package com.codelabs.konspirasisnack.activity.ui.pengaturan;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -133,6 +139,7 @@ public class PengaturanFragment extends Fragment {
     RelativeLayout layoutMenu;
     @BindView(R.id.btn_setting)
     FloatingActionButton btnSetting;
+    private GetRefreshToken data;
 
     public PengaturanFragment() {
         // Required empty public constructor
@@ -159,6 +166,8 @@ public class PengaturanFragment extends Fragment {
                 dialogLogout();
             }
         });
+        btnPerangkat.setVisibility(View.GONE);
+        btnPembayaranNontunai.setVisibility(View.GONE);
         return v;
     }
 
@@ -198,6 +207,7 @@ public class PengaturanFragment extends Fragment {
 
     @Subscribe
     public void initView(GetRefreshToken refreshToken) {
+        data = refreshToken;
 //        txtProdukKategori.setOnClickListener(getOnClickText(btnProdukKategori, vProdukKategori, txtProdukKategori));
         txtStrukBiaya.setOnClickListener(getOnClick(btnStrukBiaya, vStrukBiaya, txtStrukBiaya));
         txtPerangkat.setOnClickListener(getOnClick(btnPerangkat, vPerangkat, txtPerangkat));
@@ -212,6 +222,7 @@ public class PengaturanFragment extends Fragment {
         txtStok.setOnClickListener(getOnSubClick(txtStok));
         onSubClicked(txtProduk);
         toProduk();
+
 
 
     }
@@ -320,7 +331,7 @@ public class PengaturanFragment extends Fragment {
             }
         });
 
-        ft.replace(R.id.frame_layout, KategoriFragment.newInstance());
+        ft.replace(R.id.frame_layout, KategoriFragment.newInstance(data));
         ft.commit();
 
     }
@@ -346,7 +357,7 @@ public class PengaturanFragment extends Fragment {
             }
         });
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.frame_layout, ProdukFragment.newInstance());
+        ft.replace(R.id.frame_layout, ProdukFragment.newInstance(data));
         ft.commit();
 
     }
@@ -591,7 +602,31 @@ public class PengaturanFragment extends Fragment {
 
                     }
                 } else {
-                    RecentUtils.handleRetrofitError(data.code());
+                    StringBuilder error = new StringBuilder();
+                    try {
+                        BufferedReader bufferedReader = null;
+                        if (data.errorBody() != null) {
+                            bufferedReader = new BufferedReader(new InputStreamReader(
+                                    data.errorBody().byteStream()));
+
+                            String eLine = null;
+                            while ((eLine = bufferedReader.readLine()) != null) {
+                                error.append(eLine);
+                            }
+                            bufferedReader.close();
+                        }
+
+                    } catch (Exception e) {
+                        error.append(e.getMessage());
+                    }
+
+                    Log.e("Error", error.toString());
+                    try {
+                        JSONObject objek = new JSONObject(error.toString());
+                        RecentUtils.handleRetrofitError(data.code(),objek.getString("MESSAGE"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 processLogout();

@@ -33,6 +33,7 @@ import com.codelabs.konspirasisnack.model.GetOutlet;
 import com.codelabs.konspirasisnack.model.GetPaymentMethod;
 import com.codelabs.konspirasisnack.model.GetPaymentMethodType;
 import com.codelabs.konspirasisnack.model.GetPengaturanPromo;
+import com.codelabs.konspirasisnack.model.GetPengaturanVoucher;
 import com.codelabs.konspirasisnack.model.GetProductCategory;
 import com.codelabs.konspirasisnack.model.GetProductDetail;
 import com.codelabs.konspirasisnack.model.GetProducts;
@@ -336,6 +337,10 @@ public interface RetrofitInterface {
     @Headers({AppConstant.AcceptTitle + ":" + AppConstant.AcceptValue})
     @GET(AppConstant.GetPromos)
     Call<GetPengaturanPromo> getPengaturanPromo(@Header(AppConstant.AuthTitle) String auth);
+
+    @Headers({AppConstant.AcceptTitle + ":" + AppConstant.AcceptValue})
+    @GET(AppConstant.GetVouchers)
+    Call<GetPengaturanVoucher> getPengaturanVoucher(@Header(AppConstant.AuthTitle) String auth);
 
     @Headers({AppConstant.AcceptTitle + ":" + AppConstant.AcceptValue})
     @POST(AppConstant.ReportKasKasirAdd)

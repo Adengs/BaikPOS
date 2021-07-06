@@ -25,6 +25,9 @@ public class AppConstant {
     //URL DEV
     public static final String HostAPI = "http://159.65.14.50/snack-gateway/public/api/v1/";
 
+//    LIVE API
+//    public static final String HostAPI = "http://139.59.233.163/snack-gateway/public/api/v1/";
+
 
     public static final String GetTokenClient = "auth/get_token";
     public static final String LoginAPI = "authenticate";
@@ -79,6 +82,7 @@ public class AppConstant {
 
     public static final String GetKaryawan = "employee_list";
     public static final String GetPromos = "promos";
+    public static final String GetVouchers = "vouchers";
     public static final String GetSetting = "setting";
     public static final String UpdateSetting = "setting-update";
     public static final String PaymentMethodType = "payment/payment_method/type";

@@ -18,6 +18,7 @@ import com.codelabs.konspirasisnack.connection.DataManager;
 import com.codelabs.konspirasisnack.connection.RetrofitInterface;
 import com.codelabs.konspirasisnack.helper.Utils;
 import com.codelabs.konspirasisnack.model.GetPengaturanPromo;
+import com.codelabs.konspirasisnack.model.GetPengaturanVoucher;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,20 +67,20 @@ public class PromoFragment extends Fragment {
         RetrofitInterface apiService = ApiUtils.getAPIService();
         String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getTokenSetting();
 
-        Call<GetPengaturanPromo> call = apiService.getPengaturanPromo(auth);
-        call.enqueue(new Callback<GetPengaturanPromo>() {
+        Call<GetPengaturanVoucher> call = apiService.getPengaturanVoucher(auth);
+        call.enqueue(new Callback<GetPengaturanVoucher>() {
             @Override
-            public void onResponse(Call<GetPengaturanPromo> call, Response<GetPengaturanPromo> data) {
+            public void onResponse(Call<GetPengaturanVoucher> call, Response<GetPengaturanVoucher> data) {
                 Utils.changeVisibility(pbLoading);
                 Utils.changeVisibility(rvData);
                 if (data.isSuccessful()) {
-                    GetPengaturanPromo response = data.body();
+                    GetPengaturanVoucher response = data.body();
                     if (response != null) {
-                        if (response.getSTATUS() == 200) {
-                            adapter.setData(data.body().getDATA());
+                        if (response.getStatus() == 200) {
+                            adapter.setData(data.body().getData());
 
                         } else {
-                            Toast.makeText(getActivity(), response.getMESSAGE(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), response.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     } else {
                     }
@@ -88,7 +89,7 @@ public class PromoFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<GetPengaturanPromo> call, Throwable t) {
+            public void onFailure(Call<GetPengaturanVoucher> call, Throwable t) {
                 Utils.changeVisibility(pbLoading);
                 Utils.changeVisibility(rvData);
                 t.printStackTrace();

@@ -323,7 +323,7 @@ public class TambahKaryawanDialogFragment extends DialogFragment {
         });
     }
 
-    private boolean valid() {
+    private boolean  valid() {
         if (TextUtils.isEmpty(selectedImage)) {
             Toast.makeText(getActivity(), getString(R.string.message_dialog_foto_karyawan), Toast.LENGTH_SHORT).show();
             return false;

@@ -53,7 +53,7 @@
 
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                android:text="@string/kriteria"
+                android:text="Kode"
                 android:textAllCaps="true"
                 android:textStyle="bold" />
 
@@ -63,7 +63,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
 
-                android:text="@string/jenis_bonus"
+                android:text="Start DAte"
                 android:textAllCaps="true"
                 android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
 
-                android:text="@string/tipe"
+                android:text="End Date"
                 android:textAllCaps="true"
                 android:textStyle="bold" />
 
@@ -81,7 +81,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/durasi"
+                android:text="deskripsi"
+                android:textAllCaps="true"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dipakai"
                 android:textAllCaps="true"
                 android:textStyle="bold" />
         </LinearLayout>

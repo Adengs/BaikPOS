@@ -30,7 +30,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.codelabs.konspirasisnack.EventBus.RefreshDetailOrder;
 import com.codelabs.konspirasisnack.EventBus.RefreshProduct;
 import com.codelabs.konspirasisnack.EventBus.ShowTambahAlamat;
@@ -450,7 +449,7 @@ public class PembayaranActivity extends AppCompatActivity {
         txtTax.setText("Rp " + Utils.toCurrency(data.getTransTaxValue().replace(".00", "")));
         txtTotal.setText("Rp " + Utils.toCurrency(data.getTransTotal().replace(".00", "")));
         txtBayar.setText("Rp " + Utils.toCurrency(data.getTransTotal().replace(".00", "")));
-        txtDiskon.setText("Rp " + Utils.toCurrency(data.getTransDiscountValue().replace(".00", "")));
+        txtDiskon.setText("Rp -" + Utils.toCurrency(data.getTransDiscountValue().replace(".00", "")));
         txtServiceCharge.setText("Rp " + Utils.toCurrency(data.getService_charge_value().replace(".00", "")));
         btnUangpas.setOnClickListener(listenerButton2(detailTransaction.getTransTotal().replace(".00", "")));
         adapter.setData(data.getTransactionItems());
