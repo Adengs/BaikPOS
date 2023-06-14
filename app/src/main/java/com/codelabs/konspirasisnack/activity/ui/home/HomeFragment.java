@@ -407,6 +407,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GET_PELANGGAN && resultCode == Activity.RESULT_OK) {
             selectedCustomer = (GetCustomer.DATA) data.getSerializableExtra(AppConstant.DATA_CUSTOMER);
+//            DataManager.getInstance().setCustomerId(Integer.parseInt(String.valueOf(data.getSerializableExtra(AppConstant.ID_CUSTOMER))));
+            Log.e("CEK", "onActivityResult: " + AppConstant.DATA_CUSTOMER );
+            Log.e("CEK ID", "onActivityResult: " + data.getSerializableExtra(AppConstant.ID_CUSTOMER));
+            Log.e("CEK NAME", "onActivityResult: " + data.getSerializableExtra(AppConstant.NAME_CUSTOMER));
+            Log.e("CEK SPH", "onActivityResult: " + DataManager.getInstance().getCustomerId());
+
+//            selectedCustomer.setCustId(Integer.parseInt(String.valueOf(data.getSerializableExtra(AppConstant.ID_CUSTOMER))));
+
+//            ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+//            pesananFragment = PesananFragment.newInstance();
+//            Intent i = new Intent();
+//
+//            adapter.addFragment(new Fragment(), "" +data.getStringExtra(AppConstant.NAME_CUSTOMER)+"");
+//            viewPager.setAdapter(adapter);
+
 
             getCategory();
             if (!CheckDevice.isTablet()) {
@@ -462,6 +477,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             if (selectedOrderDetail.getCustomer().getCustId() != 0) {
                 DataManager.getInstance().setCustomerId(selectedOrderDetail.getCustomer().getCustId());
+//                Log.e("SPH", "onActivityResult: " + selectedOrderDetail.getCustomer().getCustId() );
             }
 
             if (selectedOrderDetail != null) {
@@ -742,7 +758,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         pesananFragment = PesananFragment.newInstance();
+//        Intent i = new Intent();
+//        String title = "PELANGGAN";
+//        if (selectedOrderDetail.getCustomer().getCustId() != 0) {
+//            title = selectedOrderDetail.getCustomer().getCustFullname();
+//        }
 
+//        selectedCustomer = (GetCustomer.DATA) data.getSerializableExtra(AppConstant.DATA_CUSTOMER);
+
+//        adapter.addFragment(pesananFragment, "" +selectedCustomer.getCustFullname()+"");
         adapter.addFragment(pesananFragment, "PESANAN");
         adapter.addFragment(new Fragment(), "PELANGGAN");
         viewPager.setAdapter(adapter);
@@ -1249,9 +1273,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             param.setOrder_type(String.valueOf(selectedOrderType.getTypeId()));
         }
 
-        if (selectedCustomer != null) {
-            param.setCustomer_id(selectedCustomer.getCustId());
-            param.setCustomerName(selectedCustomer.getCustFullname());
+//        if (selectedCustomer != null) {
+//            param.setCustomer_id(selectedCustomer.getCustId());
+//            param.setCustomerName(selectedCustomer.getCustFullname());
+//        }
+
+        Log.e("TAG", "createOrder: " + DataManager.getInstance().getCustomerIdProduct() );
+        Log.e("TAG", "createOrder: " + DataManager.getInstance().getCustomerName() );
+
+        if (DataManager.getInstance().getCustomerIdProduct() != 0) {
+            param.setCustomer_id(DataManager.getInstance().getCustomerIdProduct());
+            param.setCustomerName(DataManager.getInstance().getCustomerName());
         }
         param.setCashierName(DataManager.getInstance().getU_firstname_cashier());
 
@@ -1672,12 +1704,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+//        btnBayar.setClickable(true);
         if (view == btnBayar) {
             if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
                 return;
             }
             mLastClickTime = SystemClock.elapsedRealtime();
+
+            Log.e("Pilih pelanggan", "onClick: " + DataManager.getInstance().getCustomerId());
+            if (DataManager.getInstance().getCustomerIdProduct() == 0) {
+                Toast.makeText(requireContext(), "Pilih pelanggan terlebuh dahulu", Toast.LENGTH_SHORT).show();
+                return;
+            }
             loadInvoiceNumber();
+//            btnBayar.setClickable(false);
+
         }
 
         if (view == btnSaveSelectedProduk) {

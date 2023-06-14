@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -60,7 +62,8 @@
                 android:text="@string/poin"
                 android:fontFamily="@font/poppins_bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_9ssp" />
+                android:textSize="@dimen/_9ssp"
+                android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/txt_point"
@@ -79,7 +82,8 @@
                 android:paddingTop="@dimen/paddingXSmall"
                 android:paddingRight="@dimen/paddingSmall"
                 android:paddingBottom="@dimen/paddingXSmall"
-                android:text="0" />
+                android:text="0"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
@@ -202,7 +206,7 @@
             <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_25sdp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"

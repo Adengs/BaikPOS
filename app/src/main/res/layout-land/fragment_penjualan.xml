@@ -55,7 +55,8 @@
                 android:layout_weight="1"
                 android:text="@string/nama"
                 android:textAllCaps="true"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="0dp"

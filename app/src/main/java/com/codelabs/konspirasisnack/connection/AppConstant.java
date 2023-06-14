@@ -100,6 +100,8 @@ public class AppConstant {
 
     // Global Var
     public static final String DATA_CUSTOMER = "DATA_CUSTOMER";
+    public static final String ID_CUSTOMER = "ID_CUSTOMER";
+    public static final String NAME_CUSTOMER = "NAME_CUSTOMER";
     public static final String TRANSACTION_ID = "TRANSACTION_ID";
     public static final String ORDER_DETAIL = "ORDER_DETAIL";
     public static final String ORDER_TAMBAHAN_MEJA = "ORDER_MEJA";

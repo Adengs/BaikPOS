@@ -3,6 +3,7 @@ package com.codelabs.konspirasisnack.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class DaftarPelangganAdapter extends RecyclerView.Adapter<DaftarPelanggan
         GetCustomer.DATA selectedData = data.get(position);
         holder.tvNama.setText(selectedData.getCustFullname());
         holder.tvAlamat.setText(selectedData.getCustAddress());
-        holder.tvPoin.setText(selectedData.getCustTotalPoint()+"");
+//        holder.tvPoin.setText(selectedData.getCustTotalPoint()+"");
         holder.tvNohp.setText(selectedData.getCustPhone());
         holder.tvKelamin.setText(selectedData.getCustGender().equals("female")? "P" : "L");
     }
@@ -80,10 +81,14 @@ public class DaftarPelangganAdapter extends RecyclerView.Adapter<DaftarPelanggan
                 @Override
                 public void onClick(View view) {
                     DataManager.getInstance().setCustomerId(data.get(getAdapterPosition()).getCustId());
+                    DataManager.getInstance().setCustomerName(data.get(getAdapterPosition()).getCustFullname());
+                    Log.e("ADAPTER", "onClick: " + DataManager.getInstance().getCustomerIdProduct() );
 
 
                     Intent returnIntent = new Intent();
                     returnIntent.putExtra(AppConstant.DATA_CUSTOMER, data.get(getAdapterPosition()));
+                    returnIntent.putExtra(AppConstant.ID_CUSTOMER, data.get(getAdapterPosition()).getCustId());
+                    returnIntent.putExtra(AppConstant.NAME_CUSTOMER, data.get(getAdapterPosition()).getCustFullname());
 
                     ((Activity)context).setResult(Activity.RESULT_OK,returnIntent);
                     ((Activity)context).finish();

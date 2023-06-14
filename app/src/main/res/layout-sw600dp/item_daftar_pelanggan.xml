@@ -39,7 +39,8 @@
             android:fontFamily="@font/poppins_regular"
             android:text="1000"
             android:textAllCaps="true"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_kelamin"

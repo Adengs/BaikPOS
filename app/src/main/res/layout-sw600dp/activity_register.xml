@@ -5,26 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".activity.RegisterActivity">
+    tools:context=".activity.RegisterActivity"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.3"
-        android:background="@color/gray_light">
+        android:layout_weight="0.35"
+        android:background="@drawable/bg_gradient">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_63sdp"
+            android:layout_height="@dimen/_45sdp"
             android:layout_centerInParent="true"
             android:src="@drawable/logo"/>
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.7"
-        android:background="@color/white">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.65"
+        android:background="@color/white"
+        android:layout_gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,8 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/daftar"
-                android:fontFamily="@font/poppins_bold"
-                android:textSize="@dimen/_9ssp"
+                android:fontFamily="@font/segoe_ui"
+                android:textSize="@dimen/_12ssp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
@@ -52,7 +56,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/_40sdp"
                 app:hintTextAppearance="@style/TextLabel"
                 app:passwordToggleEnabled="true">
 
@@ -61,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/segoe_ui"
                     android:textSize="@dimen/_9ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="textEmailAddress"
@@ -80,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/kata_sandi"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/segoe_ui"
                     android:textSize="@dimen/_9ssp"
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="textPassword"
@@ -103,7 +107,7 @@
                     android:imeOptions="flagNoExtractUi"
                     android:inputType="textPassword"
                     android:singleLine="true"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/segoe_ui"
                     android:textSize="@dimen/_9ssp"
                     android:textColorHint="@color/green_dark" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -114,19 +118,19 @@
                 android:layout_height="wrap_content"
                 android:checked="false"
                 android:textColor="@color/black"
-                android:fontFamily="@font/poppins_regular"
-                android:textSize="@dimen/_9ssp"
+                android:fontFamily="@font/segoe_ui"
+                android:textSize="@dimen/_6ssp"
                 android:buttonTint="@color/green_dark"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:text="@string/privacy_policy" />
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingLarge"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:background="@color/green_dark"
                 android:clickable="true"
-                android:fontFamily="@font/poppins_bold"
+                android:fontFamily="@font/segoe_ui"
                 android:textSize="@dimen/_9ssp"
                 android:id="@+id/btn_daftar"
                 android:foreground="?attr/selectableItemBackground"
@@ -136,7 +140,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/paddingXXXXXLarge"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:layout_marginBottom="@dimen/paddingLarge"
                 android:orientation="horizontal">
 
@@ -144,7 +148,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/poppins_regular"
+                    android:fontFamily="@font/segoe_ui"
                     android:textSize="@dimen/_9ssp"
                     android:text="@string/memiliki_akun" />
 
@@ -153,14 +157,15 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:id="@+id/btn_masuk"
-                    android:fontFamily="@font/poppins_bold"
+                    android:fontFamily="@font/segoe_ui"
                     android:textSize="@dimen/_9ssp"
                     android:foreground="?attr/selectableItemBackground"
                     android:paddingLeft="@dimen/paddingSmall"
                     android:paddingRight="@dimen/paddingSmall"
                     android:text="@string/masuk"
                     android:textAllCaps="true"
-                    android:textColor="@color/green_dark" />
+                    android:textColor="@color/green_dark"
+                    android:textStyle="bold"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -442,8 +443,12 @@ public class PembayaranActivity extends AppCompatActivity {
     }
 
     private void initData(GetOrderDetail.DATA data) {
-        txtCustomerName.setText(data.getCustomer().getCustId() == 0 ? "" : data.getCustomer().getCustFullname());
+//        txtCustomerName.setText(data.getCustomer().getCustId() == 0 ? "" : data.getCustomer().getCustFullname());
+        txtCustomerName.setText(DataManager.getInstance().getCustomerName());
+
+        Log.e("TAG", "initData: " + DataManager.getInstance().getCustomerName() );
         txtInvoiceNo.setText(data.getTransCode());
+        Log.e("trans", "initData: " + data.getTransCode());
 
         txtSubtotal.setText("Rp " + Utils.toCurrency(data.getTransSubtotal().replace(".00", "")));
         txtTax.setText("Rp " + Utils.toCurrency(data.getTransTaxValue().replace(".00", "")));
@@ -530,7 +535,7 @@ public class PembayaranActivity extends AppCompatActivity {
         txtPaymentStruk.setText(data.getTransCode());
         txtPaymentDate.setText(DateUtils.changeDateFormat(data.getTransPaidDate(), DateUtils.WEB_DATE_TIME_FORMAT, DateUtils.DATE_FORMAT_MONTH_NAME_FULL + " " + DateUtils.TIME_FORMAT_STANDARD_2));
         txtPaymentKasir.setText(data.getCashierName());
-        txtPaymentPelanggan.setText(data.getCustomerName());
+        txtPaymentPelanggan.setText(DataManager.getInstance().getCustomerName());
         txtPaymentMethod.setText(data.getPaymentMethodName());
 
         txtPaymentSubtotal.setText(Utils.toCurrency(data.getTransSubtotal().replace(".00", "")));
@@ -599,6 +604,8 @@ public class PembayaranActivity extends AppCompatActivity {
     public void onSelesaiClick() {
         Intent i = new Intent();
         setResult(Activity.RESULT_OK, i);
+        DataManager.getInstance().setCustomerId(0);
+        DataManager.getInstance().setCustomerName("");
         finish();
     }
 

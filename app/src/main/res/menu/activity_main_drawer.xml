@@ -16,10 +16,10 @@
             android:id="@+id/nav_laporan"
             android:icon="@drawable/ic_laporan"
             android:title="@string/laporan_B" />
-        <item
-            android:id="@+id/nav_absensi"
-            android:icon="@drawable/ic_absensi"
-            android:title="@string/absensi_B" />
+<!--        <item-->
+<!--            android:id="@+id/nav_absensi"-->
+<!--            android:icon="@drawable/ic_absensi"-->
+<!--            android:title="@string/absensi_B" />-->
 
         <item
             android:id="@+id/nav_pengaturan"

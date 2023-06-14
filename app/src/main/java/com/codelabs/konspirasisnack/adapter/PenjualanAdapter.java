@@ -42,7 +42,7 @@ public class PenjualanAdapter extends RecyclerView.Adapter<PenjualanAdapter.View
         GetOrderListData.DATA data = this.data.get(position);
         holder.txtInvoiceNo.setText(data.getTransCode());
 
-        holder.txtPelanggan.setText(data.getTransCustomerId() == 0 ? context.getString(R.string.tanpa_pelanggan) : data.getTransCustomerName());
+        holder.txtPelanggan.setText(data.getCustomer_name());
         holder.txtTanggal.setText(DateUtils.changeDateFormat(data.getTransDate(),DateUtils.WEB_DATE_TIME_FORMAT,DateUtils.DATE_FORMAT_MONTH_TIME_STANDARD2));
         holder.txtKasir.setText(data.getCashierName());
         holder.txtJenis.setText(data.getOrderTypeName());

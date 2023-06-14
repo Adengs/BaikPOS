@@ -5,26 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".activity.RegisterMasukanProdukActivity">
+    tools:context=".activity.RegisterMasukanProdukActivity"
+    android:background="@color/white"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
 
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.3"
-        android:background="@color/gray_light">
+        android:layout_weight="0.35"
+        android:background="@drawable/bg_gradient">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_63sdp"
+            android:layout_height="@dimen/_45sdp"
             android:layout_centerInParent="true"
             android:src="@drawable/logo"/>
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.7"
-        android:background="@color/white">
+        android:layout_height="wrap_content"
+        android:layout_weight="0.65"
+        android:background="@color/white"
+        android:layout_gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,8 +54,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/masukan_produk"
-                        android:textSize="@dimen/_9ssp"
-                        android:fontFamily="@font/poppins_bold"
+                        android:textSize="@dimen/_12ssp"
+                        android:fontFamily="@font/segoe_ui"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -105,7 +109,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -162,7 +166,7 @@
                         android:id="@+id/ed_nama_produk"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
+                        android:fontFamily="@font/segoe_ui"
                         android:textSize="@dimen/_9ssp"
                         android:hint="@string/nama_produk"
                         android:imeOptions="flagNoExtractUi"
@@ -182,7 +186,7 @@
                         android:textColor="@color/green_dark"
                         android:layout_width="match_parent"
                         android:textSize="@dimen/_8ssp"
-                        android:fontFamily="@font/poppins_regular"
+                        android:fontFamily="@font/segoe_ui"
                         android:layout_height="wrap_content"
                         android:text="Satuan" />
 
@@ -191,7 +195,7 @@
                         android:id="@+id/spinner_satuan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
+                        android:fontFamily="@font/segoe_ui"
                         android:textSize="@dimen/_9ssp"
                         android:backgroundTint="@color/black"
                         android:popupBackground="@color/white" />
@@ -229,7 +233,7 @@
                         android:id="@+id/ed_kategori_produk"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_regular"
+                        android:fontFamily="@font/segoe_ui"
                         android:textSize="@dimen/_9ssp"
                         android:hint="@string/kategori_produk"
                         android:imeOptions="flagNoExtractUi"
@@ -250,7 +254,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/stok"
-                        android:fontFamily="@font/poppins_regular"
+                        android:fontFamily="@font/segoe_ui"
                         android:textSize="@dimen/_9ssp"
                         android:inputType="number"
                         android:imeOptions="flagNoExtractUi"
@@ -279,7 +283,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/modal"
-                        android:fontFamily="@font/poppins_regular"
+                        android:fontFamily="@font/segoe_ui"
                         android:textSize="@dimen/_9ssp"
                         android:inputType="number"
                         android:imeOptions="flagNoExtractUi"
@@ -300,7 +304,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/jual"
-                        android:fontFamily="@font/poppins_regular"
+                        android:fontFamily="@font/segoe_ui"
                         android:textSize="@dimen/_9ssp"
                         android:inputType="number"
                         android:imeOptions="flagNoExtractUi"
@@ -312,10 +316,10 @@
             <Button
                 android:id="@+id/btn_lanjut"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_25sdp"
                 android:layout_marginTop="@dimen/paddingLarge"
                 android:layout_marginBottom="@dimen/paddingLarge"
-                android:fontFamily="@font/poppins_bold"
+                android:fontFamily="@font/segoe_ui"
                 android:textSize="@dimen/_9ssp"
                 android:background="@color/green_dark"
                 android:clickable="true"

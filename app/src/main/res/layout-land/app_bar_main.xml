@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.MainActivity"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -51,18 +53,21 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="NAMA RESTORAN"
-                                android:fontFamily="@font/poppins_bold"
+                                android:fontFamily="@font/segoe_ui"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_12ssp"/>
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold"/>
 
 
                             <TextView
                                 android:id="@+id/tv_name_kasir"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_2sdp"
                                 android:text="Budi Setiawan"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_12ssp" />
+                                android:textSize="@dimen/_8ssp"
+                                android:fontFamily="@font/segoe_ui"/>
 
                         </LinearLayout>
 
@@ -93,7 +98,9 @@
                                 android:paddingBottom="@dimen/paddingXSmall"
                                 android:singleLine="true"
                                 android:textColor="@android:color/black"
-                                android:textColorHint="@color/gray_txt" />
+                                android:textColorHint="@color/gray_txt"
+                                android:textSize="@dimen/_8sdp"
+                                android:fontFamily="@font/segoe_ui"/>
 
                             <ImageView
                                 android:visibility="gone"
@@ -157,7 +164,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:backgroundTint="@color/black" />
+                            android:backgroundTint="@color/black"
+                            android:visibility="visible"/>
 
 
                         <ImageView

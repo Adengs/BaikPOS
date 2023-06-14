@@ -43,6 +43,7 @@ import com.codelabs.konspirasisnack.model.GetLogin;
 import com.codelabs.konspirasisnack.model.GetProfil;
 import com.codelabs.konspirasisnack.model.GetProvince;
 import com.codelabs.konspirasisnack.utils.RecentUtils;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -227,11 +228,12 @@ public class OutletFragment extends Fragment {
         call.enqueue(new Callback<GetKecamatan>() {
             @Override
             public void onResponse(Call<GetKecamatan> call, Response<GetKecamatan> data) {
+//                Log.e("Kecamatan", "onResponse: " + new Gson().toJson(data) );
                 if (data.isSuccessful()) {
                     GetKecamatan response = data.body();
                     if (response != null) {
                         if (response.getSTATUS() == 200) {
-                            initKecamatan(response.getDATA());
+//                            initKecamatan(response.getDATA());
 
                         } else {
                             Toast.makeText(getActivity(), response.getMESSAGE(), Toast.LENGTH_SHORT).show();
@@ -316,7 +318,7 @@ public class OutletFragment extends Fragment {
                     GetProvince response = data.body();
                     if (response != null) {
                         if (response.getSTATUS() == 200) {
-                            initProvinsi(response.getDATA());
+//                            initProvinsi(response.getDATA());
 
                         } else {
                             Toast.makeText(getActivity(), response.getMESSAGE(), Toast.LENGTH_SHORT).show();
@@ -400,11 +402,12 @@ public class OutletFragment extends Fragment {
         call.enqueue(new Callback<GetCities>() {
             @Override
             public void onResponse(Call<GetCities> call, Response<GetCities> data) {
+//                Log.e("Cities", "onResponse: " + new Gson().toJson(data) );
                 if (data.isSuccessful()) {
                     GetCities response = data.body();
                     if (response != null) {
                         if (response.getSTATUS() == 200) {
-                            initCities(response);
+//                            initCities(response);
                         } else {
                             Toast.makeText(getActivity(), response.getMESSAGE(), Toast.LENGTH_SHORT).show();
 

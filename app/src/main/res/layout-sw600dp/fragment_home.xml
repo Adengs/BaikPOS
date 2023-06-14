@@ -15,7 +15,7 @@
             android:id="@+id/ll_main"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:layout_weight="6.5"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -60,14 +60,14 @@
                     <FrameLayout
                         android:id="@+id/lay_barcode_scanner"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_above="@id/tabs"
                         android:visibility="gone"></FrameLayout>
 
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tabs"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_25sdp"
                         android:layout_alignParentBottom="true"
                         app:tabIndicatorColor="@color/green_dark"
                         app:tabMode="scrollable"
@@ -211,7 +211,7 @@
             android:id="@+id/ll_pesanan"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4">
+            android:layout_weight="3.5">
 
 
             <com.google.android.material.tabs.TabLayout
@@ -264,8 +264,8 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:paddingLeft="@dimen/paddingSmall"
-                    android:paddingRight="@dimen/paddingSmall"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingRight="@dimen/_8sdp"
                     android:src="@drawable/ic_save"
                     android:visibility="gone" />
 
@@ -277,8 +277,8 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:paddingLeft="@dimen/paddingSmall"
-                    android:paddingRight="@dimen/paddingSmall"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingRight="@dimen/_8sdp"
                     android:src="@drawable/ic_delete"
                     android:visibility="gone" />
 
@@ -310,7 +310,7 @@
                     <Button
                         android:id="@+id/btn_bayar"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/_25sdp"
                         android:background="@color/green_dark"
                         android:fontFamily="@font/poppins_bold"
                         android:textSize="@dimen/_9ssp"

@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".activity.DaftarPelangganActivity">
+    tools:context=".activity.DaftarPelangganActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -137,7 +139,8 @@
                 android:layout_weight="0.3"
                 android:text="@string/poin"
                 android:textAllCaps="true"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="0dp"

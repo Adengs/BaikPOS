@@ -1,5 +1,6 @@
 package com.codelabs.konspirasisnack.activity.ui.pengaturan.strukbiaya;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -164,6 +165,7 @@ public class StrukBiayaFragment extends Fragment {
         llPreview.setVisibility(View.GONE);
     }
 
+    @SuppressLint("SetTextI18n")
     private void initStruk() {
         llServiceCharge.setVisibility(data.getSettings().getService().getIsActive() ? View.VISIBLE : View.GONE);
         llPajak.setVisibility(data.getSettings().getTax().getIsActive() ? View.VISIBLE : View.GONE);
