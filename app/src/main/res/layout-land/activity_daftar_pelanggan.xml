@@ -58,7 +58,8 @@
                 android:gravity="center"
                 android:text="@string/non_pelanggan"
                 android:textColor="@color/black"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_tambah_pelanggan"

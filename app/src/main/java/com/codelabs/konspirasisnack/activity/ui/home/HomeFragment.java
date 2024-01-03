@@ -369,7 +369,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        //tadinya this
+        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
 //                textView.setText(s);
@@ -1400,6 +1401,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             if (selectedOrderType.getTypeId() == 3) {
                 if (selectedCustomer != null) {
                     shipping.setName(selectedCustomer.getCustFullname());
+                    Log.e("TAG", "Cek name 1 " + selectedCustomer.getCustFullname() );
                 }else {
                     Toast.makeText(getActivity(), "Pilih data pelanggan", Toast.LENGTH_SHORT).show();
                     return;
@@ -1418,6 +1420,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         if (selectedOrderDetail != null){
             shipping.setName(selectedOrderDetail.getDataTransactionShipping().getTs_to_name());
+            Log.e("TAG", "cek name 2 " + selectedOrderDetail.getDataTransactionShipping().getTs_to_name() );
             shipping.setAddress(selectedOrderDetail.getDataTransactionShipping().getTs_to_address());
             shipping.setLatitude(selectedOrderDetail.getDataTransactionShipping().getTs_to_lat());
             shipping.setLongitude(selectedOrderDetail.getDataTransactionShipping().getTs_to_long());
@@ -1534,8 +1537,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         } else if (selectedOrderDetail != null) {
             param.setOrder_type(String.valueOf(selectedOrderDetail.getTransOrderType()));
         }
-        if (selectedCustomer != null)
-            param.setCustomer_id(selectedCustomer.getCustId());
+
+//        if (selectedCustomer != null)
+//            param.setCustomer_id(selectedCustomer.getCustId());
+//
+        Log.e("TAG", "createOrderSave: " + DataManager.getInstance().getCustomerIdProduct() );
+        Log.e("TAG", "createOrderSave: " + DataManager.getInstance().getCustomerName() );
+
+        if (DataManager.getInstance().getCustomerIdProduct() != 0) {
+            param.setCustomer_id(DataManager.getInstance().getCustomerIdProduct());
+            param.setCustomerName(DataManager.getInstance().getCustomerName());
+        }
+        param.setCashierName(DataManager.getInstance().getU_firstname_cashier());
+
         RetrofitInterface apiService = ApiUtils.getAPIService();
         String auth = AppConstant.AuthValue + " " + DataManager.getInstance().getToken_cashier();
         Call<GetCreateOrder> call = apiService.createOrder(auth, param);
@@ -1716,7 +1730,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(requireContext(), "Pilih pelanggan terlebuh dahulu", Toast.LENGTH_SHORT).show();
                 return;
             }
-            loadInvoiceNumber();
+//            loadInvoiceNumber();
 //            btnBayar.setClickable(false);
 
         }

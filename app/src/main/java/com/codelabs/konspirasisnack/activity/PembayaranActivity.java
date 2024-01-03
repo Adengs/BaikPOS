@@ -446,7 +446,7 @@ public class PembayaranActivity extends AppCompatActivity {
 //        txtCustomerName.setText(data.getCustomer().getCustId() == 0 ? "" : data.getCustomer().getCustFullname());
         txtCustomerName.setText(DataManager.getInstance().getCustomerName());
 
-        Log.e("TAG", "initData: " + DataManager.getInstance().getCustomerName() );
+        Log.e("TAG", "initData: " + data.getCustomer().getCustFullname());
         txtInvoiceNo.setText(data.getTransCode());
         Log.e("trans", "initData: " + data.getTransCode());
 

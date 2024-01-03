@@ -53,7 +53,8 @@
                 android:layout_toLeftOf="@+id/tv_tambah_pelanggan"
                 android:gravity="center_horizontal"
                 android:textColor="@color/black"
-                android:fontFamily="@font/poppins_bold"/>
+                android:fontFamily="@font/poppins_bold"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_tambah_pelanggan"

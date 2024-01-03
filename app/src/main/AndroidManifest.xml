@@ -26,40 +26,48 @@
         <activity
             android:name="com.codelabs.konspirasisnack.activity.DaftarPesananActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false"></activity>
         <activity
             android:name="com.codelabs.konspirasisnack.activity.PembayaranActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false"/>
         <activity
             android:name="com.codelabs.konspirasisnack.activity.DaftarPelangganActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false"/>
         <activity
             android:name="com.codelabs.konspirasisnack.activity.MainActivity"
             android:configChanges="keyboardHidden|screenSize"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false"/>
         <activity
 
             android:name="com.codelabs.konspirasisnack.activity.RegisterMasukanProdukActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false"/>
         <activity
             android:name="com.codelabs.konspirasisnack.activity.RegisterInformasiUsahaActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false">
 
         </activity>
         <activity
             android:name="com.codelabs.konspirasisnack.activity.RegisterVerifikasiActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false"/>
         <activity
             android:name="com.codelabs.konspirasisnack.activity.SignInActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -69,7 +77,8 @@
         <activity
             android:name="com.codelabs.konspirasisnack.activity.RegisterActivity"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false"/>
 
         <!-- imagepicker-->
 

@@ -55,7 +55,8 @@
                 android:text="@string/non_pelanggan"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_9ssp"
-                android:fontFamily="@font/poppins_bold"/>
+                android:fontFamily="@font/poppins_bold"
+                android:visibility="gone"/>
 
 
             <TextView
